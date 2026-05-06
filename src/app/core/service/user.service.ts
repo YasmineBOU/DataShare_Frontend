@@ -18,12 +18,5 @@ export class UserService {
   login(user: LoginModel): Observable<{ token: string }> {
     return this.httpClient.post<{ token: string }>('/api/login', user);
   }
-
-  uploadFile(file: File): Observable<Object> {
-    const formData = new FormData();
-    formData.append('file', file);
-    console.log(`Uploading file: ${file.name} (${file.size} bytes)`);
-    return this.httpClient.post('/api/upload', formData);
-  }
   
 }

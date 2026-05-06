@@ -6,6 +6,8 @@ import { LoginModel } from '../../core/models/login.model';
 import { RegisterModel } from '../../core/models/register.model';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
+import { REGISTER_CONFIG } from '../../core/config/config';
+
 @Component({
   selector: 'app-register',
   standalone: true,
@@ -19,7 +21,7 @@ export class Register {
   private userService = inject(UserService);
   private destroyRef = inject(DestroyRef);
   private router = inject(Router);
-  private passwordLength = 8;
+  private passwordLength = REGISTER_CONFIG.PASSWORD_MIN_LENGTH;
 
   constructor(private formBuilder: FormBuilder) {
     this.registerForm = this.formBuilder.group({

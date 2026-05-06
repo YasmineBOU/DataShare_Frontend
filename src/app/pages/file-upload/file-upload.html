@@ -1,0 +1,86 @@
+<div class="min-h-screen bg-gray-50 flex flex-col justify-center items-center p-4">
+  <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+    <h1 class="text-2xl font-bold text-center text-gray-800 mb-6">
+      Tu veux partager un fichier ?
+    </h1>
+
+    <div class="flex flex-col items-center space-y-4">
+      <label
+        for="file-upload"
+        class="flex items-center justify-center cursor-pointer bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-md shadow-sm transition duration-300"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5 mr-2"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+            clip-rule="evenodd"
+          />
+        </svg>
+        Tu veux partager un fichier ?
+      </label>
+      <input
+        id="file-upload"
+        type="file"
+        class="hidden"
+        (change)="onFileSelected($event)"
+      />
+
+      <p *ngIf="selectedFile" class="text-sm text-gray-600 mt-2">
+        {{ selectedFile.name }} {{ formatFileSize(selectedFile.size) }}
+      </p>
+    </div>
+
+    <!-- Formulaire conditionnel (s'affiche après avoir sélectionné un fichier) -->
+    <div *ngIf="showForm" class="mt-6">
+      <h2 class="text-lg font-medium text-gray-800 mb-4">Informations supplémentaires</h2>
+      <form [formGroup]="fileUploadForm" (ngSubmit)="onFileSelected()" class="space-y-4">
+        <!-- Champ Titre -->
+        <div>
+          <label for="title" class="block text-sm font-medium text-gray-700">
+            Titre
+          </label>
+          <input
+            type="text"
+            id="title"
+            formControlName="title"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            placeholder="Entrez un titre"
+          />
+          <p *ngIf="fileUploadForm.get('title')?.hasError('required') && fileUploadForm.get('title')?.touched" class="mt-1 text-sm text-red-600">
+            Le titre est requis.
+          </p>
+        </div>
+
+        <!-- Champ Description (optionnel) -->
+        <div>
+          <label for="description" class="block text-sm font-medium text-gray-700">
+            Description
+          </label>
+          <textarea
+            id="description"
+            formControlName="description"
+            rows="3"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            placeholder="Entrez une description"
+          ></textarea>
+        </div>
+
+        <!-- Bouton de soumission -->
+        <div class="mt-6">
+          <button
+            type="submit"
+            class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            [disabled]="!fileUploadForm.valid"
+          >
+            Envoyer
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
