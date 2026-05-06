@@ -1,0 +1,33 @@
+<header class="bg-white shadow">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between h-16">
+      <!-- Logo -->
+      <div class="flex items-center">
+        <a href="#" class="text-xl font-bold">DataShare</a>
+      </div>
+
+      <!-- Navigation -->
+      <nav class="flex items-center space-x-4">
+        <!-- User authenticated -->
+        <div *ngIf="isAuthenticated" class="flex items-center space-x-4">
+          <a
+            routerLink="/dashboard"
+            class="text-gray-700 hover:text-indigo-600"
+          >
+            Mon espace
+          </a>
+        </div>
+
+        <!-- User not authenticated -->
+        <div *ngIf="!isAuthenticated" class="flex items-center space-x-4">
+          <a
+            routerLink="/login"
+            class="text-gray-700 hover:text-indigo-600"
+          >
+            Se connecter
+          </a>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
