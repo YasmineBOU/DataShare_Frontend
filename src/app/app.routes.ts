@@ -18,7 +18,9 @@ export const routes: Routes = [
     component: Register
   },
   {
-    path: 'upload-file',
-    component: FileUpload
+    path: 'files',
+    children: [
+      {path: 'upload', component: FileUpload}
+    ]
   }
 ];
