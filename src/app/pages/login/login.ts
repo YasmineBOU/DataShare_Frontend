@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { LoginModel } from '../../core/models/login.model';
+import { AuthService } from '../../core/service/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -17,6 +18,7 @@ export class Login{
 
   loginForm: FormGroup;
   private userService = inject(UserService);
+  private authService = inject(AuthService);
   private destroyRef = inject(DestroyRef);
   private router = inject(Router);
   // private authService = inject(AuthService);
@@ -42,6 +44,9 @@ export class Login{
         next: (response) => {
           //this.router.navigateByUrl('/admin-pannel');
           console.log('Login successful, token:', response.token);
+          this.authService.setToken(response.token);
+          // Store email for later use
+          localStorage.setItem('userEmail', loginUser.email);
         },
         error: (err) => {
           if ([400, 401, 403].includes(err.status)) {

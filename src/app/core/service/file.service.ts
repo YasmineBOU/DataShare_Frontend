@@ -12,7 +12,7 @@ export class FileService {
 
   uploadFile(fileUploadData: FileUploadModel): Observable<Object> {
     console.log("File upload data:", fileUploadData);
-    return this.httpClient.post('/api/upload', fileUploadData);
+    return this.httpClient.post('/api/files/upload', fileUploadData);
   }
   
 }

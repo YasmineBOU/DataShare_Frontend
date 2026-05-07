@@ -100,7 +100,11 @@ export class FileUpload implements OnInit {
       await this.calculateChecksum(); // remove async/await if no longer needed
       // Upload the file on the server
       const fileUploadData: FileUploadModel = {
+        email: localStorage.getItem('userEmail') || '', 
         file: this.selectedFile,
+        filename: this.selectedFile.name,
+        fileSize: this.selectedFile.size,
+        fileType: this.selectedFile.type,
         hash: this.fileChecksum,
         password: this.fileUploadForm.value.password,
         expirationDays: Number(this.fileUploadForm.value.expiration)
