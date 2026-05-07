@@ -20,8 +20,8 @@ export class FileUpload implements OnInit {
   selectedFile: File | null = null;
   fileChecksum: string = '';
   getHumanReadableSize = formatFileSize;
-  expirationOptions! : Map<number, string>;
-  selectedExpiration! : string;
+  expirationOptions!: Map<number, string>;
+  selectedExpiration: number = FILE_CONFIG.DEFAULT_LINK_EXPIRATION_DAYS;
 
 
   constructor(private formBuilder: FormBuilder) {
@@ -29,11 +29,18 @@ export class FileUpload implements OnInit {
   }
 
   private buildForm() {
-    console.log(`Selected expiration: ${this.selectedExpiration}`);
-    this.fileUploadForm = this.formBuilder.group({
-      password: ['', Validators.minLength(FILE_CONFIG.PASSWORD_MIN_LENGTH)],
-      expiration: [this.selectedExpiration, Validators.required]
-    });
+    console.log('📝 buildForm() appelé. Valeur de selectedExpiration :', this.selectedExpiration);
+    if (this.fileUploadForm) {
+      this.fileUploadForm.patchValue({
+        password: '',
+        expiration: this.selectedExpiration
+      });
+    } else {
+      this.fileUploadForm = this.formBuilder.group({
+        password: ['', Validators.minLength(FILE_CONFIG.PASSWORD_MIN_LENGTH)],
+        expiration: [this.selectedExpiration, Validators.required]
+      });
+    }
   }
 
   ngOnInit() {
@@ -42,7 +49,7 @@ export class FileUpload implements OnInit {
         ([key, value]) => [Number(key), value] as [number, string]
       )
     );
-    this.selectedExpiration = this.expirationOptions.get(FILE_CONFIG.DEFAULT_LINK_EXPIRATION_DAYS) || '';
+    this.selectedExpiration = FILE_CONFIG.DEFAULT_LINK_EXPIRATION_DAYS;
 
     this.buildForm();
   }
@@ -51,9 +58,9 @@ export class FileUpload implements OnInit {
   
     try {
       this.fileChecksum = await computeFileChecksum(this.selectedFile!); 
-      console.log(`Checksum (BLAKE3) du fichier : ${this.fileChecksum}`);
+      console.log(`Checksum du fichier : ${this.fileChecksum}`);
     } catch (error) {
-      console.error('Erreur lors du calcul du checksum:', error);
+      console.error('Got error while computing checksum:', error);
       alert('Une erreur est survenue lors du calcul du checksum.');
       throw error; 
     }
@@ -64,12 +71,21 @@ export class FileUpload implements OnInit {
     if (fileInput.files && fileInput.files.length > 0) {
       this.showForm = true;
       this.selectedFile = fileInput.files[0];
-      console.log(`Fichier sélectionné : ${this.selectedFile.name} (${this.getHumanReadableSize(this.selectedFile.size)})`);
-
+      console.log(`Fichier sélectionné : ${this.selectedFile.name} (${this.getHumanReadableSize(this.selectedFile.size)}`);
+      this.buildForm();
+      
     }
   }
 
+  resetSelectedFile() {
+    this.selectedFile = null;
+  }
+
   async onUpload() {
+  console.log('Démarrage de l\'upload du fichier...');
+  console.log('📝 Formulaire valide ?', this.fileUploadForm?.valid); // <-- Vérifie ici
+  console.log('📝 Valeurs du formulaire :', this.fileUploadForm?.value); // <-- Vérifie ici
+  console.log('📁 Fichier sélectionné ?', this.selectedFile);
     // Form validation and file upload check
     if (!this.fileUploadForm.valid || !this.selectedFile) {
       return;
@@ -87,7 +103,7 @@ export class FileUpload implements OnInit {
         file: this.selectedFile,
         hash: this.fileChecksum,
         password: this.fileUploadForm.value.password,
-        expirationDays: Number(this.fileUploadForm.value.expiration.split(' ')[0]) // Extract number of days from string
+        expirationDays: Number(this.fileUploadForm.value.expiration)
       };
       console.log('Données d\'upload :', fileUploadData);
       this.fileService.uploadFile(fileUploadData).subscribe({

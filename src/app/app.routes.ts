@@ -5,20 +5,20 @@ import { FileUpload } from './pages/file-upload/file-upload';
 
 export const routes: Routes = [
     
-    // {
-    //     path: '',
-    //     component: Home
-    // },
-    {
-      path: 'login',
-      component: Login
-    },
-    {
-      path: 'register',
-      component: Register
-    },
-    {
-      path: 'file-upload',
-      component: FileUpload
-    }
+  {
+    path: '',
+    component: FileUpload
+  },
+  {
+    path: 'login',
+    component: Login
+  },
+  {
+    path: 'register',
+    component: Register
+  },
+  {
+    path: 'upload-file',
+    component: FileUpload
+  }
 ];

@@ -33,19 +33,34 @@
     </div>
 
     <!-- Display the form if file is selected -->
-    <div *ngIf="showForm" class="mt-6">
+    <div *ngIf="showForm && selectedFile" class="mt-6">
       <h1 class="text-2xl font-bold text-center text-gray-800 mb-6">
         Ajouter un fichier
       </h1>
-
-      <p *ngIf="selectedFile" class="text-sm text-gray-600 mt-2 strong">
-        {{ selectedFile.name }} 
-        <br/>
-        {{ getHumanReadableSize(selectedFile.size) }}
-      </p>
-      
+      <div class="flex items-center justify-between bg-gray-50 p-4 rounded-md">
+        <!-- File information -->
+        <div class="flex-1 min-w-0">
+          <p class="text-lg font-semibold text-indigo-600 truncate" [title]="selectedFile.name">
+            {{ selectedFile.name }}
+          </p>
+          <p class="text-sm text-gray-500">
+            {{ getHumanReadableSize(selectedFile.size) }}
+          </p>
+        </div>
+        <!-- Replace file button -->
+        <label class="ml-4 cursor-pointer flex-shrink-0">
+          <input
+            type="file"
+            class="hidden"
+            (change)="onFileSelected($event)"
+          />
+          <span class="inline-flex items-center px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium rounded-md shadow-sm transition duration-300">
+            Changer
+          </span>
+        </label>
+      </div>  
+           
       <form [formGroup]="fileUploadForm"  class="space-y-4">
-
         <div>
           <label for="password" class="block text-sm font-medium text-gray-700">
             Mot de passe
@@ -56,7 +71,6 @@
               name="password"
               type="password"
               autocomplete="current-password"
-              required
               class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               formControlName="password"
               placeholder="Optionnel"
@@ -72,7 +86,7 @@
               formControlName="expiration"
               class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             >   
-              <option *ngFor="let option of expirationOptions | keyvalue" [value]="option.key">
+              <option *ngFor="let option of expirationOptions | keyvalue" [ngValue]="option.key">
                 {{ option.value }}
               </option>
             </select>
@@ -80,13 +94,12 @@
 
         <div class="mt-6">
           <button
-            type="submit"
+            type="button"
             class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            [disabled]="!fileUploadForm.valid"
             (click)="onUpload()"
           >
-            Téléverser
-          </button>
+          Téléverser
+        </button>
         </div>
       </form>
     </div>

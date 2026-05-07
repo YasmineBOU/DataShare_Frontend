@@ -1,4 +1,4 @@
-import { createHash } from 'blake3-wasm';
+import { createBLAKE3 } from 'hash-wasm';
 
 
 export function formatFileSize(bytes: number, decimals: number = 2): string {
@@ -12,29 +12,21 @@ export function formatFileSize(bytes: number, decimals: number = 2): string {
 }
 
 
-// export async function computeFileChecksum(file) {
-//   const arrayBuffer = await file.arrayBuffer();
-//   return await blake3(arrayBuffer);
-// }
 
-
-/**
- * Calcule le hash BLAKE3 d'un fichier.
- * @param file - Le fichier à hasher.
- * @param chunkSize - Taille des chunks (par défaut 64 Mo).
- * @returns Promise<string> - Hash hexadécimal.
- */
 export async function computeFileChecksum(
   file: File,
   chunkSize: number = 64 * 1024 * 1024
 ): Promise<string> {
+
+
   if (!file) {
-    throw new Error('Aucun fichier fourni.');
+    throw new Error('No file provided.');
   }
+
+  const hash = await createBLAKE3();
 
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
-    const hash = createHash();
     let offset = 0;
 
     const readChunk = () => {
@@ -45,7 +37,7 @@ export async function computeFileChecksum(
     reader.onload = (event) => {
       const chunk = event.target?.result as ArrayBuffer;
       if (!chunk) {
-        reject(new Error('Erreur lors de la lecture du chunk.'));
+        reject(new Error('Error occurred while reading the chunk.'));
         return;
       }
 
@@ -53,22 +45,14 @@ export async function computeFileChecksum(
       offset += chunkSize;
 
       if (offset >= file.size) {
-        // digest() retourne un Uint8Array (buffer binaire)
-        const digestBuffer = hash.digest();
-
-        // Conversion en hexadécimal
-        const hashHex = Array.from(digestBuffer)
-          .map(b => b.toString(16).padStart(2, '0'))
-          .join('');
-
-        resolve(hashHex);
+        resolve(hash.digest('hex'));
       } else {
         readChunk();
       }
     };
 
     reader.onerror = () => {
-      reject(new Error('Erreur lors de la lecture du fichier.'));
+      reject(new Error('Error occurred while reading the file.'));
     };
 
     readChunk();
