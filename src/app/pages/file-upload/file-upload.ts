@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FileService } from '../../core/service/file.service';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Form, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FILE_CONFIG } from '../../core/config/config';
 import { formatFileSize, computeFileChecksum } from '../../core/utils/file-utils';
 import { CommonModule } from '@angular/common';
@@ -81,6 +81,22 @@ export class FileUpload implements OnInit {
     this.selectedFile = null;
   }
 
+  getFileFormData(): FormData {
+    const formData = new FormData();
+
+    formData.append('email', localStorage.getItem('userEmail') || '');
+    formData.append('file', this.selectedFile!);
+    formData.append('filename', this.selectedFile!.name);
+    formData.append('fileSize', this.selectedFile!.size.toString());
+    formData.append('fileType', this.selectedFile!.type);
+    formData.append('hash', this.fileChecksum);
+    formData.append('filePassword', this.fileUploadForm.get('password')?.value || '');
+    formData.append('expirationDays', this.fileUploadForm.get('expiration')?.value || '');
+
+    return formData;
+  }
+
+
   async onUpload() {
   console.log('Démarrage de l\'upload du fichier...');
   console.log('📝 Formulaire valide ?', this.fileUploadForm?.valid); // <-- Vérifie ici
@@ -99,18 +115,7 @@ export class FileUpload implements OnInit {
       // Calculate file checksum before uploading
       await this.calculateChecksum(); // remove async/await if no longer needed
       // Upload the file on the server
-      const fileUploadData: FileUploadModel = {
-        email: localStorage.getItem('userEmail') || '', 
-        file: this.selectedFile,
-        filename: this.selectedFile.name,
-        fileSize: this.selectedFile.size,
-        fileType: this.selectedFile.type,
-        hash: this.fileChecksum,
-        password: this.fileUploadForm.value.password,
-        expirationDays: Number(this.fileUploadForm.value.expiration)
-      };
-      console.log('Données d\'upload :', fileUploadData);
-      this.fileService.uploadFile(fileUploadData).subscribe({
+      this.fileService.uploadFile(this.getFileFormData()).subscribe({
         next: (response) => {
           alert('Fichier uploadé avec succès !');
           this.fileUploadForm.reset();

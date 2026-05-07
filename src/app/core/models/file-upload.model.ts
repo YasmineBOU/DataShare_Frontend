@@ -5,7 +5,7 @@ export interface FileUploadModel {
   fileSize: number; 
   fileType: string;
   hash: string;
-  password: string;
+  filePassword: string;
   expirationDays: number;
 }
     
