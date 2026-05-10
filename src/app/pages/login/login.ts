@@ -10,7 +10,10 @@ import { AuthService } from '../../core/service/auth.service';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, RouterLink],
+  imports: [
+    ReactiveFormsModule, 
+    RouterLink
+  ],
   templateUrl: './login.html',
   styleUrl: './login.scss',
 })
@@ -21,7 +24,6 @@ export class Login{
   private authService = inject(AuthService);
   private destroyRef = inject(DestroyRef);
   private router = inject(Router);
-  // private authService = inject(AuthService);
 
   constructor(private formBuilder: FormBuilder) {
     this.loginForm = this.formBuilder.group({
@@ -42,7 +44,8 @@ export class Login{
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: (response) => {
-          //this.router.navigateByUrl('/admin-pannel');
+          // Redirect to user's dashboard
+          //this.router.navigateByUrl('/');
           console.log('Login successful, token:', response.token);
           this.authService.setToken(response.token);
           // Store email for later use
