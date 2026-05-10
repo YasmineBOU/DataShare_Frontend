@@ -1,0 +1,27 @@
+header {
+  width: 100%;
+}
+
+nav {
+  white-space: nowrap;
+}
+
+/* Responsive adjustments for very large screens (4K and above) */
+@media (min-width: 2560px) {
+  header {
+    padding: 1rem 2rem;
+  }
+}
+
+/* Responsive adjustments for mobile */
+@media (max-width: 640px) {
+  nav {
+    gap: 0.5rem !important;
+  }
+
+  a,
+  button {
+    padding: 0.5rem 0.75rem !important;
+    font-size: 0.875rem !important;
+  }
+}

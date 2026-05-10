@@ -11,9 +11,12 @@ import { REGISTER_CONFIG } from '../../core/config/config';
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ReactiveFormsModule, RouterLink],
+  imports: [
+    ReactiveFormsModule, 
+    RouterLink
+  ],
   templateUrl: './register.html',
-  styleUrl: './register.scss',
+  styleUrls: ['./register.scss'],
 })
 export class Register {
   

@@ -5,12 +5,15 @@ import { routes } from './app.routes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 import { importProvidersFrom } from '@angular/core';
+import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
+import { tokenInterceptor } from './interceptors/token.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes), 
     provideClientHydration(withEventReplay()),
+    provideHttpClient(withFetch(), withInterceptors([tokenInterceptor])),
     importProvidersFrom(ReactiveFormsModule)
   ]
 };

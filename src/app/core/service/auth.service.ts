@@ -1,13 +1,16 @@
-import { Injectable } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { inject, Injectable, PLATFORM_ID } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   private tokenKey: string = 'authToken';
+  private platformId = inject(PLATFORM_ID);
 
-  constructor() {}
-
+  private isBrowser(): boolean {
+    return isPlatformBrowser(this.platformId);
+  }
   
   /**
    * Sets the authentication token in localStorage.
@@ -15,11 +18,19 @@ export class AuthService {
    * @param token The authentication token to be set.
    */
   setToken(token: string): void {
-    localStorage.setItem(this.tokenKey, token);
+    if (!this.isBrowser()) {
+      return;
+    }
+
+    window.localStorage.setItem(this.tokenKey, token);
   }
 
   getToken(): string {
-    return localStorage.getItem(this.tokenKey) || '';
+    if (!this.isBrowser()) {
+      return '';
+    }
+
+    return window.localStorage.getItem(this.tokenKey) || '';
   }
 
 /**
@@ -28,7 +39,11 @@ export class AuthService {
  * This method is used to log out the user. It removes the token from localStorage, effectively logging out the user.
  */
   removeToken(): void {
-    localStorage.removeItem(this.tokenKey);
+    if (!this.isBrowser()) {
+      return;
+    }
+
+    window.localStorage.removeItem(this.tokenKey);
   }
 
   /**
