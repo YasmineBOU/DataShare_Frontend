@@ -11,12 +11,14 @@ import { FileUploadModel } from '../../core/models/file-upload.model';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './file-upload.html',
-  styleUrl: './file-upload.scss',
+  styleUrls: ['./file-upload.scss'],
 })
 export class FileUpload implements OnInit {
+
   private fileService = inject(FileService);
   fileUploadForm!: FormGroup;
-  showForm: boolean = false;
+  generatedLink: string = '';
+  dwlLinkMessage: string = '';
   selectedFile: File | null = null;
   fileChecksum: string = '';
   getHumanReadableSize = formatFileSize;
@@ -24,12 +26,12 @@ export class FileUpload implements OnInit {
   selectedExpiration: number = FILE_CONFIG.DEFAULT_LINK_EXPIRATION_DAYS;
 
 
+
   constructor(private formBuilder: FormBuilder) {
    
   }
 
   private buildForm() {
-    console.log('📝 buildForm() appelé. Valeur de selectedExpiration :', this.selectedExpiration);
     if (this.fileUploadForm) {
       this.fileUploadForm.patchValue({
         password: '',
@@ -58,7 +60,6 @@ export class FileUpload implements OnInit {
   
     try {
       this.fileChecksum = await computeFileChecksum(this.selectedFile!); 
-      console.log(`Checksum du fichier : ${this.fileChecksum}`);
     } catch (error) {
       console.error('Got error while computing checksum:', error);
       alert('Une erreur est survenue lors du calcul du checksum.');
@@ -69,9 +70,7 @@ export class FileUpload implements OnInit {
   onFileSelected(event: Event) {
     const fileInput = event.target as HTMLInputElement;
     if (fileInput.files && fileInput.files.length > 0) {
-      this.showForm = true;
       this.selectedFile = fileInput.files[0];
-      console.log(`Fichier sélectionné : ${this.selectedFile.name} (${this.getHumanReadableSize(this.selectedFile.size)}`);
       this.buildForm();
       
     }
@@ -98,10 +97,6 @@ export class FileUpload implements OnInit {
 
 
   async onUpload() {
-  console.log('Démarrage de l\'upload du fichier...');
-  console.log('📝 Formulaire valide ?', this.fileUploadForm?.valid); // <-- Vérifie ici
-  console.log('📝 Valeurs du formulaire :', this.fileUploadForm?.value); // <-- Vérifie ici
-  console.log('📁 Fichier sélectionné ?', this.selectedFile);
     // Form validation and file upload check
     if (!this.fileUploadForm.valid || !this.selectedFile) {
       return;
@@ -116,21 +111,30 @@ export class FileUpload implements OnInit {
       await this.calculateChecksum(); // remove async/await if no longer needed
       // Upload the file on the server
       this.fileService.uploadFile(this.getFileFormData()).subscribe({
-        next: (response) => {
+        next: (response: any) => {
           alert('Fichier uploadé avec succès !');
+          // this.selectedFile = null;
+          let expVal = this.expirationOptions.get(this.fileUploadForm.get('expiration')?.value);
+          this.dwlLinkMessage = `Félicitations, ton fichier sera conservé chez nous pendant ${expVal} !`;
+          this.generatedLink = response.fileLink;
           this.fileUploadForm.reset();
-          this.selectedFile = null;
-          this.showForm = false;
         },
         error: (err) => {
-          alert('Une erreur est survenue lors de l\'upload du fichier. Veuillez réessayer plus tard.');
           console.error('Upload error:', err);
+          alert('Une erreur est survenue lors de l\'upload du fichier. Veuillez réessayer plus tard.');
         }
       });
     } catch (error) {
-      alert('Une erreur est survenue lors du traitement du fichier. Veuillez réessayer.');
       console.error('File processing error:', error);
+      alert('Une erreur est survenue lors du traitement du fichier. Veuillez réessayer.');
     }  
+  }
+
+  copyLinkToClipboard() {
+    navigator.clipboard.writeText(this.generatedLink).then(() => {
+    }).catch(err => {
+      console.error('Error copying link :', err);
+    });
   }
 }
 
