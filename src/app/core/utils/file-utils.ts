@@ -1,5 +1,10 @@
 import { createBLAKE3 } from 'hash-wasm';
+import { extensionIconMap } from './file-icon-map';
 
+export function getIconByExtension(filename: string): string {
+  const ext = filename.split('.').pop()?.toLowerCase() || '';
+  return extensionIconMap[ext] || extensionIconMap['default'];
+}
 
 export function formatFileSize(bytes: number, decimals: number = 2): string {
   if (bytes === 0) return '0 octets';
@@ -10,8 +15,6 @@ export function formatFileSize(bytes: number, decimals: number = 2): string {
 
   return parseFloat((bytes / Math.pow(k, i)).toFixed(decimals)) + ' ' + sizes[i];
 }
-
-
 
 export async function computeFileChecksum(
   file: File,

@@ -2,7 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { FileService } from '../../core/service/file.service';
 import { Form, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FILE_CONFIG } from '../../core/config/config';
-import { formatFileSize, computeFileChecksum } from '../../core/utils/file-utils';
+import { formatFileSize, computeFileChecksum, getIconByExtension } from '../../core/utils/file-utils';
 import { CommonModule } from '@angular/common';
 import { FileUploadModel } from '../../core/models/file-upload.model';
 
@@ -20,6 +20,7 @@ export class FileUpload implements OnInit {
   generatedLink: string = '';
   dwlLinkMessage: string = '';
   selectedFile: File | null = null;
+  fileIcon: string = '';
   fileChecksum: string = '';
   getHumanReadableSize = formatFileSize;
   expirationOptions!: Map<number, string>;
@@ -71,6 +72,8 @@ export class FileUpload implements OnInit {
     const fileInput = event.target as HTMLInputElement;
     if (fileInput.files && fileInput.files.length > 0) {
       this.selectedFile = fileInput.files[0];
+      this.fileIcon = getIconByExtension(this.selectedFile.name);
+      console.log('icone', this.fileIcon);
       this.buildForm();
       
     }
