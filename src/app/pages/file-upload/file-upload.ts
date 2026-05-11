@@ -115,7 +115,7 @@ export class FileUpload implements OnInit {
           alert('Fichier uploadé avec succès !');
           // this.selectedFile = null;
           let expVal = this.expirationOptions.get(this.fileUploadForm.get('expiration')?.value);
-          this.dwlLinkMessage = `Félicitations, ton fichier sera conservé chez nous pendant ${expVal} !`;
+          this.dwlLinkMessage = `Félicitations, ton fichier sera conservé chez nous pendant ${expVal?.toLocaleLowerCase()} !`;
           this.generatedLink = response.fileLink;
           this.fileUploadForm.reset();
         },
