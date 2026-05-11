@@ -44,12 +44,13 @@ export class Login{
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: (response) => {
-          // Redirect to user's dashboard
-          //this.router.navigateByUrl('/');
-          console.log('Login successful, token:', response.token);
-          this.authService.setToken(response.token);
-          // Store email for later use
-          localStorage.setItem('userEmail', loginUser.email);
+          console.log('Login successful:', response.message);
+          this.authService.loadCurrentUser()
+            .pipe(takeUntilDestroyed(this.destroyRef))
+            .subscribe({
+              next: () => this.router.navigateByUrl('/'),
+              error: () => this.router.navigateByUrl('/')
+            });
         },
         error: (err) => {
           if ([400, 401, 403].includes(err.status)) {

@@ -1,8 +1,9 @@
 // header.component.ts
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { AuthService } from '../../core/service/auth.service';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-header',
@@ -16,11 +17,17 @@ import { RouterLink } from '@angular/router';
 })
 export class Header implements OnInit {
   isAuthenticated = false;
+  currentEmail: string | null = null;
   authService = inject(AuthService); 
+  private destroyRef = inject(DestroyRef);
 
   ngOnInit() {
-    this.isAuthenticated = this.authService.isAuthenticated();
-    console.log("Header component initialized. User authenticated: ", this.isAuthenticated);
+    this.authService.loadCurrentUser()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((response) => {
+        this.isAuthenticated = response.authenticated;
+        this.currentEmail = response.email;
+      });
     
   }
 }

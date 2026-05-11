@@ -1,80 +1,51 @@
-import { isPlatformBrowser } from '@angular/common';
-import { inject, Injectable, PLATFORM_ID } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject, Observable, catchError, map, of, tap } from 'rxjs';
+import { AuthMeModel } from '../models/auth-me.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private tokenKey: string = 'authToken';
-  private platformId = inject(PLATFORM_ID);
+  private httpClient = inject(HttpClient);
+  private readonly apiUrl = '/api';
+  private readonly currentEmailSubject = new BehaviorSubject<string | null>(null);
 
-  private isBrowser(): boolean {
-    return isPlatformBrowser(this.platformId);
-  }
-  
-  /**
-   * Sets the authentication token in localStorage.
-   * 
-   * @param token The authentication token to be set.
-   */
-  setToken(token: string): void {
-    if (!this.isBrowser()) {
-      return;
-    }
+  readonly currentEmail$ = this.currentEmailSubject.asObservable();
 
-    window.localStorage.setItem(this.tokenKey, token);
-  }
-
-  getToken(): string {
-    if (!this.isBrowser()) {
-      return '';
-    }
-
-    return window.localStorage.getItem(this.tokenKey) || '';
-  }
-
-/**
- * Removes the token from localStorage.
- * 
- * This method is used to log out the user. It removes the token from localStorage, effectively logging out the user.
- */
-  removeToken(): void {
-    if (!this.isBrowser()) {
-      return;
-    }
-
-    window.localStorage.removeItem(this.tokenKey);
+  get currentEmail(): string | null {
+    return this.currentEmailSubject.value;
   }
 
   /**
-   * Checks if the user is authenticated.
-   * 
-   * @returns {boolean} True if the user is authenticated, false otherwise.
+   * Loads the current authenticated user from the backend cookie session.
+   * This is the source of truth for auth state when using HttpOnly cookies.
    */
+  loadCurrentUser(): Observable<AuthMeModel> {
+    return this.httpClient.get<AuthMeModel>(`${this.apiUrl}/auth/me`).pipe(
+      tap((response) => {
+        this.currentEmailSubject.next(response.authenticated ? response.email : null);
+      }),
+      catchError((error) => {
+        this.currentEmailSubject.next(null);
+        return of({ authenticated: false, email: null } as AuthMeModel);
+      })
+    );
+  }
+
+  /**
+   * Logout the user by calling the backend logout endpoint.
+   * Backend will clear the HttpOnly cookie.
+   * 
+   * @returns Observable of the logout response
+   */
+  logout(): Observable<any> {
+    return this.httpClient.post(`${this.apiUrl}/logout`, {}).pipe(
+      tap(() => this.currentEmailSubject.next(null))
+    );
+  }
+
   isAuthenticated(): boolean {
-    const token = this.getToken();
-    if (!token) {
-      return false;
-    }
-    return !this.isTokenExpired(token);
-  }
-  logout(): void {
-    this.removeToken();
-  }
-
-  private isTokenExpired(token: string): boolean {
-    try {
-      const payload = JSON.parse(atob(token.split('.')[1]));
-      // extract expiration time from payload
-      const exp = payload.exp;
-      if (!exp) {
-        return true; 
-      }
-      // Get current time in seconds
-      const now = Math.floor(new Date().getTime() / 1000);
-      return exp < now;
-    } catch (e) {
-      return true; // token invalide
-    }
+    return this.currentEmailSubject.value !== null;
   }
 }

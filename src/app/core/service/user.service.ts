@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 
 import { LoginModel } from '../models/login.model';
 import { RegisterModel } from '../models/register.model';
+import { AuthMeModel } from '../models/auth-me.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +16,12 @@ export class UserService {
     return this.httpClient.post('/api/register', user);
   }
   
-  login(user: LoginModel): Observable<{ token: string }> {
-    return this.httpClient.post<{ token: string }>('/api/login', user);
+  login(user: LoginModel): Observable<{ message: string }> {
+    return this.httpClient.post<{ message: string }>('/api/login', user);
+  }
+
+  me(): Observable<AuthMeModel> {
+    return this.httpClient.get<AuthMeModel>('/api/auth/me');
   }
   
 }
