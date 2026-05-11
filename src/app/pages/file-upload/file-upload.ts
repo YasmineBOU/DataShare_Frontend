@@ -71,9 +71,22 @@ export class FileUpload implements OnInit {
   onFileSelected(event: Event) {
     const fileInput = event.target as HTMLInputElement;
     if (fileInput.files && fileInput.files.length > 0) {
-      this.selectedFile = fileInput.files[0];
+      let file = fileInput.files[0];
+
+      // File size check
+      if (file.size > FILE_CONFIG.MAX_FILE_SIZE){
+        alert(`Le fichier est trop volumineux. Veuillez choisir un fichier de moins de ${this.getHumanReadableSize(FILE_CONFIG.MAX_FILE_SIZE)}.`);
+        return;
+      }
+      // File extensions check
+      const fileExt = file.name.split('.').pop()?.toLowerCase() || '';
+      if (FILE_CONFIG.FORBIDDEN_FILE_TYPES.includes(fileExt)) {
+        alert(`Le type de fichier .${fileExt} n'est pas autorisé. Veuillez choisir un autre fichier.`);
+        return;
+      }
+      
+      this.selectedFile = file;
       this.fileIcon = getIconByExtension(this.selectedFile.name);
-      console.log('icone', this.fileIcon);
       this.buildForm();
       
     }
@@ -104,19 +117,14 @@ export class FileUpload implements OnInit {
     if (!this.fileUploadForm.valid || !this.selectedFile) {
       return;
     }
-    // File size check
-    if (this.selectedFile.size > FILE_CONFIG.MAX_FILE_SIZE){
-      alert(`Le fichier est trop gros. Veuillez choisir un fichier de moins de ${this.getHumanReadableSize(FILE_CONFIG.MAX_FILE_SIZE)}.`);
-      return;
-    }
+    
     try {
       // Calculate file checksum before uploading
-      await this.calculateChecksum(); // remove async/await if no longer needed
+      await this.calculateChecksum(); 
       // Upload the file on the server
       this.fileService.uploadFile(this.getFileFormData()).subscribe({
         next: (response: any) => {
           alert('Fichier uploadé avec succès !');
-          // this.selectedFile = null;
           let expVal = this.expirationOptions.get(this.fileUploadForm.get('expiration')?.value);
           this.dwlLinkMessage = `Félicitations, ton fichier sera conservé chez nous pendant ${expVal?.toLocaleLowerCase()} !`;
           this.generatedLink = response.fileLink;
