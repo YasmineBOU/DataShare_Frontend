@@ -1,0 +1,53 @@
+<div class="relative">
+  @if (isMobile && !isSidebarOpen) {
+    <button
+      type="button"
+      (click)="toggleSidebar()"
+      class="fixed left-3 top-3 z-[90] inline-flex h-11 w-11 items-center justify-center md:hidden"
+      [attr.aria-label]="'Open sidebar'"
+    >
+      <img src="/assets/icons/buttons/dashboard-menu.svg" alt="Open menu" class="h-6 w-6" />
+    </button>
+  }
+
+  @if (isMobile && isSidebarOpen) {
+    <div
+      (click)="toggleSidebar()"
+      class="fixed inset-0 z-[70] bg-black/50 md:hidden"
+    ></div>
+  }
+
+  <!-- Sidebar -->
+  <aside
+    class="fixed inset-y-0 left-0 z-[80] flex w-64 flex-col bg-[image:var(--app-layout-gradient)] bg-cover bg-no-repeat shadow-2xl transition-transform duration-300 ease-in-out md:translate-x-0"
+    [class.-translate-x-full]="isMobile && !isSidebarOpen"
+    [class.translate-x-0]="!isMobile || isSidebarOpen"
+  >
+    <div class="flex h-16 items-center gap-3 px-6">
+      @if (isMobile && isSidebarOpen) {
+        <button
+          type="button"
+          (click)="toggleSidebar()"
+          class="inline-flex h-10 w-10 shrink-0 items-center justify-center md:hidden"
+          [attr.aria-label]="'Close sidebar'"
+        >
+          <img src="/assets/icons/buttons/close-dashboard-menu.svg" alt="Close menu" class="h-6 w-6" />
+        </button>
+      }
+
+      <a routerLink="/" class="text-left text-3xl font-semibold tracking-wide text-white">
+        DataShare
+      </a>
+    </div>
+
+    <nav class="flex flex-col gap-4 px-6 pb-6 pt-6">
+      <a
+        routerLink="files"
+        (click)="isMobile && toggleSidebar()"
+        class="block rounded-xl bg-[var(--color-sidebar-btn-bg)] px-4 py-3 font-bold text-[var(--color-sidebar-btn-text)] transition hover:bg-[var(--color-sidebar-btn-hover)]"
+      >
+        Mes fichiers
+      </a>
+    </nav>
+  </aside>
+</div>

@@ -25,15 +25,23 @@ body {
   --color-btn-orange-border: #ECBA99;
 
   // Color palette for headers
-  --color-header-non-authenticated-user: #FDB289;
-  --color-header-authenticated-user: #FFEEE3;
+  --color-header-default: #FDB289;
+  --color-header-dashboard: #FFEEE3;
   --color--header-btn-bg: #2C2C2C;
   --color-header-btn-hover-bg: #4C4C4C;
-
+  
   // Color palette for the upload file page
   --color-btn-change-text: #E27F29;
   --color-btn-change-hover: #BF702C;
   --color-btn-change-border: #FFA569;
   --color-generated-link-text: #DC7528;
-
+  
+  // Color palette for sidebar
+  --color-sidebar-btn-bg: #FCCDB6;
+  --color-sidebar-btn-text: #803A00;
+  --color-sidebar-btn-hover: #F9B07C;
+  --color-sidebar-border: #E19372;
+  
+  // Gradient for the public layout and the dashboard sidebar
+  --app-layout-gradient: linear-gradient(180deg, #fdb289 0%, #df6564 100%);
 }

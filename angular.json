@@ -81,6 +81,8 @@
               "buildTarget": "DataShare_Frontend:build:development",
               "proxyConfig": "proxy.conf.json",
               "ssl": true,
+              "sslCert": ".certs/localhost.pem",
+              "sslKey": ".certs/localhost-key.pem",
               "port": 4200
             }
           },

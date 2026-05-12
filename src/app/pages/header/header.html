@@ -1,37 +1,27 @@
+<!-- header.html -->
 <header
   class="shadow"
   [ngClass]="{
-    'bg-[var(--color-header-authenticated-user)]': isAuthenticated,
-    'bg-[var(--color-header-non-authenticated-user)]': !isAuthenticated
+    'bg-[var(--color-header-default)]': !showDashboardHeader,
+    'bg-[var(--color-header-dashboard)]': showDashboardHeader,
   }"
 >
   <div class="w-full px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between h-16 items-center">
       <!-- Logo -->
-      <div class="flex-shrink-0">
-        <a href="#" class="text-xl font-bold">DataShare</a>
+      <div *ngIf="!showDashboardHeader" class="flex-shrink-0">
+        <a 
+          routerLink="/" 
+          class="text-left text-3xl font-semibold tracking-wide"
+        >
+          DataShare
+        </a>
       </div>
 
       <!-- Navigation -->
-      <nav class="flex items-center gap-3 sm:gap-4">
-        <!-- Authenticated user -->
-        <ng-container *ngIf="isAuthenticated; else notAuthenticated">
-          <a
-            class="inline-block px-4 py-2 border border-transparent rounded-md
-                  bg-[var(--color--header-btn-bg)] text-white font-normal
-                  hover:bg-[var(--color-header-btn-hover-bg)] focus:outline-none focus:ring-2 focus:ring-white"
-          >
-            Mon espace
-          </a>
-          <button
-            class="px-4 py-2 rounded bg-[var(--color--header-btn-bg)] text-white font-semibold hover:bg-[var(--color-header-btn-hover-bg)] focus:outline-none focus:ring-2 focus:ring-white"
-          >
-            Déconnexion
-          </button>
-        </ng-container>
-
-        <!-- Not authenticated user -->
-        <ng-template #notAuthenticated>
+      <nav class="ml-auto flex items-center gap-3 sm:gap-4">
+        <!-- Cas 1 : User non connecté -->
+        <ng-container *ngIf="!isAuthenticated">
           <a
             class="inline-block px-4 py-2 border border-transparent rounded-md
                   bg-[var(--color--header-btn-bg)] text-white font-normal
@@ -40,8 +30,45 @@
           >
             Se connecter
           </a>
+        </ng-container>
 
-        </ng-template>
+        <!-- Case 2 : Authenticated user -->
+        <ng-container *ngIf="isAuthenticated">
+          <!-- Case 2a : Upload page -->
+          <ng-container *ngIf="showUploadHeader">
+            <button
+              class="inline-block px-4 py-2 border border-transparent rounded-md
+                    bg-[var(--color--header-btn-bg)] text-white font-normal
+                    hover:bg-[var(--color-header-btn-hover-bg)] focus:outline-none focus:ring-2 focus:ring-white"
+                    routerLink="/dashboard"
+            >
+              Mon espace
+            </button>
+          </ng-container>
+
+          <!-- Case 2b : Dashboard page -->
+          <ng-container *ngIf="showDashboardHeader">
+            <a
+              class="inline-block px-4 py-2 border border-transparent rounded-md
+                    bg-[var(--color--header-btn-bg)] text-white font-normal
+                    hover:bg-[var(--color-header-btn-hover-bg)] focus:outline-none focus:ring-2 focus:ring-white"
+                    routerLink="/files/upload"
+            >
+              Ajouter des fichiers
+            </a>
+            <button
+              class="ml-2 inline-flex items-center px-4 py-2 border border-transparent rounded-md
+                    text-primary-orange font-normal
+                    hover:bg-[var(--color-header-btn-hover-bg)] focus:outline-none focus:ring-2 focus:ring-white
+                    cursor-pointer"
+                    (click)="logout()"
+            >
+              <img src="/assets/icons/buttons/logout.svg" alt="logout" class="w-4 h-4 mr-1" /> 
+              Déconnexion
+            </button>
+          </ng-container>
+          
+        </ng-container>
       </nav>
     </div>
   </div>

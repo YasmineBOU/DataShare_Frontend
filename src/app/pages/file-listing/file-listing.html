@@ -1,0 +1,43 @@
+<mat-toolbar class="toolbar-orange">
+  <span>Mes Fichiers</span>
+</mat-toolbar>
+
+<!-- Filtres en boutons "catégories" avec icônes -->
+<div class="filter-container">
+  <button mat-raised-button color="accent" class="filter-btn" (click)="filterFiles('all')">
+    <mat-icon>folder_open</mat-icon>
+    Tous
+  </button>
+  <button mat-raised-button color="accent" class="filter-btn" (click)="filterFiles('active')">
+    <mat-icon>check_circle</mat-icon>
+    Actifs
+  </button>
+  <button mat-raised-button color="accent" class="filter-btn" (click)="filterFiles('expired')">
+    <mat-icon>error</mat-icon>
+    Expirés
+  </button>
+</div>
+
+<!-- Liste des fichiers sous forme de cartes -->
+<div class="files-list">
+  <mat-card *ngFor="let file of filteredFiles" class="file-card mat-elevation-z4">
+    <mat-card-content>
+      <div class="file-header">
+        <h3 class="file-name">{{ file.filename }}</h3>
+        <div class="file-actions">
+          <button mat-stroked-button color="warn" (click)="onDeleteFile(file)">
+            <mat-icon>delete</mat-icon>
+            Supprimer
+          </button>
+          <button mat-stroked-button color="primary" (click)="onViewFile(file)">
+            <mat-icon>visibility</mat-icon>
+            Accéder
+          </button>
+        </div>
+      </div>
+      <p class="file-expire-message" [ngClass]="file.isExpired ? 'expired' : 'active'">
+        {{ file.expireMessage }}
+      </p>
+    </mat-card-content>
+  </mat-card>
+</div>
