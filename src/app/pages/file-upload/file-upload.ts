@@ -1,5 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FileService } from '../../core/service/file.service';
+import { AuthService } from '../../core/service/auth.service';
 import { Form, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FILE_CONFIG } from '../../core/config/config';
 import { formatFileSize, computeFileChecksum, getIconByExtension } from '../../core/utils/file-utils';
@@ -16,6 +17,7 @@ import { FileUploadModel } from '../../core/models/file-upload.model';
 export class FileUpload implements OnInit {
 
   private fileService = inject(FileService);
+  private authService = inject(AuthService);
   fileUploadForm!: FormGroup;
   generatedLink: string = '';
   dwlLinkMessage: string = '';
@@ -25,6 +27,7 @@ export class FileUpload implements OnInit {
   getHumanReadableSize = formatFileSize;
   expirationOptions!: Map<number, string>;
   selectedExpiration: number = FILE_CONFIG.DEFAULT_LINK_EXPIRATION_DAYS;
+  currentUserEmail: string = '';
 
 
 
@@ -47,6 +50,18 @@ export class FileUpload implements OnInit {
   }
 
   ngOnInit() {
+    // Load current authenticated user email from backend via HttpOnly cookie
+    this.authService.loadCurrentUser().subscribe({
+      next: (response) => {
+        if (response.authenticated && response.email) {
+          this.currentUserEmail = response.email;
+        }
+      },
+      error: (err) => {
+        console.error('Error loading current user:', err);
+      }
+    });
+
     this.expirationOptions = new Map(
       Object.entries(FILE_CONFIG.LINK_EXPIRATION_OPTIONS).map(
         ([key, value]) => [Number(key), value] as [number, string]
@@ -99,7 +114,7 @@ export class FileUpload implements OnInit {
   getFileFormData(): FormData {
     const formData = new FormData();
 
-    formData.append('email', localStorage.getItem('userEmail') || '');
+      formData.append('email', this.currentUserEmail);
     formData.append('file', this.selectedFile!);
     formData.append('filename', this.selectedFile!.name);
     formData.append('fileSize', this.selectedFile!.size.toString());

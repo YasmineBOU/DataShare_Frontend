@@ -79,7 +79,9 @@
             },
             "development": {
               "buildTarget": "DataShare_Frontend:build:development",
-              "proxyConfig": "proxy.conf.json"
+              "proxyConfig": "proxy.conf.json",
+              "ssl": true,
+              "port": 4200
             }
           },
           "defaultConfiguration": "development"
