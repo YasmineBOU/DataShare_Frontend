@@ -1,13 +1,28 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
+import { Header } from '../pages/header/header';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-public-layout',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [
+    CommonModule,
+    Header,
+    RouterOutlet
+  ],
   templateUrl: './public-layout.html',
   styleUrls: ['./public-layout.scss'],
 })
 export class PublicLayout {
   year = new Date().getFullYear();
+  showFooter = true;
+
+  constructor(private router: Router) {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.showFooter = !event.url.startsWith('/dashboard');
+      }
+    });
+  }
 }

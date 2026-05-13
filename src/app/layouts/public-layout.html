@@ -3,9 +3,25 @@
     <router-outlet />
   </div>
   
-  <footer class="text-left py-4 text-white ml-10">
+  <footer
+   *ngIf="showFooter" 
+   class="text-left py-4 text-white ml-10 z-index-10"
+   >
     Copyright DataShare<sup>&copy;</sup> {{ year }}
   </footer>
 
 </div>
 
+
+<!-- <div class="public-layout bg-[image:var(--app-layout-gradient)] bg-cover bg-no-repeat">
+    <app-header/>
+
+
+  <div class="public-layout__content">
+    <router-outlet/>
+  </div>
+
+  <footer *ngIf="showFooter" class="text-left py-4 text-white ml-10">
+    Copyright DataShare<sup>&copy;</sup> {{ year }}
+  </footer>
+</div> -->

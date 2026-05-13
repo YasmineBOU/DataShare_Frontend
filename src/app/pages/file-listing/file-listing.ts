@@ -1,51 +1,57 @@
-import { Component, OnInit, inject, PLATFORM_ID, ChangeDetectorRef } from '@angular/core';
+import { ChangeDetectorRef, Component, HostListener, OnInit, inject } from '@angular/core';
 import { FileService } from '../../core/service/file.service';
 import { AuthService } from '../../core/service/auth.service';
 import { Router } from '@angular/router';
 import { FileInfo } from '../../core/models/file-info.model';
-import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { CommonModule } from '@angular/common';
-import { isPlatformBrowser } from '@angular/common';
-import { MaterialModule } from '../../material/material.module';
+import { getIconByExtension } from '../../core/utils/file-utils';
+import { isBrowser, isMobileDevice } from '../../core/utils/common-utils';
 
 @Component({
   selector: 'app-file-listing',
   standalone: true,
-  imports: [
-    CommonModule,
-    MaterialModule,
-  ],
+  imports: [CommonModule],
   templateUrl: './file-listing.html',
-  styleUrls: ['./file-listing.scss'],
 })
 
 export class FileListing implements OnInit {
   private fileService = inject(FileService);
   private authService = inject(AuthService);
   private router = inject(Router);
-  private dialog = inject(MatDialog);
-  private snackBar = inject(MatSnackBar);
-  private platformId = inject(PLATFORM_ID);
   private cdr = inject(ChangeDetectorRef);
 
   // Local display state for the Material table.
   userFiles: FileInfo[] = [];
   filteredFiles: FileInfo[] = [];
+  activeFilter: String = 'all'; // available filters: 'all', 'active', 'expired'
+  isMobile!: boolean;
+  message: string | null = null;
+  messageType: string = 'info';
+  // Track which file's menu is open (store file id) to keep menus per-file
+  menuOpen: number | null = null;
 
-  // Columns shown in the Material table.
-  displayedColumns: string[] = ['filename', 'expirationDate', 'status', 'actions'];
+
+  showMessage(text: string, type: 'success' | 'error' | 'info' = 'info', duration = 30000) {
+    this.message = text;
+    this.messageType = type;
+    this.cdr.detectChanges();
+    setTimeout(() => {
+      this.message = null;
+    }, duration);
+  }
 
   ngOnInit(): void {
-    if (!isPlatformBrowser(this.platformId)) {
+    if (!isBrowser()) {
       return;
     }
+    this.isMobile = isMobileDevice(window.innerWidth);
+    console.log("isMobileDevice:", this.isMobile, "window.innerWidth:", window.innerWidth);
 
     // Load the current authenticated user from the backend via HttpOnly cookie
     this.authService.loadCurrentUser().subscribe({
       next: (response) => {
         if (!response.authenticated || !response.email) {
-          this.snackBar.open('User email not found. Please log in again.', 'Close', { duration: 3000 });
+          this.showMessage('User email not found. Please log in again.', 'error');
           this.router.navigate(['/login']);
           return;
         }
@@ -58,9 +64,10 @@ export class FileListing implements OnInit {
               // Add UI-only computed fields without changing the backend model.
               this.userFiles = files.map(file => {
                 const isExpired = new Date(file.expirationDate) < new Date();
+                let fileIconUrl = getIconByExtension(file.filename);
                 let expireMessage = '';
                 if (isExpired) {
-                  expireMessage = 'Expiré';
+                  expireMessage = 'Ce fichier a expiré, il n\'est plus stocké chez nous';
                 } else {
                   const now = new Date();
                   const timeDiff = new Date(file.expirationDate).getTime() - now.getTime();
@@ -73,11 +80,11 @@ export class FileListing implements OnInit {
                       expireMessage = 'Expire demain';
                       break;
                     default:
-                      expireMessage = `Expire dans ${daysLeft} jour(s)`;
+                      expireMessage = `Expire dans ${daysLeft} ${daysLeft > 1 ? 'jours' : 'jour'}`;
                       break;
                   }
                 }
-                return { ...file, isExpired, expireMessage };
+                return { ...file, isExpired, expireMessage, fileIconUrl };
               });
 
               // Initialize the table without any filter.
@@ -87,19 +94,20 @@ export class FileListing implements OnInit {
           },
           error: err => {
             console.error('Error fetching files:', err);
-            this.snackBar.open('An error occurred while fetching files.', 'Close', { duration: 3000 });
+            this.showMessage('An error occurred while fetching files.', 'error');
           }
         });
       },
       error: (err) => {
         console.error('Error loading current user:', err);
-        this.snackBar.open('User email not found. Please log in again.', 'Close', { duration: 3000 });
+        this.showMessage('User email not found. Please log in again.', 'error');
         this.router.navigate(['/login']);
       }
     });
   }
 
   filterFiles(filter: string): void {
+    this.activeFilter = filter;
     switch (filter) {
       case 'expired':
         this.filteredFiles = this.userFiles.filter(f => new Date(f.expirationDate) < new Date());
@@ -121,11 +129,12 @@ export class FileListing implements OnInit {
       next: () => {
         this.userFiles = this.userFiles.filter(f => f.id !== file.id);
         this.filteredFiles = this.filteredFiles.filter(f => f.id !== file.id);
-        this.snackBar.open(`File "${file.filename}" deleted successfully.`, 'Close', { duration: 3000 });
+        this.cdr.detectChanges();
+        this.showMessage(`File "${file.filename}" deleted successfully.`, 'success');
       },
       error: err => {
         console.error('Error deleting file:', err);
-        this.snackBar.open(`Error deleting file "${file.filename}".`, 'Close', { duration: 3000 });
+        this.showMessage(`Error deleting file "${file.filename}".`, 'error');
       }
     });
   }
@@ -133,4 +142,27 @@ export class FileListing implements OnInit {
   onViewFile(file: FileInfo): void {
     this.router.navigate(['/files', file.id]);
   }
+
+  closeMessage() {
+    this.message = null;
+    this.cdr.detectChanges();
+  }
+
+
+  @HostListener('document:click', ['$event'])
+  closeMenuWhenClickingOutside(event: MouseEvent): void {
+    if (this.menuOpen === null) {
+      return;
+    }
+
+    this.menuOpen = null;
+    this.cdr.detectChanges();
+  }
+
+  toggleMenu(fileId?: string | number | null) {
+    const id = fileId == null ? null : Number(fileId);
+    this.menuOpen = this.menuOpen === id ? null : id;
+    this.cdr.detectChanges();
+  }
+
 }

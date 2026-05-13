@@ -11,6 +11,7 @@ import { isBrowser, isMobileDevice, watchViewportWidth } from '../../core/utils/
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DashboardSidebar implements OnInit {
+  year = new Date().getFullYear();
   isSidebarOpen = false;
   isMobile = false;
 

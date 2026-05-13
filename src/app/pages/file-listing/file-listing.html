@@ -1,43 +1,153 @@
-<mat-toolbar class="toolbar-orange">
-  <span>Mes Fichiers</span>
-</mat-toolbar>
+<div class="p-6 bg-white w-full">
+  <!-- Info/Error Message -->
+  <div *ngIf="message" 
+    [ngClass]="{
+      'bg-green-100 text-green-700 border-green-500': messageType === 'success',
+      'bg-red-100 text-red-700 border-red-500': messageType === 'error',
+      'bg-blue-100 text-blue-700 border-blue-500': messageType === 'info'
+    }"
+    class="relative border-l-4 p-4 mb-4 rounded shadow-md transition-opacity duration-500"
+    [style.opacity]="message ? '1' : '0'"
+    role="alert"
+  >
+    {{ message }}
+    
+    <button
+    aria-label="close message"
+    class="absolute right-2 text-xl font-bold leading-none hover:text-gray-700 focus:outline-none"
+    (click)="closeMessage()"
+    >
+      &times;
+    </button>
+  </div>
 
-<!-- Filtres en boutons "catégories" avec icônes -->
-<div class="filter-container">
-  <button mat-raised-button color="accent" class="filter-btn" (click)="filterFiles('all')">
-    <mat-icon>folder_open</mat-icon>
-    Tous
-  </button>
-  <button mat-raised-button color="accent" class="filter-btn" (click)="filterFiles('active')">
-    <mat-icon>check_circle</mat-icon>
-    Actifs
-  </button>
-  <button mat-raised-button color="accent" class="filter-btn" (click)="filterFiles('expired')">
-    <mat-icon>error</mat-icon>
-    Expirés
-  </button>
-</div>
 
-<!-- Liste des fichiers sous forme de cartes -->
-<div class="files-list">
-  <mat-card *ngFor="let file of filteredFiles" class="file-card mat-elevation-z4">
-    <mat-card-content>
-      <div class="file-header">
-        <h3 class="file-name">{{ file.filename }}</h3>
-        <div class="file-actions">
-          <button mat-stroked-button color="warn" (click)="onDeleteFile(file)">
-            <mat-icon>delete</mat-icon>
+  <h2 class="font-semibold text-2xl mb-4">
+    Mes Fichiers
+  </h2>
+
+  <!-- filters; all/active/expired -->
+  <div class="ml-auto inline-flex flex items-center rounded-full border-1 border-filter-btn-border mb-6">
+    <button 
+      class = "px-4 py-2 rounded-l-full bg-filter-btn-disabled-bg"
+      [ngClass]="{'text-white bg-filter-btn-enabled-bg': activeFilter === 'all'}"
+      (click)="filterFiles('all')"
+    >
+      Tous
+    </button>
+    <button 
+      class="px-4 py-2 bg-filter-btn-disabled-bg"
+      [ngClass]="{'text-white bg-filter-btn-enabled-bg': activeFilter === 'active'}"
+      (click)="filterFiles('active')"
+    >
+      Actif
+    </button>
+    <button 
+      class="px-4 py-2 rounded-r-full bg-filter-btn-disabled-bg "
+      [ngClass]="{'text-white bg-filter-btn-enabled-bg': activeFilter === 'expired'}"
+      (click)="filterFiles('expired')"
+    >
+      Expiré
+    </button>
+  </div>
+
+  <!-- Files -->
+  <ng-container *ngFor="let file of filteredFiles" >
+    <div 
+      class="flex items-center rounded-lg bg-file-container-bg p-4 border-1 border-file-container-border justify-between mb-2"
+    >
+      <!-- File icon -->
+      <div>
+        <img [src]="file.fileIconUrl" alt="File Icon" class="w-8 h-8 mr-4">
+      </div>
+      <div class="flex-1">
+        <!-- Filename -->
+        <h3 class="font-semibold text-lg">{{ file.filename }}</h3>
+        <!-- Expiration message -->
+        <ng-container *ngIf="file.isExpired; else activeBlock">
+          <p class="text-red-600">Expiré</p>
+        </ng-container>
+        <ng-template #activeBlock>
+          <p>{{ file.expireMessage}}</p>
+        </ng-template>
+      </div>
+      <!-- Protected ? -->
+      <a title="Fichier protégé">
+        <img 
+          *ngIf="file.hasPassword && !file.isExpired" 
+          src="assets/icons/buttons/protected-file.svg" 
+          alt="Protected" 
+        >
+      </a>
+      <!-- Actions -->
+      <!-- <ng-container *ngIf="!file.isExpired; else expiredBlock"> -->
+      <ng-container *ngIf="!file.isExpired">
+        <!-- Desktop actions -->
+        <div *ngIf="!isMobile" class="inline-flex items-center gap-2">
+          <button 
+            class="ml-2 inline-flex items-center rounded-md text-primary-orange border border-file-btn-border hover:bg-file-btn-hover-bg px-4 py-2
+            cursor-pointer"
+            (click)="onDeleteFile(file)"
+          >
+            <img src="assets/icons/buttons/delete.svg" alt="Delete" class="w-5 h-5 mr-2" />
             Supprimer
           </button>
-          <button mat-stroked-button color="primary" (click)="onViewFile(file)">
-            <mat-icon>visibility</mat-icon>
+
+          <button 
+            class="ml-2 inline-flex items-center rounded-md text-primary-orange border border-file-btn-border hover:bg-file-btn-hover-bg px-4 py-2 cursor-pointer" 
+            (click)="onViewFile(file)"
+          >
             Accéder
+            <img src="assets/icons/buttons/view-file.svg" alt="View" class="w-5 h-5 ml-2" />
           </button>
+
         </div>
-      </div>
-      <p class="file-expire-message" [ngClass]="file.isExpired ? 'expired' : 'active'">
-        {{ file.expireMessage }}
-      </p>
-    </mat-card-content>
-  </mat-card>
+
+        <!-- Mobile menu -->
+        <div *ngIf="isMobile" class="relative pl-2 inline-flex md:hidden" (click)="$event.stopPropagation()">
+          <button
+            class="p-2 rounded-md border border-btn-orange-border bg-btn-orange-bg text-primary-orange shadow-sm transition duration-150 hover:bg-btn-orange-hover-bg hover:shadow-md cursor-pointer"
+            aria-label="Open menu"
+            (click)="toggleMenu(file.id)"
+          >
+            <img src="assets/icons/buttons/menu.svg" alt="Menu" class="w-5 h-5" />
+          </button>
+
+          <div
+            *ngIf="menuOpen === file.id"
+            class="absolute right-0 mt-5 w-40 overflow-hidden rounded-md border border-btn-orange-border bg-white shadow-lg z-50"
+          >
+            <button
+              class="flex w-full items-center gap-2 px-4 py-2 text-left text-primary-orange transition-colors hover:bg-btn-orange-hover-bg cursor-pointer"
+              (click)="onDeleteFile(file); toggleMenu(file.id)"
+            >
+              <img src="assets/icons/buttons/delete.svg" alt="Delete" class="w-5 h-5" />
+              Supprimer
+            </button>
+
+            <button
+              class="flex w-full items-center gap-2 px-4 py-2 text-left text-primary-orange transition-colors hover:bg-btn-orange-hover-bg cursor-pointer"
+              (click)="onViewFile(file); toggleMenu(file.id)"
+            >
+              <img src="assets/icons/buttons/view-file.svg" alt="View" class="w-5 h-5" />
+              Accéder
+            </button>
+          </div>
+        </div>
+      </ng-container>
+
+      <!-- When expired file, show expire message only -->
+      <ng-container *ngIf="file.isExpired">
+        <div class="flex items-center gap-2">
+          <p *ngIf="!isMobile" class="text-gray-500">
+            {{ file.expireMessage }}
+          </p>
+        </div>
+      </ng-container>
+    
+    </div>
+
+  </ng-container>
 </div>
+
+ 
