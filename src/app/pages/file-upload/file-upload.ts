@@ -28,6 +28,7 @@ export class FileUpload implements OnInit {
   expirationOptions!: Map<number, string>;
   selectedExpiration: number = FILE_CONFIG.DEFAULT_LINK_EXPIRATION_DAYS;
   currentUserEmail: string = '';
+  passwordMinLength = FILE_CONFIG.PASSWORD_MIN_LENGTH;
 
 
 
@@ -43,7 +44,7 @@ export class FileUpload implements OnInit {
       });
     } else {
       this.fileUploadForm = this.formBuilder.group({
-        password: ['', Validators.minLength(FILE_CONFIG.PASSWORD_MIN_LENGTH)],
+        password: ['', Validators.minLength(this.passwordMinLength)],
         expiration: [this.selectedExpiration, Validators.required]
       });
     }

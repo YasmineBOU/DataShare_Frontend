@@ -82,6 +82,9 @@
               formControlName="password"
               placeholder="Optionnel"
             />
+            <p *ngIf="fileUploadForm.get('password')?.errors?.['minlength']" class="text-sm text-red-600 mt-1">
+                Le mot de passe doit comporter au moins {{ passwordMinLength }} caractères.
+            </p>
           </div>
         </div>
         <div>
