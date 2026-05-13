@@ -136,6 +136,7 @@ export class FileUpload implements OnInit {
     try {
       // Calculate file checksum before uploading
       await this.calculateChecksum(); 
+      console.log('File checksum calculated:', this.fileChecksum);
       // Upload the file on the server
       this.fileService.uploadFile(this.getFileFormData()).subscribe({
         next: (response: any) => {

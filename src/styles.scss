@@ -44,4 +44,12 @@ body {
   
   // Gradient for the public layout and the dashboard sidebar
   --app-layout-gradient: linear-gradient(180deg, #fdb289 0%, #df6564 100%);
+
+  // Color palette for the file listing page
+  --color-filter-btn-enabled-bg: #E77A6E;
+  --color-filter-btn-disabled-bg: #FFEFE3;
+  --color-filter-btn-border: #F7D3B8;
+  --color-file-btn-border: #FFA569;
+  --color-file-container-bg: #FFF5EE;
+  --color-file-container-border: #F7D8C1;
 }
