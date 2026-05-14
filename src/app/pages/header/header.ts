@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { filter } from 'rxjs/operators';
+import { isBrowser, isMobileDevice } from '../../core/utils/common-utils';
 
 @Component({
   selector: 'app-header',
@@ -14,6 +15,7 @@ import { filter } from 'rxjs/operators';
   styleUrls: ['./header.scss']
 })
 export class Header implements OnInit {
+
   private destroyRef = inject(DestroyRef);
   private router = inject(Router);
   authService = inject(AuthService);
@@ -21,8 +23,14 @@ export class Header implements OnInit {
   currentEmail$ = this.authService.currentEmail$;
   isAuthenticated: boolean = false;
   currentRoute: string = '';
+  isMobile!: boolean;
+  profileMenuOpen: boolean = false;
 
   ngOnInit() {
+    if (!isBrowser()) {
+      return;
+    }
+    this.isMobile = isMobileDevice(window.innerWidth);
     this.updateCurrentRoute(this.router.url);
 
     // Écoute les changements de route
@@ -66,14 +74,18 @@ export class Header implements OnInit {
 
   logout() {
     this.authService.logout().pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
-      
-      this.isAuthenticated = false;
-      this.router.navigate(['/login']);
-    },
-    (error) => {
-      console.error('Logout failed', error);
-      alert('Logout failed. Please try again.');
-    }
-  );
+        
+        this.isAuthenticated = false;
+        this.router.navigate(['/login']);
+      },
+      (error) => {
+        console.error('Logout failed', error);
+        alert('Logout failed. Please try again.');
+      }
+    );
+  }
+
+  toggleProfileMenu() {
+    this.profileMenuOpen = !this.profileMenuOpen;
   }
 }
