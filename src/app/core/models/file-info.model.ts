@@ -1,11 +1,13 @@
 export interface FileInfo {
+    // Properties returned by the backend API
     id: number;
     filename: string;
-    fileSize: number;
+    fileSize: string;
     createdAt: string;
     expirationDate: string; 
     hasPassword: boolean;
+    // Optional properties for UI display
     isExpired?: boolean;
-    expireMessage?: string;
+    expirationMsg?: string;
     fileIconUrl?: string;
 }

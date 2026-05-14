@@ -4,7 +4,7 @@ import { AuthService } from '../../core/service/auth.service';
 import { Router } from '@angular/router';
 import { FileInfo } from '../../core/models/file-info.model';
 import { CommonModule } from '@angular/common';
-import { getIconByExtension } from '../../core/utils/file-utils';
+import { formatFileSize, getIconByExtension } from '../../core/utils/file-utils';
 import { isBrowser, isMobileDevice } from '../../core/utils/common-utils';
 
 @Component({
@@ -63,28 +63,32 @@ export class FileListing implements OnInit {
             queueMicrotask(() => {
               // Add UI-only computed fields without changing the backend model.
               this.userFiles = files.map(file => {
+                // Format file size for display
+                file.fileSize = formatFileSize(Number(file.fileSize));
                 const isExpired = new Date(file.expirationDate) < new Date();
+                // Determine file icon based on extension
                 let fileIconUrl = getIconByExtension(file.filename);
-                let expireMessage = '';
+                // 
+                let expirationMsg = '';
                 if (isExpired) {
-                  expireMessage = 'Ce fichier a expiré, il n\'est plus stocké chez nous';
+                  expirationMsg = 'Ce fichier a expiré, il n\'est plus stocké chez nous';
                 } else {
                   const now = new Date();
                   const timeDiff = new Date(file.expirationDate).getTime() - now.getTime();
                   const daysLeft = Math.ceil(timeDiff / (1000 * 3600 * 24));
                   switch (daysLeft) {
                     case 0:
-                      expireMessage = 'Expire aujourd\'hui';
+                      expirationMsg = 'Expire aujourd\'hui';
                       break;
                     case 1:
-                      expireMessage = 'Expire demain';
+                      expirationMsg = 'Expire demain';
                       break;
                     default:
-                      expireMessage = `Expire dans ${daysLeft} ${daysLeft > 1 ? 'jours' : 'jour'}`;
+                      expirationMsg = `Expire dans ${daysLeft} ${daysLeft > 1 ? 'jours' : 'jour'}`;
                       break;
                   }
                 }
-                return { ...file, isExpired, expireMessage, fileIconUrl };
+                return { ...file, isExpired, expirationMsg, fileIconUrl };
               });
 
               // Initialize the table without any filter.

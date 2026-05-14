@@ -63,12 +63,18 @@
       <div class="flex-1">
         <!-- Filename -->
         <h3 class="font-semibold text-lg">{{ file.filename }}</h3>
+        <!-- Size + Upload Date -->
+        <div class="flex items-center gap-2 text-sm text-gray-500 mt-1">
+          <span>{{ file.fileSize }}</span>
+          <span>•</span>
+          <span>{{ file.createdAt | date:'dd/MM/yyyy' }}</span>
+        </div>
         <!-- Expiration message -->
         <ng-container *ngIf="file.isExpired; else activeBlock">
           <p class="text-red-600">Expiré</p>
         </ng-container>
         <ng-template #activeBlock>
-          <p>{{ file.expireMessage}}</p>
+          <p>{{ file.expirationMsg}}</p>
         </ng-template>
       </div>
       <!-- Protected ? -->
@@ -140,7 +146,7 @@
       <ng-container *ngIf="file.isExpired">
         <div class="flex items-center gap-2">
           <p *ngIf="!isMobile" class="text-gray-500">
-            {{ file.expireMessage }}
+            {{ file.expirationMsg }}
           </p>
         </div>
       </ng-container>
