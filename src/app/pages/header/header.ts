@@ -4,7 +4,7 @@ import { AuthService } from '../../core/service/auth.service';
 import { CommonModule } from '@angular/common';
 import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { filter } from 'rxjs/operators';
+import { distinctUntilChanged, filter, map, startWith } from 'rxjs/operators';
 import { isBrowser, isMobileDevice } from '../../core/utils/common-utils';
 
 @Component({
@@ -21,7 +21,11 @@ export class Header implements OnInit {
   authService = inject(AuthService);
 
   currentEmail$ = this.authService.currentEmail$;
-  isAuthenticated: boolean = false;
+  readonly isAuthenticated$ = this.currentEmail$.pipe(
+    map((email) => email !== null),
+    startWith(this.authService.isAuthenticated()),
+    distinctUntilChanged(),
+  );
   currentRoute: string = '';
   isMobile!: boolean;
   profileMenuOpen: boolean = false;
@@ -33,7 +37,7 @@ export class Header implements OnInit {
     this.isMobile = isMobileDevice(window.innerWidth);
     this.updateCurrentRoute(this.router.url);
 
-    // Écoute les changements de route
+    // Listener for route changes to update currentRoute
     this.router.events.pipe(
       takeUntilDestroyed(this.destroyRef),
       filter((event): event is NavigationEnd => event instanceof NavigationEnd)
@@ -41,31 +45,20 @@ export class Header implements OnInit {
       this.updateCurrentRoute(event.urlAfterRedirects);
     });
 
-    // Charge l'état de l'utilisateur et met à jour isAuthenticated
-    this.authService.loadCurrentUser().pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
-      this.isAuthenticated = this.authService.isAuthenticated();
-    });
-
-    // Écoute les changements d'authentification
-    this.currentEmail$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((email) => {
-      this.isAuthenticated = email !== null;
-    });
+    // Listener for loading user state; currentEmail$ remains the single source for isAuthenticated.
+    this.authService.loadCurrentUser().pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
   }
 
   get isUploadPage(): boolean {
     return this.currentRoute === '/' || this.currentRoute.startsWith('/files/upload');
   }
 
+   get isDownloadPage(): boolean {
+    return this.currentRoute.startsWith('/files/download');
+  }
+
   get isDashboardPage(): boolean {
     return this.currentRoute.startsWith('/dashboard');
-  }
-
-  get showDashboardHeader(): boolean {
-    return this.isAuthenticated && this.isDashboardPage;
-  }
-
-  get showUploadHeader(): boolean {
-    return this.isAuthenticated && this.isUploadPage;
   }
 
   private updateCurrentRoute(url: string): void {
@@ -74,8 +67,6 @@ export class Header implements OnInit {
 
   logout() {
     this.authService.logout().pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
-        
-        this.isAuthenticated = false;
         this.router.navigate(['/login']);
       },
       (error) => {

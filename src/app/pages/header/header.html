@@ -2,14 +2,14 @@
 <header
   class="shadow"
   [ngClass]="{
-    'bg-[var(--color-header-default)]': !showDashboardHeader,
-    'bg-[var(--color-header-dashboard)]': showDashboardHeader,
+    'bg-[var(--color-header-default)]': !((isAuthenticated$ | async) && isDashboardPage),
+    'bg-[var(--color-header-dashboard)]': (isAuthenticated$ | async) && isDashboardPage,
   }"
 >
   <div class="w-full px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between h-16 items-center">
       <!-- Logo -->
-      <div *ngIf="!showDashboardHeader" class="flex-shrink-0">
+      <div *ngIf="!((isAuthenticated$ | async) && isDashboardPage)" class="flex-shrink-0">
         <a 
           routerLink="/" 
           class="text-left text-3xl font-semibold tracking-wide"
@@ -21,7 +21,7 @@
       <!-- Navigation -->
       <nav class="ml-auto flex items-center gap-3 sm:gap-4">
         <!-- Cas 1 : User non connecté -->
-        <ng-container *ngIf="!isAuthenticated">
+        <ng-container *ngIf="!(isAuthenticated$ | async)">
           <a
             class="inline-block px-4 py-2 border border-transparent rounded-md
                   bg-[var(--color--header-btn-bg)] text-white font-normal
@@ -33,9 +33,9 @@
         </ng-container>
 
         <!-- Case 2 : Authenticated user -->
-        <ng-container *ngIf="isAuthenticated">
+        <ng-container *ngIf="isAuthenticated$ | async">
           <!-- Case 2a : Upload page -->
-          <ng-container *ngIf="showUploadHeader">
+          <ng-container *ngIf="isUploadPage || isDownloadPage">
             <button
               class="inline-block px-4 py-2 border border-transparent rounded-md
                     bg-[var(--color--header-btn-bg)] text-white font-normal
@@ -47,7 +47,7 @@
           </ng-container>
 
           <!-- Case 2b : Dashboard page -->
-          <ng-container *ngIf="showDashboardHeader">
+          <ng-container *ngIf="isDashboardPage">
             <!-- Mobile device -->
             <div *ngIf="isMobile" class="relative pl-2 inline-flex md:hidden" (click)="$event.stopPropagation()">
               <!-- Profile button -->
