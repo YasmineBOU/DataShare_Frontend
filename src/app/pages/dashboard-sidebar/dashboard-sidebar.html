@@ -3,7 +3,9 @@
     <button
       type="button"
       (click)="toggleSidebar()"
-      class="fixed left-3 top-3 z-[90] inline-flex h-11 w-11 items-center justify-center md:hidden"
+      class="inline-flex h-11 w-11 items-center justify-center md:hidden"
+      style="position: fixed; left: 0.75rem; z-index: 120;"
+      [style.top]="'calc(env(safe-area-inset-top) + 0.75rem)'"
       [attr.aria-label]="'Open sidebar'"
     >
       <img src="/assets/icons/buttons/menu.svg" alt="Open menu" class="h-6 w-6" />

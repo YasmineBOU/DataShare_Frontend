@@ -1,3 +1,4 @@
+@use 'tailwindcss' as *;
 
 html {
   height: 100%;
@@ -14,7 +15,6 @@ body {
   height: 100%;
 
 }
-@import 'tailwindcss';
 
 @theme {
   /* Color palette mainly for the Login/Register forms and the buttons. */
