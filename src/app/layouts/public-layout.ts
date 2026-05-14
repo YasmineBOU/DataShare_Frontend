@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
-import { Header } from '../pages/header/header';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -8,7 +7,6 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [
     CommonModule,
-    Header,
     RouterOutlet
   ],
   templateUrl: './public-layout.html',

@@ -4,7 +4,7 @@ import { AuthService } from '../../core/service/auth.service';
 import { Router } from '@angular/router';
 import { FileInfo } from '../../core/models/file-info.model';
 import { CommonModule } from '@angular/common';
-import { formatFileSize, getIconByExtension } from '../../core/utils/file-utils';
+import { formatFileSize, getExpirationDaysMessage, getIconByExtension } from '../../core/utils/file-utils';
 import { isBrowser, isMobileDevice } from '../../core/utils/common-utils';
 
 @Component({
@@ -73,20 +73,7 @@ export class FileListing implements OnInit {
                 if (isExpired) {
                   expirationMsg = 'Ce fichier a expiré, il n\'est plus stocké chez nous';
                 } else {
-                  const now = new Date();
-                  const timeDiff = new Date(file.expirationDate).getTime() - now.getTime();
-                  const daysLeft = Math.ceil(timeDiff / (1000 * 3600 * 24));
-                  switch (daysLeft) {
-                    case 0:
-                      expirationMsg = 'Expire aujourd\'hui';
-                      break;
-                    case 1:
-                      expirationMsg = 'Expire demain';
-                      break;
-                    default:
-                      expirationMsg = `Expire dans ${daysLeft} ${daysLeft > 1 ? 'jours' : 'jour'}`;
-                      break;
-                  }
+                  expirationMsg = `Expire ${getExpirationDaysMessage(file.expirationDate)[0]}`;
                 }
                 return { ...file, isExpired, expirationMsg, fileIconUrl };
               });
@@ -144,7 +131,7 @@ export class FileListing implements OnInit {
   }
 
   onViewFile(file: FileInfo): void {
-    this.router.navigate(['/files', file.id]);
+    this.router.navigate(['/files/download', file.id]);
   }
 
   closeMessage() {

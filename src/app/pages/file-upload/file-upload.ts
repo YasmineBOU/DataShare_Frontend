@@ -15,9 +15,11 @@ import { FileUploadModel } from '../../core/models/file-upload.model';
   styleUrls: ['./file-upload.scss'],
 })
 export class FileUpload implements OnInit {
-
+  
   private fileService = inject(FileService);
   private authService = inject(AuthService);
+  private formBuilder = inject(FormBuilder);
+
   fileUploadForm!: FormGroup;
   generatedLink: string = '';
   dwlLinkMessage: string = '';
@@ -30,11 +32,6 @@ export class FileUpload implements OnInit {
   currentUserEmail: string = '';
   passwordMinLength = FILE_CONFIG.PASSWORD_MIN_LENGTH;
 
-
-
-  constructor(private formBuilder: FormBuilder) {
-   
-  }
 
   private buildForm() {
     if (this.fileUploadForm) {
