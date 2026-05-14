@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { FileInfo } from '../models/file-info.model';
-import { FileDownload } from '../models/file-download.model';
+import { FileDownloadInfo } from '../models/file-download.model';
 
 export interface FileListResponse {
   message: string;
@@ -21,13 +21,22 @@ export class FileService {
     return this.httpClient.post('/api/files/upload', fileUploadFormData);
   }
 
-  downloadFile(fileDownloadInfo: FileDownload): Observable<Object> {
+  getFileLink(fileDownloadInfo: FileDownloadInfo): Observable<Object> {
+    console.log("File download info:", fileDownloadInfo);
     return this.httpClient.post('/api/files/download', fileDownloadInfo);
+  }
+
+  downloadFile(url: string): Observable<Blob> {
+    return this.httpClient.get(url, { responseType: 'blob' });
   }
 
   listFiles(email: string): Observable<FileListResponse> {
     const params = new HttpParams().set('email', email);
     return this.httpClient.get<FileListResponse>('/api/files/list', { params });
+  }
+
+  getFileInfo(id: number): Observable<Object> {
+    return this.httpClient.get<FileListResponse>(`/api/files/info/${id}`);
   }
 
   deleteFile(fileId: number): Observable<Object> {

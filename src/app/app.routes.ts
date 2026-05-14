@@ -29,7 +29,6 @@ export const routes: Routes = [
         children: [
           { path: 'upload', component: FileUpload },
           { path: 'download/:id', component: FileDownload },
-          { path: ':id', component: FileDownload }
         ]
       },
       {

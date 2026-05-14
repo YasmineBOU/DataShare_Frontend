@@ -1,4 +1,4 @@
-export const extensionIconMap: Record<string, string> = {
+export const EXTENSION_ICON_MAP: Record<string, string> = {
   // PDF files
   'pdf': '/assets/icons/files/pdf.svg',
   // Word documents
@@ -34,4 +34,13 @@ export const extensionIconMap: Record<string, string> = {
 
   // default icon for unknown file types
   'default': '/assets/icons/files/default.svg'
+};
+
+
+export const STATUS_ICON_MAP: Record<string, string> = {
+  'safe': '/assets/icons/status/info.svg',
+  'warning': '/assets/icons/status/warning.svg',
+  'overdue': '/assets/icons/status/alert.svg',
+  // default icon for unknown status
+  'default': '/assets/icons/status/info.svg'
 };

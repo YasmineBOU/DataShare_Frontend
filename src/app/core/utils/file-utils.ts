@@ -1,9 +1,13 @@
 import { createBLAKE3 } from 'hash-wasm';
-import { extensionIconMap } from './file-icon-map';
+import { EXTENSION_ICON_MAP, STATUS_ICON_MAP } from './file-icon-map';
 
 export function getIconByExtension(filename: string): string {
   const ext = filename.split('.').pop()?.toLowerCase() || '';
-  return extensionIconMap[ext] || extensionIconMap['default'];
+  return EXTENSION_ICON_MAP[ext] || EXTENSION_ICON_MAP['default'];
+}
+
+export function getIconByStatus(status: string): string {
+  return STATUS_ICON_MAP[status] || STATUS_ICON_MAP['default'];
 }
 
 export function formatFileSize(bytes: number, decimals: number = 2): string {
@@ -60,4 +64,24 @@ export async function computeFileChecksum(
 
     readChunk();
   });
+}
+
+
+export function getExpirationDaysMessage(expirationDate: string): [string, number] {
+  let expMsg = '';
+  const now = new Date(); 
+  const timeDiff = new Date(expirationDate).getTime() - now.getTime();
+  const daysLeft = Math.round(timeDiff / (1000 * 3600 * 24));
+  switch (daysLeft) {
+    case 0:
+      expMsg = 'aujourd\'hui';
+      break;
+    case 1:
+      expMsg = 'demain';
+      break;
+    default:
+      expMsg = `dans ${daysLeft} ${daysLeft > 1 ? 'jours' : 'jour'}`;
+      break;
+  }
+  return [expMsg, daysLeft];
 }

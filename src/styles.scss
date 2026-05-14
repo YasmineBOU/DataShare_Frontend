@@ -17,35 +17,35 @@ body {
 @import 'tailwindcss';
 
 @theme {
-  // Color palette mainly for the Login/Register forms and the buttons.
+  /* Color palette mainly for the Login/Register forms and the buttons. */
   --color-primary-orange: #E27F29;
   --color-btn-orange-bg: #FFEFE4;
   --color-btn-orange-hover-bg: #FFD8C8;
   --color-btn-orange-text: #BF702C;
   --color-btn-orange-border: #ECBA99;
 
-  // Color palette for headers
+  /* Color palette for headers */
   --color-header-default: #FDB289;
   --color-header-dashboard: #FFEEE3;
   --color--header-btn-bg: #2C2C2C;
   --color-header-btn-hover-bg: #4C4C4C;
   
-  // Color palette for the upload file page
+  /* Color palette for the upload file page */
   --color-btn-change-text: #E27F29;
   --color-btn-change-hover: #BF702C;
   --color-btn-change-border: #FFA569;
   --color-generated-link-text: #DC7528;
   
-  // Color palette for sidebar
+  /* Color palette for sidebar */
   --color-sidebar-btn-bg: #FCCDB6;
   --color-sidebar-btn-text: #803A00;
   --color-sidebar-btn-hover: #F9B07C;
   --color-sidebar-border: #E19372;
   
-  // Gradient for the public layout and the dashboard sidebar
+  /* Gradient for the public layout and the dashboard sidebar */
   --app-layout-gradient: linear-gradient(180deg, #fdb289 0%, #df6564 100%);
 
-  // Color palette for the file listing page
+  /* Color palette for the file listing page */
   --color-filter-btn-enabled-bg: #E77A6E;
   --color-filter-btn-disabled-bg: #FFEFE3;
   --color-filter-btn-border: #F7D3B8;
@@ -53,4 +53,25 @@ body {
   --color-file-container-bg: #FFF5EE;
   --color-file-container-border: #F7D8C1;
   --color-file-btn-hover-bg: #FFD8C8;
+
+  /* Color palette for the download page */
+  // Download button
+  --color-download-btn-bg: #FFEFE4;
+  --color-download-btn-text: #BA681F;
+  --color-download-btn-border: #E6A67C;
+  --color-download-btn-hover-bg: #FFD8C8;
+  // Expiration message
+  // * Safe (more than 1 day left)
+  --color-expiration-safe-bg: #E2ECFF;
+  --color-expiration-safe-text: #2A3F72;
+  --color-expiration-safe-border: #B1C9F5;
+  // * Warning (less than 1 day left)
+  --color-expiration-warning-bg: #FFE5ED;
+  --color-expiration-warning-text: #AA642B;
+  --color-expiration-warning-border: #E6CBB5;
+  // * Overdue (expired)
+  --color-expiration-overdue-bg: #FFE2E2;
+  --color-expiration-overdue-text: #9C3333;
+  --color-expiration-overdue-border: #E8A6A6;
+
 }
