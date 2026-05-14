@@ -28,10 +28,10 @@
         '\
           bg-[var(--color-expiration-warning-bg)] \
           text-[var(--color-expiration-warning-text)] \
-          border-2 border-[var(--color-expiration-warning-border)]': 
+          border-1 border-[var(--color-expiration-warning-border)]': 
         expMsgType === 'warning'
       }"
-      class="relative p-2 rounded-lg shadow-md transition-opacity duration-500 flex items-center gap-2"
+      class="relative p-2 rounded-lg transition-opacity duration-500 flex items-center gap-2"
     >
       <img 
         [src]="expMsgIcon" 
@@ -82,11 +82,7 @@
     <ng-template #expireBlock>
 
       <div  
-        class="relative p-4 mb-4 rounded shadow-md transition-opacity duration-500 \
-          bg-[var(--color-expiration-overdue-bg)] \
-          text-[var(--color-expiration-overdue-text)] \
-          border-2 border-[var(--color-expiration-overdue-border)] 
-        "
+        class="relative p-2 rounded-lg transition-opacity duration-500 bg-[var(--color-expiration-overdue-bg)] text-[var(--color-expiration-overdue-text)] border border-[var(--color-expiration-overdue-border)]"
       >
         <img 
           [src]="expMsgIcon" 

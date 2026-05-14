@@ -69,7 +69,6 @@ export class FileDownload {
           this.file = response as FileInfo;
           this.processFile();
           this.buildForm();
-          console.log('After Build form: file info:', this.file);
           this.cdr.detectChanges();
 
         },
@@ -79,9 +78,6 @@ export class FileDownload {
         }
       });
     });
-
-    // this.cdr.detectChanges();
-    console.log('After loading file info:', this.file);
   }
 
   processFile() {
@@ -109,8 +105,6 @@ export class FileDownload {
     }
     // Get expiration status icon
     this.expMsgIcon = getIconByStatus(this.expMsgType);
-    console.log('Processed file info:', this.file);
-    console.log('messageType: ', this.expMsgType, 'icon:', this.expMsgIcon);
   }
 
   onDownload() {
@@ -132,7 +126,6 @@ export class FileDownload {
       id: this.fileId,
       filePassword: filePassword
     };
-    console.log('Attempting to get file link with info:', fileDownloadInfo);
     this.fileService.getFileLink(fileDownloadInfo).subscribe({
       next: (response: any) => {
         this.fileLink = response.fileLink;
