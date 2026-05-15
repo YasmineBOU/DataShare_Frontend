@@ -23,7 +23,7 @@ export class FileListing implements OnInit {
   // Local display state for the Material table.
   userFiles: FileInfo[] = [];
   filteredFiles: FileInfo[] = [];
-  activeFilter: String = 'all'; // available filters: 'all', 'active', 'expired'
+  activeFilter: string = 'active'; // available filters: 'all', 'active', 'expired'
   isMobile!: boolean;
   message: string | null = null;
   messageType: string = 'info';
@@ -78,8 +78,7 @@ export class FileListing implements OnInit {
                 return { ...file, isExpired, expirationMsg, fileIconUrl };
               });
 
-              // Initialize the table without any filter.
-              this.filteredFiles = [...this.userFiles];
+              this.filterFiles(this.activeFilter); // Apply initial filter to populate filteredFiles
               this.cdr.detectChanges();
             });
           },
