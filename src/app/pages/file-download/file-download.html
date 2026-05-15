@@ -64,7 +64,7 @@
             type="button"
             [disabled]="fileDownloadForm.invalid" 
             [ngClass]="{
-              'bg-download-btn-bg hover:bg-download-btn-hover cursor-not-allowed opacity-60': fileDownloadForm.invalid,
+              'bg-download-btn-bg cursor-not-allowed opacity-60': fileDownloadForm.invalid,
               'bg-download-btn-bg hover:bg-download-btn-hover': !fileDownloadForm.invalid
             }"
             class="mx-auto flex justify-center py-2 px-4 border border-download-btn-border rounded-md shadow-sm text-sm font-medium text-download-btn-text focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-orange"

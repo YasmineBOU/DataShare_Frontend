@@ -22,6 +22,12 @@
               formControlName="email"
               placeholder="Saisissez votre email..."
             />
+            <p 
+              *ngIf="registerForm.get('email')?.errors?.['pattern']" 
+              class="text-sm text-red-600 mt-1"
+            >
+                Veuillez saisir une adresse email valide.
+            </p>
           </div>
         </div>
 
@@ -40,6 +46,15 @@
               formControlName="password"
               placeholder="Saisissez votre mot de passe..."
             />
+            <p 
+              *ngIf="
+                registerForm.get('password')?.errors?.['minlength'] || 
+                registerForm.get('password')?.errors?.['pattern']
+              " 
+              class="text-sm text-red-600 mt-1"
+            >
+                Le mot de passe doit comporter au moins une lettre, un chiffre, un caracter special et être d'une longueur d'au moins {{ passwordMinLength }} caractères.
+            </p>
           </div>
         </div>
 

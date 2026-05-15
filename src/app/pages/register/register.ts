@@ -7,11 +7,13 @@ import { RegisterModel } from '../../core/models/register.model';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { REGISTER_CONFIG } from '../../core/config/config';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-register',
   standalone: true,
   imports: [
+    CommonModule,
     ReactiveFormsModule, 
     RouterLink
   ],
@@ -24,13 +26,29 @@ export class Register {
   private userService = inject(UserService);
   private destroyRef = inject(DestroyRef);
   private router = inject(Router);
-  private passwordLength = REGISTER_CONFIG.PASSWORD_MIN_LENGTH;
+  passwordMinLength = REGISTER_CONFIG.PASSWORD_MIN_LENGTH;
 
   constructor(private formBuilder: FormBuilder) {
     this.registerForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(this.passwordLength)]],
-      confirmPassword: ['', Validators.required]
+      email: [
+        '', 
+        [
+          Validators.required, 
+          Validators.pattern(REGISTER_CONFIG.EMAIL_REGEX)
+        ]
+      ],
+      password: [
+        '', 
+        [
+          Validators.required, 
+          Validators.minLength(this.passwordMinLength),
+          Validators.pattern(REGISTER_CONFIG.PASSWORD_REGEX)
+        ]
+      ],
+      confirmPassword: [
+        '', 
+        Validators.required
+      ]
     });
   }
   
@@ -46,9 +64,11 @@ export class Register {
     if (!this.registerForm.valid) {
       if (this.registerForm.controls['email'].invalid) {
         alert('Veuillez entrer une adresse e-mail valide.');
-      } else if (this.registerForm.controls['password'].invalid) {
-        alert(`Le mot de passe doit comporter au moins ${this.passwordLength} caractères.`);
-      } else {
+      } 
+      // else if (this.registerForm.controls['password'].invalid) {
+      //   alert(`Le mot de passe doit comporter au moins ${this.passwordMinLength} caractères.`);
+      // } 
+      else {
         alert('Veuillez remplir tous les champs requis.');
       }
       return;

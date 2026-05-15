@@ -5,7 +5,7 @@ import { FileService } from '../../core/service/file.service';
 import { formatFileSize, getExpirationDaysMessage, getIconByExtension, getIconByStatus } from '../../core/utils/file-utils';
 import { DOWNLOAD_CONFIG } from '../../core/config/config';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../core/service/auth.service';
 import { FileDownloadInfo } from '../../core/models/file-download.model';
 
@@ -40,8 +40,9 @@ export class FileDownload {
     return;
   }
 
+  const passwordValidators = this.file.hasPassword ? [Validators.required] : [];
   this.fileDownloadForm = this.formBuilder.group({
-    password: ['']
+    password: ['', passwordValidators]
   });
 }
   ngOnInit() {  
@@ -158,25 +159,6 @@ export class FileDownload {
     });
   }
 
-  triggerFileDownload(): void {
-    if (!this.fileLink) {
-      alert('Le lien de téléchargement n\'est pas disponible pour ce fichier.');
-      console.error('File link is not available for download.');
-      return;
-    }
-
-    // Create a temporary link and trigger the download
-    const downloadLink = document.createElement('a');
-    downloadLink.href = this.fileLink;
-    downloadLink.download = this.file.filename; // Set the filename for the downloaded file
-    document.body.appendChild(downloadLink);
-    downloadLink.click();
-    document.body.removeChild(downloadLink);
-
-    // Alternatively, if the backend provides a direct link that can be opened in a new tab:
-    window.open(this.fileLink, '_blank');
-  }
-
   downloadFile() {
   if (!this.fileLink) {
     alert('Le lien de téléchargement n\'est pas disponible pour ce fichier.');
@@ -200,7 +182,7 @@ export class FileDownload {
       a.click();
       document.body.removeChild(a);
 
-      // Libérer la mémoire après un court délai
+      // Revoke the object URL after a short delay to allow the download to start
       setTimeout(() => {
         URL.revokeObjectURL(objectUrl);
       }, 1000);

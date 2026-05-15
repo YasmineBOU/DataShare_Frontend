@@ -5,12 +5,17 @@ import { Form, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@
 import { FILE_CONFIG } from '../../core/config/config';
 import { formatFileSize, computeFileChecksum, getIconByExtension } from '../../core/utils/file-utils';
 import { CommonModule } from '@angular/common';
-import { FileUploadModel } from '../../core/models/file-upload.model';
+import { LoadingService } from '../../core/service/loading';
+import { LoadingSpinner } from '../../shared/components/loading-spinner/loading-spinner';
 
 @Component({
   selector: 'app-file-upload',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    LoadingSpinner, 
+    ReactiveFormsModule
+  ],
   templateUrl: './file-upload.html',
   styleUrls: ['./file-upload.scss'],
 })
@@ -19,7 +24,10 @@ export class FileUpload implements OnInit {
   private fileService = inject(FileService);
   private authService = inject(AuthService);
   private formBuilder = inject(FormBuilder);
+  private loadingService = inject(LoadingService);
 
+  isLoading$ = this.loadingService.isLoading$;
+  
   fileUploadForm!: FormGroup;
   generatedLink: string = '';
   dwlLinkMessage: string = '';
@@ -41,7 +49,13 @@ export class FileUpload implements OnInit {
       });
     } else {
       this.fileUploadForm = this.formBuilder.group({
-        password: ['', Validators.minLength(this.passwordMinLength)],
+        password: [
+          '', 
+          [
+            Validators.minLength(this.passwordMinLength), 
+            Validators.pattern(FILE_CONFIG.PASSWORD_REGEX)
+          ]
+        ],
         expiration: [this.selectedExpiration, Validators.required]
       });
     }
@@ -146,7 +160,18 @@ export class FileUpload implements OnInit {
         },
         error: (err) => {
           console.error('Upload error:', err);
-          alert('Une erreur est survenue lors de l\'upload du fichier. Veuillez réessayer plus tard.');
+          let errorMessage = 'Une erreur est survenue lors de l\'upload du fichier.';
+          
+          // Afficher des messages d'erreur spécifiques selon le type d'erreur
+          if (err.name === 'TimeoutError' || err.message?.includes('timeout')) {
+            errorMessage = 'L\'upload a expiré. Vérifiez votre connexion réseau et réessayez. (Pour les gros fichiers, l\'upload peut prendre 5-30 minutes selon votre connexion)';
+          } else if (err.status === 413) {
+            errorMessage = 'Le fichier est trop volumineux. Vérifiez la limite de taille du serveur.';
+          } else if (err.status === 0 || err.statusText === 'Unknown Error') {
+            errorMessage = 'Erreur réseau détectée. Vérifiez votre connexion et réessayez.';
+          }
+          
+          alert(errorMessage);
         }
       });
     } catch (error) {
