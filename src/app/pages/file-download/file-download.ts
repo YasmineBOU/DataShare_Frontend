@@ -6,7 +6,6 @@ import { formatFileSize, getExpirationDaysMessage, getIconByExtension, getIconBy
 import { DOWNLOAD_CONFIG } from '../../core/config/config';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { AuthService } from '../../core/service/auth.service';
 import { FileDownloadInfo } from '../../core/models/file-download.model';
 
 @Component({
@@ -21,7 +20,6 @@ import { FileDownloadInfo } from '../../core/models/file-download.model';
 export class FileDownload {
 
   private fileService = inject(FileService);
-  private authService = inject(AuthService);
   private route = inject(ActivatedRoute);
   private router = inject(Router);
   private formBuilder = inject(FormBuilder);
@@ -29,6 +27,7 @@ export class FileDownload {
 
   fileDownloadForm: FormGroup | null = null;
   fileId: number = 0;
+  fileToken: string = "";
   file: FileInfo = {} as FileInfo;
   expMsgType = 'safe'; // 'safe' | 'warning' | 'overdue'
   expMsgIcon: string = '';
@@ -46,26 +45,16 @@ export class FileDownload {
   });
 }
   ngOnInit() {  
-    this.authService.loadCurrentUser().subscribe({
-      next: (response) => {
-        
-      },
-      error: (err) => {
-        console.error('Error loading current user:', err);
-      }
-    });
-
-    const idFromRoute = Number(this.route.snapshot.paramMap.get('id'));
-    if (!idFromRoute) {
-      console.error('Invalid file id.');
+    this.fileToken = this.route.snapshot.queryParamMap.get('fileToken') ?? "";
+    if (!this.fileToken) {
+      console.warn('No file token provided in route parameters.');
       this.router.navigateByUrl('/');
       return;
     }
-    this.fileId = idFromRoute;
 
     queueMicrotask(() => {
       this.file = {} as FileInfo; // Reset file info before loading new data
-      this.fileService.getFileInfo(this.fileId).subscribe({
+      this.fileService.getFileInfo(this.fileToken).subscribe({
         next: (response) => {
           this.file = response as FileInfo;
           this.processFile();
@@ -82,6 +71,8 @@ export class FileDownload {
   }
 
   processFile() {
+    // Set file Id
+    this.fileId = this.file.id;
     // Get file icon based on extension
     this.file.fileIconUrl = getIconByExtension(this.file.filename);
     // Format file size for human display

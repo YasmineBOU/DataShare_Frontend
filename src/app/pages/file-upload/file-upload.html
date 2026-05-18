@@ -47,7 +47,7 @@
 
         <!-- Display before sending the file to the server for link generation -->
         <!-- Replace file button -->
-        <label *ngIf="!generatedLink" class="ml-4 cursor-pointer flex-shrink-0">
+        <label *ngIf="!downloadLink" class="ml-4 cursor-pointer flex-shrink-0">
           <input type="file" class="hidden" (change)="onFileSelected($event)" />
           <span
             class="flex justify-center items-center border border-btn-change-border px-4 py-2 text-btn-change-text hover:bg-btn-orange-bg  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-orange rounded-md shadow-sm transition duration-300">
@@ -56,7 +56,7 @@
         </label>
       </div>
 
-      <form *ngIf="!generatedLink" [formGroup]="fileUploadForm" class="space-y-4">
+      <form *ngIf="!downloadLink" [formGroup]="fileUploadForm" class="space-y-4">
         <div>
           <label for="password" class="block text-sm font-medium text-gray-700">
             Mot de passe
@@ -98,18 +98,18 @@
 
 
       <!-- Display only if the link has been generated -->
-      <div *ngIf="generatedLink" class="mt-6">
+      <div *ngIf="downloadLink" class="mt-6">
         <p class="text-base font-normal text-left">
           {{ dwlLinkMessage }}
         </p>
         <p class="mt-4 text-center text-generated-link-text bg-gray-100 p-2 rounded cursor-pointer
           max-w-full overflow-x-auto whitespace-nowrap underline" (click)="copyLinkToClipboard()">
-          {{ generatedLink }}
+          {{ downloadLink }}
         </p>
 
         <div class="mt-6">
           <button type="button"
-            class="mx-auto flex justify-center py-2 px-4 border border-btn-orange-border rounded-md shadow-sm text-sm font-medium text-btn-orange-text bg-btn-orange-bg hover:bg-btn-orange-hover-bg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-orange cursor-pointer"
+            class="mx-auto flex justify-center py-2 px-4 border border-btn-orange-border rounded-md shadow-sm text-sm font-medium text-btn-orange-text bg-btn-orange-bg hover:bg-btn-orange-hover-bg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-orange"
             (click)="copyLinkToClipboard()">
             <img src="/assets/icons/buttons/copy.svg" alt="upload" class="w-4 h-4 mr-2 mt-1" />
             Copier le lien

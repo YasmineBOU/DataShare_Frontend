@@ -16,6 +16,8 @@ export const EXTENSION_ICON_MAP: Record<string, string> = {
   'jpg': '/assets/icons/files/image.svg',
   'jpeg': '/assets/icons/files/image.svg',
   'gif': '/assets/icons/files/image.svg',
+  'ico': '/assets/icons/files/image.svg',
+  'svg': '/assets/icons/files/image.svg',
   // Audio files
   'mp3': '/assets/icons/files/audio.svg',
   'wav': '/assets/icons/files/audio.svg',
@@ -25,6 +27,7 @@ export const EXTENSION_ICON_MAP: Record<string, string> = {
   'mpeg': '/assets/icons/files/video.svg',
   'avi': '/assets/icons/files/video.svg',
   'mkv': '/assets/icons/files/video.svg',
+  'mov': '/assets/icons/files/video.svg',
   // Text files
   'txt': '/assets/icons/files/text.svg',
   // Archive files

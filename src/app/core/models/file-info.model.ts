@@ -3,6 +3,7 @@ export interface FileInfo {
     id: number;
     filename: string;
     fileSize: string;
+    fileToken: string;
     createdAt: string;
     expirationDate: string; 
     hasPassword: boolean;

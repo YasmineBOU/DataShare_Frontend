@@ -35,8 +35,9 @@ export class FileService {
     return this.httpClient.get<FileListResponse>('/api/files/list', { params });
   }
 
-  getFileInfo(id: number): Observable<Object> {
-    return this.httpClient.get<FileListResponse>(`/api/files/info/${id}`);
+  getFileInfo(fileToken: string): Observable<Object> {
+    const params = new HttpParams().set('fileToken', fileToken);
+    return this.httpClient.get<FileListResponse>('/api/files/info', { params });
   }
 
   deleteFile(fileId: number): Observable<Object> {

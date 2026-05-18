@@ -82,12 +82,12 @@
     <ng-template #expireBlock>
 
       <div  
-        class="relative p-2 rounded-lg transition-opacity duration-500 bg-[var(--color-expiration-overdue-bg)] text-[var(--color-expiration-overdue-text)] border border-[var(--color-expiration-overdue-border)]"
+        class="relative p-2 rounded-lg transition-opacity duration-500 bg-[var(--color-expiration-overdue-bg)] text-[var(--color-expiration-overdue-text)] border border-[var(--color-expiration-overdue-border)] flex items-center gap-2"
       >
         <img 
           [src]="expMsgIcon" 
           alt="Expiration Status Icon" 
-          class="w-5 h-5 absolute left-2 top-1/2 transform -translate-y-1/2"
+          class="w-5 h-5"
         />
         {{ file.expirationMsg }}
       </div>

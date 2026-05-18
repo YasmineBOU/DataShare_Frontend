@@ -23,11 +23,10 @@ export class App implements OnInit{
       return;
     }
 
-    this.authService.logout().pipe().subscribe(() => {
-      },
-      (error) => {
-        console.error('Logout failed', error);
-      }
-    );
+    // Clear any stale session on app startup and load current user state
+    this.authService.logout().subscribe(() => {
+      // After logout, load current user to check if still authenticated via HttpOnly cookie
+      this.authService.loadCurrentUser().subscribe();
+    });
   }
 }

@@ -29,7 +29,7 @@ export class FileUpload implements OnInit {
   isLoading$ = this.loadingService.isLoading$;
   
   fileUploadForm!: FormGroup;
-  generatedLink: string = '';
+  downloadLink: string = '';
   dwlLinkMessage: string = '';
   selectedFile: File | null = null;
   fileIcon: string = '';
@@ -155,7 +155,8 @@ export class FileUpload implements OnInit {
           alert('Fichier uploadé avec succès !');
           let expVal = this.expirationOptions.get(this.fileUploadForm.get('expiration')?.value);
           this.dwlLinkMessage = `Félicitations, ton fichier sera conservé chez nous pendant ${expVal?.toLocaleLowerCase()} !`;
-          this.generatedLink = response.fileLink;
+          this.downloadLink = this.getDownloadURL(response.fileToken);
+          console.log('download link:', this.downloadLink);
           this.fileUploadForm.reset();
         },
         error: (err) => {
@@ -181,10 +182,14 @@ export class FileUpload implements OnInit {
   }
 
   copyLinkToClipboard() {
-    navigator.clipboard.writeText(this.generatedLink).then(() => {
+    navigator.clipboard.writeText(this.downloadLink).then(() => {
     }).catch(err => {
       console.error('Error copying link :', err);
     });
+  }
+
+  getDownloadURL(fileToken : string): string {
+    return `${window.location.origin}/files/download?fileToken=${fileToken}`;
   }
 }
 

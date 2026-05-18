@@ -44,9 +44,6 @@ export class Header implements OnInit {
     ).subscribe((event) => {
       this.updateCurrentRoute(event.urlAfterRedirects);
     });
-
-    // Listener for loading user state; currentEmail$ remains the single source for isAuthenticated.
-    this.authService.loadCurrentUser().pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
   }
 
   get isUploadPage(): boolean {

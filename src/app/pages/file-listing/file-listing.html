@@ -1,4 +1,6 @@
 <div class="p-6 bg-white w-full">
+  <app-loading-spinner *ngIf="isLoading$ | async"></app-loading-spinner>
+
   <!-- Info/Error Message -->
   <div *ngIf="message" 
     [ngClass]="{
@@ -54,6 +56,8 @@
   <!-- Files -->
   <ng-container *ngFor="let file of filteredFiles" >
     <div 
+      [class.opacity-50]="(isLoading$ | async)" 
+      [class.pointer-events-none]="(isLoading$ | async)"
       class="flex items-center rounded-lg bg-file-container-bg p-4 border-1 border-file-container-border justify-between mb-2"
     >
       <!-- File icon -->
