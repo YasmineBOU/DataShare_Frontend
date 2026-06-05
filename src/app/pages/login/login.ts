@@ -34,6 +34,9 @@ export class Login{
   
 
   onSubmit() {
+    if (this.loginForm.invalid) {
+      return;
+    }
 
     const loginUser: LoginModel = {
       email: this.loginForm.value.email,

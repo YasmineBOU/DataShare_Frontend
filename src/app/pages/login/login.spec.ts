@@ -1,26 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { Login } from './login';
-import { Validators } from '@angular/forms';
-import { UserMockService } from '../../core/service/user-mock.service';
-import { AuthMockService } from '../../core/service/auth-mock.service';
-import { provideHttpClient } from '@angular/common/http';
-import { UserService } from '../../core/service/user.service';
-import { AuthService } from '../../core/service/auth.service';
 import { LoginModel } from '../../core/models/login.model';
 import { of, throwError } from 'rxjs';
 
 describe('Login', () => {
   let component: Login;
   let fixture: ComponentFixture<Login>;
-  let userService: UserMockService;
-  let authService: AuthMockService;
-
-
-  const mockLoginFields = [
-    { name: 'email', label: 'Email', type: 'text', validators: [Validators.required, Validators.email] },
-    { name: 'password', label: 'Password', type: 'password', validators: [Validators.required] }
-  ];
 
   const mockFormData = {
     email: 'johndoe@example.com',
@@ -31,22 +17,13 @@ describe('Login', () => {
     await TestBed.configureTestingModule({
       imports: [Login],
       providers: [
-        provideRouter([]),
-        provideHttpClient(),
-        { provide: UserService, useClass: UserMockService },
-        { provide: AuthService, useClass: AuthMockService },
+        provideRouter([])
       ],
       
     }).compileComponents();
 
-    
-
     // Mock the alert function
     global.alert = jest.fn();
-    // // Inject the UserMockService
-    // userService = TestBed.inject(UserService) as UserMockService;
-    // // Inject the AuthMockService
-    // authService = TestBed.inject(AuthService) as AuthMockService;
     // Create the main component fixture
     fixture = TestBed.createComponent(Login);
     component = fixture.componentInstance;
@@ -58,26 +35,14 @@ describe('Login', () => {
   });
 
   describe('UI form fields', () => {
-    it('should have email and password fields with correct validators', () => {
-      const emailControl = component.loginForm.get('email');
-      const passwordControl = component.loginForm.get('password');
+    it('should be invalid when email is empty', () => {
+      component.loginForm.get('email')?.setValue('');
+      expect(component.loginForm.get('email')?.hasError('required')).toBe(true);
+    });
 
-      expect(emailControl).toBeTruthy();
-      expect(passwordControl).toBeTruthy();
-
-      expect(emailControl?.validator).toBeTruthy();
-      expect(passwordControl?.validator).toBeTruthy();
-
-      // Check email validators
-      const emailValidators = emailControl?.validator ? [Validators.required, Validators.email] : [];
-      expect(emailValidators.length).toBe(2);
-      expect(emailValidators[0]).toEqual(Validators.required);
-      expect(emailValidators[1]).toEqual(Validators.email);
-
-      // Check password validators
-      const passwordValidators = passwordControl?.validator ? [Validators.required] : [];
-      expect(passwordValidators.length).toBe(1);
-      expect(passwordValidators[0]).toEqual(Validators.required);
+    it('should be invalid when email format is wrong', () => {
+      component.loginForm.get('email')?.setValue('notanemail');
+      expect(component.loginForm.get('email')?.hasError('email')).toBe(true);
     });
 
     it('should initialize form with empty values', () => {
@@ -102,7 +67,6 @@ describe('Login', () => {
 
   describe('onSubmit', () => {
     let loginUser: LoginModel;
-    let mockToken: string;
     let routerNavigateSpy: jest.SpyInstance;
     let authServiceLoadCurrentUserSpy: jest.SpyInstance;
     let userServiceLoginSpy: jest.SpyInstance;
@@ -125,7 +89,6 @@ describe('Login', () => {
         email: mockFormData.email,
         password: mockFormData.password
       };
-      mockToken = 'mock-token';
       
       // Spy on the Router navigateByUrl method
       routerNavigateSpy = jest.spyOn(component['router'], 'navigateByUrl');
@@ -160,6 +123,8 @@ describe('Login', () => {
       // Spy on the UserService login method to return a failed response with the specified status
       userServiceLoginSpy = jest.spyOn(component['userService'], 'login').mockReturnValue(throwError(() => ({ status })));
 
+      authServiceLoadCurrentUserSpy = jest.spyOn(component['authService'], 'loadCurrentUser');
+
       // Set form values
       component.loginForm.setValue({
         email: loginUser.email,
@@ -171,7 +136,39 @@ describe('Login', () => {
 
       expect(userServiceLoginSpy).toHaveBeenCalled()
       expect(alert).toHaveBeenCalledWith(expectedMessage);
-      // expect(authServiceLoadCurrentUserSpy).not.toHaveBeenCalled();
+      expect(authServiceLoadCurrentUserSpy).not.toHaveBeenCalled();
+      expect(routerNavigateSpy).not.toHaveBeenCalled();
+    });
+
+    it.each(otherErrorCases)('should show, for status "%i",  message "%s" and not redirect to "/admin-pannel" page nor store any token when form is valid but unknown error raised from server', (status, expectedMessage) => {
+      userServiceLoginSpy = jest.spyOn(component['userService'], 'login').mockReturnValue(throwError(() => ({ status })));
+
+      authServiceLoadCurrentUserSpy = jest.spyOn(component['authService'], 'loadCurrentUser');
+
+      // Set form values
+      component.loginForm.setValue({
+        email: loginUser.email,
+        password: loginUser.password
+      });
+      
+      // Simulate form submission
+      component.onSubmit();
+
+      expect(userServiceLoginSpy).toHaveBeenCalled()
+      expect(alert).toHaveBeenCalledWith(expectedMessage);
+      expect(authServiceLoadCurrentUserSpy).not.toHaveBeenCalled();
+      expect(routerNavigateSpy).not.toHaveBeenCalled();
+    });
+
+    it('should not login user nor redirect to "/" given invalid form data ', () => {
+      userServiceLoginSpy = jest.spyOn(component['userService'], 'login');
+      authServiceLoadCurrentUserSpy = jest.spyOn(component['authService'], 'loadCurrentUser');
+
+      // Simulate form submission with null data
+      component.onSubmit();
+
+      expect(userServiceLoginSpy).not.toHaveBeenCalled()
+      expect(authServiceLoadCurrentUserSpy).not.toHaveBeenCalled();
       expect(routerNavigateSpy).not.toHaveBeenCalled();
     });
 
