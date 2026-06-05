@@ -65,9 +65,6 @@ export class Register {
       if (this.registerForm.controls['email'].invalid) {
         alert('Veuillez entrer une adresse e-mail valide.');
       } 
-      // else if (this.registerForm.controls['password'].invalid) {
-      //   alert(`Le mot de passe doit comporter au moins ${this.passwordMinLength} caractères.`);
-      // } 
       else {
         alert('Veuillez remplir tous les champs requis.');
       }
@@ -75,7 +72,7 @@ export class Register {
     }
 
     if (registerUser.password !== registerUser.confirmPassword) {
-      alert('Les mot de passe ne correspondent pas, Veuillez réessayer.');
+      alert('Les mots de passe ne correspondent pas, Veuillez réessayer.');
       return;
     }
 
