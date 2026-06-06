@@ -1,12 +1,13 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FileService } from '../../core/service/file.service';
 import { AuthService } from '../../core/service/auth.service';
-import { Form, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FILE_CONFIG } from '../../core/config/config';
 import { formatFileSize, computeFileChecksum, getIconByExtension } from '../../core/utils/file-utils';
 import { CommonModule } from '@angular/common';
 import { LoadingService } from '../../core/service/loading';
 import { LoadingSpinner } from '../../shared/components/loading-spinner/loading-spinner';
+import { firstValueFrom } from 'rxjs/internal/firstValueFrom';
 
 @Component({
   selector: 'app-file-upload',
@@ -126,7 +127,7 @@ export class FileUpload implements OnInit {
   getFileFormData(): FormData {
     const formData = new FormData();
 
-      formData.append('email', this.currentUserEmail);
+    formData.append('email', this.currentUserEmail);
     formData.append('file', this.selectedFile!);
     formData.append('filename', this.selectedFile!.name);
     formData.append('fileSize', this.selectedFile!.size.toString());
@@ -140,45 +141,37 @@ export class FileUpload implements OnInit {
 
 
   async onUpload() {
-    // Form validation and file upload check
     if (!this.fileUploadForm.valid || !this.selectedFile) {
       return;
     }
-    
+
     try {
-      // Calculate file checksum before uploading
-      await this.calculateChecksum(); 
-      console.log('File checksum calculated:', this.fileChecksum);
-      // Upload the file on the server
-      this.fileService.uploadFile(this.getFileFormData()).subscribe({
-        next: (response: any) => {
-          alert('Fichier uploadé avec succès !');
-          let expVal = this.expirationOptions.get(this.fileUploadForm.get('expiration')?.value);
-          this.dwlLinkMessage = `Félicitations, ton fichier sera conservé chez nous pendant ${expVal?.toLocaleLowerCase()} !`;
-          this.downloadLink = this.getDownloadURL(response.fileToken);
-          console.log('download link:', this.downloadLink);
-          this.fileUploadForm.reset();
-        },
-        error: (err) => {
-          console.error('Upload error:', err);
-          let errorMessage = 'Une erreur est survenue lors de l\'upload du fichier.';
-          
-          // Afficher des messages d'erreur spécifiques selon le type d'erreur
-          if (err.name === 'TimeoutError' || err.message?.includes('timeout')) {
-            errorMessage = 'L\'upload a expiré. Vérifiez votre connexion réseau et réessayez. (Pour les gros fichiers, l\'upload peut prendre 5-30 minutes selon votre connexion)';
-          } else if (err.status === 413) {
-            errorMessage = 'Le fichier est trop volumineux. Vérifiez la limite de taille du serveur.';
-          } else if (err.status === 0 || err.statusText === 'Unknown Error') {
-            errorMessage = 'Erreur réseau détectée. Vérifiez votre connexion et réessayez.';
-          }
-          
-          alert(errorMessage);
-        }
-      });
-    } catch (error) {
-      console.error('File processing error:', error);
-      alert('Une erreur est survenue lors du traitement du fichier. Veuillez réessayer.');
-    }  
+      await this.calculateChecksum();
+      
+      const response = await firstValueFrom(
+        this.fileService.uploadFile(this.getFileFormData())
+      ) as { fileToken: string };;
+
+      alert('Fichier uploadé avec succès !');
+      const expVal = this.expirationOptions.get(this.fileUploadForm.get('expiration')?.value);
+      this.dwlLinkMessage = `Félicitations, ton fichier sera conservé chez nous pendant ${expVal?.toLocaleLowerCase()} !`;
+      this.downloadLink = this.getDownloadURL(response.fileToken);
+      this.fileUploadForm.reset();
+
+    } catch (err: any) {
+      console.error('Upload error:', err);
+      let errorMessage = 'Une erreur est survenue lors de l\'upload du fichier.';
+
+      if (err.name === 'TimeoutError' || err.message?.includes('timeout')) {
+        errorMessage = 'L\'upload a expiré. Vérifiez votre connexion réseau et réessayez.';
+      } else if (err.status === 413) {
+        errorMessage = 'Le fichier est trop volumineux. Vérifiez la limite de taille du serveur.';
+      } else if (err.status === 0 || err.statusText === 'Unknown Error') {
+        errorMessage = 'Erreur réseau détectée. Vérifiez votre connexion et réessayez.';
+      }
+
+      alert(errorMessage);
+    }
   }
 
   copyLinkToClipboard() {

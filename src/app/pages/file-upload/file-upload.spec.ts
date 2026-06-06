@@ -1,9 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FileUpload } from './file-upload';
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
 import { computeFileChecksum } from '../../core/utils/file-utils';
 import { FILE_CONFIG } from '../../core/config/config';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 describe('FileUpload', () => {
   let component: FileUpload;
@@ -77,20 +78,23 @@ describe('FileUpload', () => {
         expect(component.fileUploadForm.get('expiration')?.value).toBe(component.selectedExpiration);
       });
 
-      it('should refuse file larger than max size', () => {
+      it('should refuse file larger than predefined max size', () => {
+        const largeFile = new File(['a'], 'largefile.txt', { type: 'text/plain' });
         Object.defineProperty(
-          mockFile, 'size', { value: FILE_CONFIG.MAX_FILE_SIZE + 1 });
+          largeFile, 'size', { value: FILE_CONFIG.MAX_FILE_SIZE + 1 });
 
         const mockEvent = {
           target: {
-            files: [mockFile]
+            files: [largeFile]
           }
         } as unknown as Event;
 
         component.onFileSelected(mockEvent);
         
         expect(component.selectedFile).toBeNull();
-        expect(global.alert).toHaveBeenCalledWith(expect.stringContaining('Le fichier est trop volumineux. Veuillez choisir un fichier de moins de '));
+        expect(global.alert).toHaveBeenCalledWith(
+          expect.stringContaining('Le fichier est trop volumineux. Veuillez choisir un fichier de moins de ')
+        );
       });
 
       it('should refuse file with forbidden extension', () => {
@@ -118,29 +122,86 @@ describe('FileUpload', () => {
       });
    });
 
-  //  describe('getFileFormData', () => {
-  //     it('should return FormData with file and form values', () => {
-  //       const mockFile = new File(['file content'], 'test.txt', { type: 'text/plain' });
-  //       component.selectedFile = mockFile;
-  //       component.fileUploadForm = new FormGroup({
-  //         password: new FormBuilder().control('testpassword'),
-  //         expiration: new FormBuilder().control(7)
-  //       });
-  //       const formData = component.getFileFormData();
-  //       expect(formData.get('file')).toBe(mockFile);
-  //       expect(formData.get('password')).toBe('testpassword');
-  //       expect(formData.get('expiration')).toBe('7');
-  //     });
-  //  });  
+   describe('getFileFormData', () => {
+      it.each(['', 'johndoe@example.com'])('should return FormData with file and form values with email: "%s"', (email) => { 
+        const mockPassword = 'testpassword';
+        const mockExpiration = 7;
+        const mockHash = 'mockhash123';
+        component.currentUserEmail = email;
+        component.fileChecksum = mockHash;
 
-  describe('getDownloadURL', () => {
-    it('should return download URL for given file token', () => {
-      const fileToken = 'hdyYnb-65645';
-      const expectedURL = `${window.location.origin}/files/download?fileToken=${fileToken}`;
-      const downloadURL = component.getDownloadURL(fileToken);
-      expect(downloadURL).toBe(expectedURL);
-    });
-  });
+        const mockFile = new File(['file content'], 'test.txt', { type: 'text/plain' });
+        component.selectedFile = mockFile;
+        component.fileUploadForm = new FormGroup({
+          password: new FormBuilder().control(mockPassword),
+          expiration: new FormBuilder().control(mockExpiration)
+        });
+
+        const formData = component.getFileFormData();
+
+        expect(formData.get('file')).toBe(mockFile);
+        expect(formData.get('filename')).toBe(mockFile.name);
+        expect(formData.get('fileSize')).toBe(mockFile.size.toString());
+        expect(formData.get('fileType')).toBe(mockFile.type);
+        expect(formData.get('hash')).toBe(mockHash);
+        expect(formData.get('email')).toBe(email);
+        expect(formData.get('filePassword')).toBe(mockPassword);
+        expect(formData.get('expirationDays')).toBe(mockExpiration.toString());
+      });
+   });
+
+   describe('onUpload', () => {
+      it('should upload file and set download link on success', async () => {
+        const mockFileToken = 'hdyYnb-65645';
+        const mockResponse = { fileToken: mockFileToken };
+        
+        jest.spyOn(component, 'calculateChecksum').mockResolvedValue();
+        const fileServiceUploadSpy = jest.spyOn(component['fileService'], 'uploadFile').mockReturnValue(of(mockResponse));
+        
+        component.selectedFile = mockFile;
+        component.fileChecksum = 'mockhash123';
+        component.fileUploadForm = new FormGroup({
+          password: new FormBuilder().control('testpassword'),
+          expiration: new FormBuilder().control(7)
+        });
+
+        const fileUploadFormResetSpy = jest.spyOn(component.fileUploadForm, 'reset');
+        
+        await component.onUpload();
+
+        expect(fileServiceUploadSpy).toHaveBeenCalled();
+        expect(global.alert).toHaveBeenCalledWith('Fichier uploadé avec succès !');
+        expect(component.downloadLink).toBe(component.getDownloadURL(mockFileToken));
+        expect(fileUploadFormResetSpy).toHaveBeenCalled(); 
+      });
+
+      describe('onUpload error handling', () => {
+        const errorCases: [object, string][] = [
+          [{ status: 413 }, 'Le fichier est trop volumineux. Vérifiez la limite de taille du serveur.'],
+          [{ status: 0 }, 'Erreur réseau détectée. Vérifiez votre connexion et réessayez.'],
+          [{ name: 'TimeoutError' }, "L'upload a expiré. Vérifiez votre connexion réseau et réessayez."],
+          [{ status: 500 }, "Une erreur est survenue lors de l'upload du fichier."],
+        ];
+
+        beforeEach(() => {
+          jest.spyOn(component, 'calculateChecksum').mockResolvedValue();
+          component.selectedFile = mockFile;
+          component.fileUploadForm = new FormGroup({
+            password: new FormBuilder().control(''),
+            expiration: new FormBuilder().control(7)
+          });
+        });
+
+        it.each(errorCases)('should show correct message for error %o', async (error, expectedMessage) => {
+          jest.spyOn(component['fileService'], 'uploadFile')
+            .mockReturnValue(throwError(() => error));
+
+          await component.onUpload();
+
+          expect(global.alert).toHaveBeenCalledWith(expectedMessage);
+        });
+      });
+   });
 
   describe('copyLinkToClipboard', () => {
     const downloadLink = 'http://example.com/download/hdyYnb-65645';
@@ -183,6 +244,15 @@ describe('FileUpload', () => {
       
       await component.copyLinkToClipboard();
       expect(mockClipboard.writeText).toHaveBeenCalledWith(component.downloadLink);
+    });
+  });  
+
+  describe('getDownloadURL', () => {
+    it('should return download URL for given file token', () => {
+      const fileToken = 'hdyYnb-65645';
+      const expectedURL = `${window.location.origin}/files/download?fileToken=${fileToken}`;
+      const downloadURL = component.getDownloadURL(fileToken);
+      expect(downloadURL).toBe(expectedURL);
     });
   });
 
