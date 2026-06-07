@@ -151,38 +151,38 @@ export class FileDownload {
   }
 
   downloadFile() {
-  if (!this.fileLink) {
-    alert('Le lien de téléchargement n\'est pas disponible pour ce fichier.');
-    console.error('File link is not available for download.');
-    return;
-  }
-
-  this.fileService.downloadFile(this.fileLink).subscribe({
-    next: (blob) => {
-      if (!blob || blob.size === 0) {
-        alert('Le fichier est vide ou impossible à télécharger.');
-        console.error('Empty or invalid file blob received.');
-        return;
-      }
-
-      const a = document.createElement('a');
-      const objectUrl = URL.createObjectURL(blob);
-      a.href = objectUrl;
-      a.download = this.file.filename;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-
-      // Revoke the object URL after a short delay to allow the download to start
-      setTimeout(() => {
-        URL.revokeObjectURL(objectUrl);
-      }, 1000);
-    },
-    error: (err) => {
-      alert('Une erreur est survenue lors du téléchargement du fichier.');
-      console.error('Error downloading file:', err);
+    if (!this.fileLink) {
+      alert('Le lien de téléchargement n\'est pas disponible pour ce fichier.');
+      console.error('File link is not available for download.');
+      return;
     }
-  });
-}
+
+    this.fileService.downloadFile(this.fileLink).subscribe({
+      next: (blob) => {
+        if (!blob || blob.size === 0) {
+          alert('Le fichier est vide ou impossible à télécharger.');
+          console.error('Empty or invalid file blob received.');
+          return;
+        }
+
+        const a = document.createElement('a');
+        const objectUrl = URL.createObjectURL(blob);
+        a.href = objectUrl;
+        a.download = this.file.filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+
+        // Revoke the object URL after a short delay to allow the download to start
+        setTimeout(() => {
+          URL.revokeObjectURL(objectUrl);
+        }, 1000);
+      },
+      error: (err) => {
+        alert('Une erreur est survenue lors du téléchargement du fichier.');
+        console.error('Error downloading file:', err);
+      }
+    });
+  }
 
 }
