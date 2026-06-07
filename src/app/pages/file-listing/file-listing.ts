@@ -26,7 +26,6 @@ export class FileListing implements OnInit {
   private router = inject(Router);
   private cdr = inject(ChangeDetectorRef);
 
-  // Local display state for the Material table.
   userFiles: FileInfo[] = [];
   filteredFiles: FileInfo[] = [];
   activeFilter: string = 'active'; // available filters: 'all', 'active', 'expired'
@@ -62,7 +61,6 @@ export class FileListing implements OnInit {
       return;
     }
     this.isMobile = isMobileDevice(window.innerWidth);
-    console.log("isMobileDevice:", this.isMobile, "window.innerWidth:", window.innerWidth);
 
     // Use the current user state from AuthService (loaded once at app startup)
     // instead of calling loadCurrentUser again
@@ -141,7 +139,6 @@ export class FileListing implements OnInit {
   }
 
   onViewFile(file: FileInfo): void {
-    console.log('Viewing file:', file.id, file.fileToken);
     this.router.navigate(
       ['/files/download'], 
       { 
