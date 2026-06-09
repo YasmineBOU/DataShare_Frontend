@@ -14,6 +14,10 @@ type LoginBody = {
   password?: string;
 };
 
+type UploadResponse = {
+  fileToken: string;
+};
+
 const users = require('./fixtures/users.json') satisfies Record<string, MockUser>;
 
 function isSameUser(email: string | undefined, user: MockUser): boolean {
@@ -32,6 +36,10 @@ function createJwtToken(): string {
 }
 
 export function setupMockBackend(): void {
+
+  // ─────────────────────────────────────────
+  // AUTH
+  // ─────────────────────────────────────────
   cy.intercept("POST", "/api/login", (req) => {
     const body = req.body as LoginBody;
 
@@ -46,8 +54,12 @@ export function setupMockBackend(): void {
     if (isSameUser(body.email, users.registeredUser) && body.password === users.registeredUser.password){
       req.reply({
         statusCode: 200,
+        // headers: {
+        //   'Set-Cookie': `token=${createJwtToken()}; Path=/; HttpOnly`
+        // },
+        
         headers: {
-          'Set-Cookie': `token=${createJwtToken()}; Path=/; HttpOnly`
+          'Set-Cookie': `AUTH_TOKEN=${createJwtToken()}; Path=/; HttpOnly; Secure; SameSite=None`,
         },
         body: { message: 'Login successful' }
       });
@@ -63,6 +75,11 @@ export function setupMockBackend(): void {
 
   });
 
+  
+
+  // ─────────────────────────────────────────
+  // REGISTER
+  // ─────────────────────────────────────────
   cy.intercept("POST", "/api/register", (req) => {
     const body = req.body as RegisterBody;
 
@@ -90,6 +107,54 @@ export function setupMockBackend(): void {
     });
   });
 
+  
+  // ─────────────────────────────────────────
+  // FILE UPLOAD
+  // ─────────────────────────────────────────
+  cy.intercept("POST", "/api/files/upload", (req) => {
+    const fileName = req.body.get?.('filename') || '';
+    const filePassword = req.body.get?.('filePassword') || '';
+
+    // Password protected file
+    if (filePassword) {
+      req.reply({
+        statusCode: 200,
+        body: { fileToken: "mock-token-protected" }
+      });
+      return;
+    }
+
+    // File that simulates a server error
+    if (fileName === 'error-file.pdf') {
+      req.reply({
+        statusCode: 500,
+        body: { message: "Internal server error" }
+      });
+      return;
+    }
+    // File that simulates a timeout
+    if (fileName == "timeout-file.pdf") {
+      req.reply({
+        statusCode: 408,
+        body: { name: "TimeoutError" },
+      });
+      return;
+    }
+    // File that simulates a payload too large error
+    if (fileName == "network-error-file.pdf") {
+      req.reply({
+        statusCode: 0,
+        body: { message: "Network error" }
+      });
+      return;
+    }
+
+    // Default case: successful upload
+    req.reply({
+      statusCode: 200,
+      body: { fileToken: "mock-token-abc123" }
+    });
+  });
 
 
 }
