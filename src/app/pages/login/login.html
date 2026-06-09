@@ -22,6 +22,11 @@
               placeholder="Saisissez votre email..."
             />
           </div>
+          <div
+            *ngIf="loginForm.get('email')?.errors?.['required'] && loginForm.get('email')?.touched"
+            class="text-red-500 text-sm mt-1">
+            Email requis
+          </div>
         </div>
 
         <div>
@@ -39,6 +44,12 @@
               formControlName="password"
               placeholder="Saisissez votre mot de passe..."
             />
+          </div>
+
+          <div
+            *ngIf="loginForm.get('password')?.errors?.['required'] && loginForm.get('password')?.touched"
+            class="text-red-500 text-sm mt-1">
+            Mot de passe requis
           </div>
         </div>
         

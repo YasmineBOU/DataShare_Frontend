@@ -1,0 +1,43 @@
+{
+  "registeredUser": {
+    "email": "johndoe@example.com",
+    "password": "Password123!"
+  },
+  "userWithInvalidCredentials": {
+    "email": "johndoe@example.com",
+    "password": "WrongPassword123!"
+  },
+  "newUserWithValidCredentials": {
+    "email": "alice@example.fr",
+    "password": "AliceStrong1Password!"
+  },
+  "newUserWithInvalidEmail": {
+    "email": "invalid-email",
+    "password": "Password123!"
+  },
+  "newUserWithShortPassword": {
+    "email": "johndoe@example.com",
+    "password": "pass"
+  },
+  "newUserWithMissingSpecialCharacter": {
+    "email": "johndoe@example.com",
+    "password": "Password123"
+  },
+  "newUserWithMissingNumber": {
+    "email": "johndoe@example.com",
+    "password": "Password!"
+  },
+  "newUserWithMissingUppercase": {
+    "email": "johndoe@example.com",
+    "password": "password123!"
+  },
+  "newUserWithMissingLowercase": {
+    "email": "johndoe@example.com",
+    "password": "PASSWORD123!"
+  },
+  "serverErrorUser": {
+    "email": "any@example.com",
+    "password": "AnyPass123!"
+  }
+  
+}

@@ -6,11 +6,13 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { LoginModel } from '../../core/models/login.model';
 import { AuthService } from '../../core/service/auth.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [
+    CommonModule,
     ReactiveFormsModule, 
     RouterLink
   ],
@@ -35,6 +37,7 @@ export class Login{
 
   onSubmit() {
     if (this.loginForm.invalid) {
+      this.loginForm.markAllAsTouched()
       return;
     }
 
@@ -56,7 +59,7 @@ export class Login{
             });
         },
         error: (err) => {
-          if ([400, 401, 403].includes(err.status)) {
+          if (err.status == 401) {
             alert('Incorrect credentials, please try again.');
           } else {
             alert('An error occurred, please try again later.');
