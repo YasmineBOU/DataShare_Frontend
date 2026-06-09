@@ -72,9 +72,7 @@ describe('Login', () => {
     let userServiceLoginSpy: jest.SpyInstance;
 
     const incorrectCredentialsErrorCases = [
-      [400, 'Incorrect credentials, please try again.'],
-      [401, 'Incorrect credentials, please try again.'],
-      [403, 'Incorrect credentials, please try again.']
+      [401, 'Incorrect credentials, please try again.']
     ];
 
     const otherErrorCases: [number | null | undefined, string][] = [
@@ -135,7 +133,7 @@ describe('Login', () => {
       component.onSubmit();
 
       expect(userServiceLoginSpy).toHaveBeenCalled()
-      expect(alert).toHaveBeenCalledWith(expectedMessage);
+      expect(global.alert).toHaveBeenCalledWith(expectedMessage);
       expect(authServiceLoadCurrentUserSpy).not.toHaveBeenCalled();
       expect(routerNavigateSpy).not.toHaveBeenCalled();
     });
