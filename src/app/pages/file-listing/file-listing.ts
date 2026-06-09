@@ -1,12 +1,29 @@
-import { ChangeDetectorRef, Component, HostListener, OnInit, inject } from '@angular/core';
-import { FileService } from '../../core/service/file.service';
-import { AuthService } from '../../core/service/auth.service';
-import { Router } from '@angular/router';
-import { FileInfo } from '../../core/models/file-info.model';
+/**
+ * Component responsible for listing and managing files uploaded by the authenticated user.
+ * This component fetches files from the backend, applies filters, and provides actions for viewing and deleting files.
+ * It also handles responsive behavior for mobile and desktop devices.
+ *
+ * @see FileService
+ * @see AuthService
+ * @see LoadingService
+ * @see FileInfo
+ * @see formatFileSize
+ * @see getExpirationDaysMessage
+ * @see getIconByExtension
+ * @see isBrowser
+ * @see isMobileDevice
+ */
+
 import { CommonModule } from '@angular/common';
-import { formatFileSize, getExpirationDaysMessage, getIconByExtension } from '../../core/utils/file-utils';
-import { isBrowser, isMobileDevice } from '../../core/utils/common-utils';
+import { ChangeDetectorRef, Component, HostListener, OnInit, inject } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { FileInfo } from '../../core/models/file-info.model';
+import { AuthService } from '../../core/service/auth.service';
+import { FileService } from '../../core/service/file.service';
 import { LoadingService } from '../../core/service/loading';
+import { isBrowser, isMobileDevice } from '../../core/utils/common-utils';
+import { formatFileSize, getExpirationDaysMessage, getIconByExtension } from '../../core/utils/file-utils';
 import { LoadingSpinner } from '../../shared/components/loading-spinner/loading-spinner';
 
 @Component({
@@ -20,24 +37,84 @@ import { LoadingSpinner } from '../../shared/components/loading-spinner/loading-
 })
 
 export class FileListing implements OnInit {
+  /**
+   * The FileService used to interact with the backend API for file operations.
+   */
   private fileService = inject(FileService);
+  
+  /**
+   * The AuthService used to access authentication state and user email.
+   */
   private authService = inject(AuthService);
+  
+  /**
+   * The LoadingService used to track loading state and display a spinner.
+   */
   private loadingService = inject(LoadingService);
+  
+  /**
+   * The Router service used for navigation.
+   */
   private router = inject(Router);
+  
+  /**
+   * The ChangeDetectorRef service used to detect changes in the component.
+   */
   private cdr = inject(ChangeDetectorRef);
 
+  /**
+   * List of all files uploaded by the user.
+   */
   userFiles: FileInfo[] = [];
+  
+  /**
+   * List of files filtered based on the active filter ('all', 'active', or 'expired').
+   */
   filteredFiles: FileInfo[] = [];
+ 
+  /**
+   * The active filter applied to the file list ('all', 'active', or 'expired').
+   */
   activeFilter: string = 'active'; // available filters: 'all', 'active', 'expired'
+  
+  /**
+   * Flag indicating if the device is mobile.
+   */
   isMobile!: boolean;
+
+  /**
+   * Message to display in the UI (e.g., success, error, or info messages).
+   */
   message: string | null = null;
+  
+  /**
+   * Type of the message ('success', 'error', or 'info').
+   */
   messageType: string = 'info';
+  
+  /**
+   * Timeout for automatically clearing the message after a delay.
+   */
   private messageTimeout: any = null;
-  // Track which file's menu is open (store file id) to keep menus per-file
+  
+  /**
+   * ID of the file whose menu is currently open. Used to track which file's menu is expanded.
+   */
   menuOpen: number | null = null;
-  // Expose loading state to template for spinner display
+  
+  /**
+   * Observable that emits the current loading state for the spinner display.
+   */
   isLoading$ = this.loadingService.isLoading$;
 
+  /**
+   * Displays a message in the UI with an optional type and duration.
+   * The message is automatically cleared after the specified duration.
+   *
+   * @param text - The message text to display.
+   * @param type - The type of message ('success', 'error', or 'info'). Default is 'info'.
+   * @param durationMs - The duration in milliseconds before the message is automatically cleared. Default is 10000ms (10 seconds).
+   */
   showMessage(text: string, type: 'success' | 'error' | 'info' = 'info', durationMs: number = 10000) {
     this.message = text;
     this.messageType = type;
@@ -56,6 +133,10 @@ export class FileListing implements OnInit {
     }, durationMs);
   }
 
+  /**
+   * Initializes the component and fetches files uploaded by the authenticated user.
+   * Validates the user's authentication state and redirects to login if not authenticated.
+   */
   ngOnInit(): void {
     if (!isBrowser()) {
       return;
@@ -105,6 +186,11 @@ export class FileListing implements OnInit {
     });
   }
 
+  /**
+   * Filters the list of files based on the specified filter ('all', 'active', or 'expired').
+   *
+   * @param filter - The filter to apply ('all', 'active', or 'expired').
+   */
   filterFiles(filter: string): void {
     this.activeFilter = filter;
     switch (filter) {
@@ -120,6 +206,12 @@ export class FileListing implements OnInit {
     }
   }
 
+  /**
+   * Deletes a file after confirming the action with the user.
+   * Updates the file list and shows a success or error message.
+   *
+   * @param file - The file to delete.
+   */
   onDeleteFile(file: FileInfo): void {
     const confirmed = confirm(`Are you sure you want to delete the file "${file.filename}"?`);
     if (!confirmed) return;
@@ -138,6 +230,11 @@ export class FileListing implements OnInit {
     });
   }
 
+  /**
+   * Navigates to the file download page for the specified file.
+   *
+   * @param file - The file to view/download.
+   */
   onViewFile(file: FileInfo): void {
     this.router.navigate(
       ['/files/download'], 
@@ -147,6 +244,9 @@ export class FileListing implements OnInit {
     );
   }
 
+  /**
+   * Clears the currently displayed message manually.
+   */
   closeMessage() {
     if (this.messageTimeout) {
       clearTimeout(this.messageTimeout);
@@ -157,6 +257,11 @@ export class FileListing implements OnInit {
   }
 
 
+  /**
+   * Host listener that closes the file menu when clicking outside of it.
+   *
+   * @param event - The mouse event triggered by the click.
+   */
   @HostListener('document:click', ['$event'])
   closeMenuWhenClickingOutside(event: MouseEvent): void {
     if (this.menuOpen === null) {
@@ -167,6 +272,11 @@ export class FileListing implements OnInit {
     this.cdr.detectChanges();
   }
 
+  /**
+   * Toggles the file menu open or closed.
+   *
+   * @param fileId - The ID of the file whose menu is to be toggled.
+   */
   toggleMenu(fileId?: string | number | null) {
     const id = fileId == null ? null : Number(fileId);
     this.menuOpen = this.menuOpen === id ? null : id;

@@ -1,0 +1,13 @@
+{
+  "entryPoints": ["src/app/**/*.ts"],
+  "entryPointStrategy": "expand",
+  "out": "docs/angular",
+  "includeVersion": true,
+  "theme": "default",
+  "readme": "README.md",
+  "name": "DataShare Angular Documentation",
+  "exclude": ["**/*.spec.ts", "**/*.module.ts", "**/*.routes.ts", "**/*.config.ts"],
+  "excludePrivate": true,
+  "excludeProtected": true,
+  "excludeInternal": true
+}

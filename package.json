@@ -9,8 +9,8 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:DataShare_Frontend": "node dist/DataShare_Frontend/server/server.mjs",
-    "cypress:open": "cypress open",
-    "cypress:run": "cypress run"
+    "cy:open": "node cypress/fixtures/generateFilesFixture.js && cypress open",
+    "cy:run": "node cypress/fixtures/generateFilesFixture.js && cypress run"
   },
   "private": true,
   "packageManager": "npm@10.9.0",

@@ -1,12 +1,27 @@
+/**
+ * Component responsible for handling file downloads.
+ * This component allows users to download files by providing a file token and, if required, a password.
+ * It processes file metadata, checks expiration status, and manages the download process.
+ *
+ * @see FileService
+ * @see FileInfo
+ * @see FileDownloadInfo
+ * @see formatFileSize
+ * @see getExpirationDaysMessage
+ * @see getIconByExtension
+ * @see getIconByStatus
+ */
+
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, inject } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+
+import { DOWNLOAD_CONFIG } from '../../core/config/config';
 import { FileInfo } from '../../core/models/file-info.model';
+import { FileDownloadInfo } from '../../core/models/file-download.model';
 import { FileService } from '../../core/service/file.service';
 import { formatFileSize, getExpirationDaysMessage, getIconByExtension, getIconByStatus } from '../../core/utils/file-utils';
-import { DOWNLOAD_CONFIG } from '../../core/config/config';
-import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { FileDownloadInfo } from '../../core/models/file-download.model';
 
 @Component({
   selector: 'app-file-download',
@@ -19,31 +34,86 @@ import { FileDownloadInfo } from '../../core/models/file-download.model';
 })
 export class FileDownload {
 
+  /**
+   * The FileService used to interact with the backend API for file operations.
+   */
   private fileService = inject(FileService);
+  
+  /**
+   * The ActivatedRoute service used to access route parameters.
+   */
   private route = inject(ActivatedRoute);
+  
+  /**
+   * The Router service used for navigation.
+   */
   private router = inject(Router);
+  
+  /**
+   * The FormBuilder service used to create reactive forms.
+   */
   private formBuilder = inject(FormBuilder);
+  
+  /**
+   * The ChangeDetectorRef service used to detect changes in the component.
+   */
   private cdr = inject(ChangeDetectorRef);
 
+  /**
+   * Reactive form for handling file password input (if the file is password-protected).
+   */
   fileDownloadForm: FormGroup | null = null;
+  
+  /**
+   * The unique identifier of the file to download.
+   */
   fileId: number = 0;
+  
+  /**
+   * The file token used to retrieve file metadata.
+   */
   fileToken: string = "";
+  
+  /**
+   * The file metadata retrieved from the backend.
+   */
   file: FileInfo = {} as FileInfo;
+  
+  /**
+   * The type of expiration message to display ('safe', 'warning', or 'overdue').
+   */
   expMsgType = 'safe'; // 'safe' | 'warning' | 'overdue'
+  
+  /**
+   * The icon associated with the expiration message.
+   */
   expMsgIcon: string = '';
+
+  /**
+   * The download link for the file.
+   */
   fileLink: string = '';
 
- private buildForm() {
-  if (this.file.isExpired) {
-    this.fileDownloadForm = null;
-    return;
+  /**
+   * Builds the reactive form for password input if the file is password-protected.
+   * If the file is expired, the form is set to null.
+   */
+  private buildForm() {
+    if (this.file.isExpired) {
+      this.fileDownloadForm = null;
+      return;
+    }
+
+    const passwordValidators = this.file.hasPassword ? [Validators.required] : [];
+    this.fileDownloadForm = this.formBuilder.group({
+      password: ['', passwordValidators]
+    });
   }
 
-  const passwordValidators = this.file.hasPassword ? [Validators.required] : [];
-  this.fileDownloadForm = this.formBuilder.group({
-    password: ['', passwordValidators]
-  });
-}
+  /**
+   * Initializes the component and loads file metadata using the file token from route parameters.
+   * If no token is provided, the user is redirected to the home page.
+   */
   ngOnInit() {  
     this.fileToken = this.route.snapshot.queryParamMap.get('fileToken') ?? "";
     if (!this.fileToken) {
@@ -69,7 +139,14 @@ export class FileDownload {
       });
     });
   }
-
+  /**
+   * Processes the file metadata to:
+   * - Set the file ID.
+   * - Determine the file icon based on its extension.
+   * - Format the file size for human-readable display.
+   * - Check if the file is expired and compute the expiration message.
+   * - Set the expiration status icon.
+   */
   processFile() {
     // Set file Id
     this.fileId = this.file.id;
@@ -99,6 +176,11 @@ export class FileDownload {
     this.expMsgIcon = getIconByStatus(this.expMsgType);
   }
 
+  /**
+   * Handles the file download process.
+   * Validates the password (if required) and retrieves the download link from the backend.
+   * Once the link is obtained, the file is downloaded.
+   */
   onDownload() {
     let filePassword = '';
     if (this.file.hasPassword) {
@@ -150,6 +232,10 @@ export class FileDownload {
     });
   }
 
+  /**
+   * Downloads the file using the obtained download link.
+   * Creates a temporary anchor element to trigger the download and cleans up afterward.
+   */
   downloadFile() {
     if (!this.fileLink) {
       alert('Le lien de téléchargement n\'est pas disponible pour ce fichier.');
