@@ -229,14 +229,28 @@ export class FileUpload implements OnInit {
   getFileFormData(): FormData {
     const formData = new FormData();
 
-    formData.append('email', this.currentUserEmail);
     formData.append('file', this.selectedFile!);
     formData.append('filename', this.selectedFile!.name);
     formData.append('fileSize', this.selectedFile!.size.toString());
     formData.append('fileType', this.selectedFile!.type);
     formData.append('hash', this.fileChecksum);
-    formData.append('filePassword', this.fileUploadForm.get('password')?.value || '');
-    formData.append('expirationDays', this.fileUploadForm.get('expiration')?.value || '');
+    formData.append('expirationDays', this.fileUploadForm.get('expiration')?.value || null);
+    
+    if(this.currentUserEmail) {
+      formData.append('email', this.currentUserEmail);
+    }
+    const password = this.fileUploadForm.get('password')?.value;
+    if (password) {
+      formData.append('filePassword', password);
+    }
+
+    const expiration = this.fileUploadForm.get('expiration')?.value;
+    if (expiration) {
+      formData.append('expirationDays', expiration.toString());
+    }
+    else {
+      formData.append('expirationDays', this.selectedExpiration.toString());
+    }
 
     return formData;
   }
