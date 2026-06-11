@@ -1,0 +1,82 @@
+<svg version="1.1" baseProfile="full" width="642.0" height="597.0" viewBox="0 0 642 597" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
+<desc >#.interface: fill=lightblue
+#.enumeration: fill=lightgreen
+#.type: fill=lightgray
+
+[FileUpload|-fileService: FileService;-authService: AuthService;-formBuilder: FormBuilder;-loadingService: LoadingService;+isLoading$: Observable&lt;boolean&gt;;+fileUploadForm: FormGroup&lt;any&gt;;+downloadLink: string;+dwlLinkMessage: string;+selectedFile: File;+fileIcon: string;+fileChecksum: string;+expirationOptions: Map&lt;number, string&gt;;+selectedExpiration: number;+currentUserEmail: string;+passwordMinLength: number;+getHumanReadableSize: (bytes: number, decimals?: number) =&gt; string|-buildForm(): void;+ngOnInit(): void;+calculateChecksum(): Promise&lt;void&gt;;+onFileSelected(): void;+resetSelectedFile(): void;+getFileFormData(): FormData;+onUpload(): Promise&lt;void&gt;;+copyLinkToClipboard(): void;+getDownloadURL(): string]
+[OnInit]&lt;:--[FileUpload]</desc>
+<g stroke-width="1.0" text-align="left" font="12pt Helvetica, Arial, sans-serif" font-size="12pt" font-family="Helvetica" font-weight="bold" font-style="normal">
+<g font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round" stroke="#33322E">
+<g stroke="transparent" fill="transparent">
+<rect x="0.0" y="0.0" height="597.0" width="642.0" stroke="none"></rect>
+</g>
+<g transform="translate(8, 8)" fill="#33322E">
+<g transform="translate(20, 20)" fill="#eee8d5" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal">
+<g stroke-dasharray="6 6">
+<path d="M293.0 45.3 L293 52 L293 72 L293.0 72.0 " fill="none"></path>
+</g>
+<path d="M298.3 45.3 L293.0 45.3 L287.7 45.3 L293.0 32.0 Z"></path>
+<g data-name="FileUpload">
+<g fill="#eee8d5" stroke="#33322E" data-name="FileUpload">
+<rect x="0.0" y="72.0" height="469.0" width="586.0" data-name="FileUpload"></rect>
+<path d="M0.0 104.0 L586.0 104.0" fill="none" data-name="FileUpload"></path>
+<path d="M0.0 379.0 L586.0 379.0" fill="none" data-name="FileUpload"></path>
+</g>
+<g transform="translate(0, 72)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="FileUpload" data-compartment="0">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="FileUpload" data-compartment="0">
+<a id="..\..\..\..\..\src\app\pages\file-upload\file-upload.ts.FileUpload" xlink:href="..\..\..\..\..\src\app\pages\file-upload\file-upload.ts"><text x="285.0" y="14.1" stroke="none" text-anchor="middle" data-name="FileUpload" data-compartment="0">FileUpload</text></a>
+
+</g>
+</g>
+<g transform="translate(0, 104)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="FileUpload" data-compartment="1">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="FileUpload" data-compartment="1">
+<text x="0.0" y="14.1" stroke="none" data-name="FileUpload" data-compartment="1">-fileService: FileService</text>
+<text x="0.0" y="30.3" stroke="none" data-name="FileUpload" data-compartment="1">-authService: AuthService</text>
+<text x="0.0" y="46.5" stroke="none" data-name="FileUpload" data-compartment="1">-formBuilder: FormBuilder</text>
+<text x="0.0" y="62.7" stroke="none" data-name="FileUpload" data-compartment="1">-loadingService: LoadingService</text>
+<text x="0.0" y="78.9" stroke="none" data-name="FileUpload" data-compartment="1">+isLoading$: Observable&lt;boolean&gt;</text>
+<text x="0.0" y="95.1" stroke="none" data-name="FileUpload" data-compartment="1">+fileUploadForm: FormGroup&lt;any&gt;</text>
+<text x="0.0" y="111.3" stroke="none" data-name="FileUpload" data-compartment="1">+downloadLink: string</text>
+<text x="0.0" y="127.5" stroke="none" data-name="FileUpload" data-compartment="1">+dwlLinkMessage: string</text>
+<text x="0.0" y="143.7" stroke="none" data-name="FileUpload" data-compartment="1">+selectedFile: File</text>
+<text x="0.0" y="159.9" stroke="none" data-name="FileUpload" data-compartment="1">+fileIcon: string</text>
+<text x="0.0" y="176.1" stroke="none" data-name="FileUpload" data-compartment="1">+fileChecksum: string</text>
+<text x="0.0" y="192.3" stroke="none" data-name="FileUpload" data-compartment="1">+expirationOptions: Map&lt;number, string&gt;</text>
+<text x="0.0" y="208.5" stroke="none" data-name="FileUpload" data-compartment="1">+selectedExpiration: number</text>
+<text x="0.0" y="224.7" stroke="none" data-name="FileUpload" data-compartment="1">+currentUserEmail: string</text>
+<text x="0.0" y="240.9" stroke="none" data-name="FileUpload" data-compartment="1">+passwordMinLength: number</text>
+<text x="0.0" y="257.1" stroke="none" data-name="FileUpload" data-compartment="1">+getHumanReadableSize: (bytes: number, decimals?: number) =&gt; string</text>
+
+</g>
+</g>
+<g transform="translate(0, 379)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="FileUpload" data-compartment="2">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="FileUpload" data-compartment="2">
+<text x="0.0" y="14.1" stroke="none" data-name="FileUpload" data-compartment="2">-buildForm(): void</text>
+<text x="0.0" y="30.3" stroke="none" data-name="FileUpload" data-compartment="2">+ngOnInit(): void</text>
+<text x="0.0" y="46.5" stroke="none" data-name="FileUpload" data-compartment="2">+calculateChecksum(): Promise&lt;void&gt;</text>
+<text x="0.0" y="62.7" stroke="none" data-name="FileUpload" data-compartment="2">+onFileSelected(): void</text>
+<text x="0.0" y="78.9" stroke="none" data-name="FileUpload" data-compartment="2">+resetSelectedFile(): void</text>
+<text x="0.0" y="95.1" stroke="none" data-name="FileUpload" data-compartment="2">+getFileFormData(): FormData</text>
+<text x="0.0" y="111.3" stroke="none" data-name="FileUpload" data-compartment="2">+onUpload(): Promise&lt;void&gt;</text>
+<text x="0.0" y="127.5" stroke="none" data-name="FileUpload" data-compartment="2">+copyLinkToClipboard(): void</text>
+<text x="0.0" y="143.7" stroke="none" data-name="FileUpload" data-compartment="2">+getDownloadURL(): string</text>
+
+</g>
+</g>
+</g>
+<g data-name="OnInit">
+<g fill="#eee8d5" stroke="#33322E" data-name="OnInit">
+<rect x="261.5" y="0.0" height="32.0" width="63.0" data-name="OnInit"></rect>
+</g>
+<g transform="translate(261.5, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="OnInit" data-compartment="0">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="OnInit" data-compartment="0">
+<text x="23.5" y="14.1" stroke="none" text-anchor="middle" data-name="OnInit" data-compartment="0">OnInit</text>
+
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+</svg>

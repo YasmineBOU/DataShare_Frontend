@@ -1,0 +1,5 @@
+#.interface: fill=lightblue
+#.enumeration: fill=lightgreen
+#.type: fill=lightgray
+
+[Login|+loginForm: FormGroup<any>;-userService: UserService;-authService: AuthService;-destroyRef: DestroyRef;-router: Router;-formBuilder: FormBuilder|+onSubmit(): void]

@@ -1,0 +1,9 @@
+#.interface: fill=lightblue
+#.enumeration: fill=lightgreen
+#.type: fill=lightgray
+
+[AuthService|-httpClient: unknown;-apiUrl: "/api";-currentEmailSubject: BehaviorSubject<string>;+currentEmail$: Observable<string>|+loadCurrentUser(): Observable<AuthMeModel>;+logout(): Observable<any>;+isAuthenticated(): boolean]
+[FileService|-httpClient: HttpClient|+uploadFile(): Observable<Object>;+getFileLink(): Observable<Object>;+downloadFile(): Observable<Blob>;+listFiles(): Observable<FileListResponse>;+getFileInfo(): Observable<Object>;+deleteFile(): Observable<Object>]
+[<interface>FileListResponse|+message: string;+files: FileInfo\[\]|]
+[LoadingService|-isLoading: BehaviorSubject<boolean>;+isLoading$: Observable<boolean>|+show(): void;+hide(): void]
+[UserService|-httpClient: HttpClient|+register(): Observable<Object>;+login(): Observable<{ message: string; }>;+me(): Observable<AuthMeModel>]

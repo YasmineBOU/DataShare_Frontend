@@ -1,0 +1,5 @@
+#.interface: fill=lightblue
+#.enumeration: fill=lightgreen
+#.type: fill=lightgray
+
+[<interface>FileInfo|+id: number;+filename: string;+fileSize: string;+fileToken: string;+createdAt: string;+expirationDate: string;+hasPassword: boolean;+isExpired?: boolean;+expirationMsg?: string;+fileIconUrl?: string|]

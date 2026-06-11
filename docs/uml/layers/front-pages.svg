@@ -1,0 +1,338 @@
+<svg version="1.1" baseProfile="full" width="1724.0" height="904.0" viewBox="0 0 1724 904" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
+<desc >#.interface: fill=lightblue
+#.enumeration: fill=lightgreen
+#.type: fill=lightgray
+
+[Dashboard||]
+[DashboardSidebar|+year: number;+isSidebarOpen: boolean;+isMobile: boolean;-router: Router;-destroyRef: DestroyRef|+ngOnInit(): void;+toggleSidebar(): void;-checkIfMobile(): void]
+[OnInit]&lt;:--[DashboardSidebar]
+[FileDownload|-fileService: FileService;-route: ActivatedRoute;-router: Router;-formBuilder: FormBuilder;-cdr: ChangeDetectorRef;+fileDownloadForm: FormGroup&lt;any&gt;;+fileId: number;+fileToken: string;+file: FileInfo;+expMsgType: string;+expMsgIcon: string;+fileLink: string|-buildForm(): void;+ngOnInit(): void;+processFile(): void;+onDownload(): void;+downloadFile(): void]
+[FileListing|-fileService: FileService;-authService: AuthService;-loadingService: LoadingService;-router: Router;-cdr: ChangeDetectorRef;+userFiles: FileInfo\[\];+filteredFiles: FileInfo\[\];+activeFilter: string;+isMobile: boolean;+message: string;+messageType: string;-messageTimeout: any;+menuOpen: number;+isLoading$: Observable&lt;boolean&gt;|+showMessage(): void;+ngOnInit(): void;+filterFiles(): void;+onDeleteFile(): void;+onViewFile(): void;+closeMessage(): void;+closeMenuWhenClickingOutside(): void;+toggleMenu(): void]
+[OnInit]&lt;:--[FileListing]
+[FileUpload|-fileService: FileService;-authService: AuthService;-formBuilder: FormBuilder;-loadingService: LoadingService;+isLoading$: Observable&lt;boolean&gt;;+fileUploadForm: FormGroup&lt;any&gt;;+downloadLink: string;+dwlLinkMessage: string;+selectedFile: File;+fileIcon: string;+fileChecksum: string;+expirationOptions: Map&lt;number, string&gt;;+selectedExpiration: number;+currentUserEmail: string;+passwordMinLength: number;+getHumanReadableSize: (bytes: number, decimals?: number) =&gt; string|-buildForm(): void;+ngOnInit(): void;+calculateChecksum(): Promise&lt;void&gt;;+onFileSelected(): void;+resetSelectedFile(): void;+getFileFormData(): FormData;+onUpload(): Promise&lt;void&gt;;+copyLinkToClipboard(): void;+getDownloadURL(): string]
+[OnInit]&lt;:--[FileUpload]
+[Header|-destroyRef: DestroyRef;-router: Router;+authService: AuthService;+currentRoute: string;+isMobile: boolean;+profileMenuOpen: boolean;+currentEmail$: Observable&lt;string&gt;;+isAuthenticated$: Observable&lt;boolean&gt;|+ngOnInit(): void;-updateCurrentRoute(): void;+logout(): void;+toggleProfileMenu(): void]
+[OnInit]&lt;:--[Header]
+[Login|+loginForm: FormGroup&lt;any&gt;;-userService: UserService;-authService: AuthService;-destroyRef: DestroyRef;-router: Router;-formBuilder: FormBuilder|+onSubmit(): void]
+[Register|+registerForm: FormGroup&lt;any&gt;;-userService: UserService;-destroyRef: DestroyRef;-router: Router;+passwordMinLength: number;-formBuilder: FormBuilder|+onSubmit(): void]</desc>
+<g stroke-width="1.0" text-align="left" font="12pt Helvetica, Arial, sans-serif" font-size="12pt" font-family="Helvetica" font-weight="normal" font-style="normal">
+<g font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round" stroke="#33322E">
+<g stroke="transparent" fill="transparent">
+<rect x="0.0" y="0.0" height="904.0" width="1724.0" stroke="none"></rect>
+</g>
+<g transform="translate(8, 8)" fill="#33322E">
+<g transform="translate(20, 20)" fill="#eee8d5" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal">
+<g stroke-dasharray="6 6">
+<path d="M631.4 184.3 L108.5 359 L108.5 516.5 L108.5 516.5 " fill="none"></path>
+</g>
+<path d="M633.0 189.3 L631.4 184.3 L629.7 179.2 L644.0 180.0 Z"></path>
+<g stroke-dasharray="6 6">
+<path d="M643.7 193.5 L425 359 L425 403 L425.0 403.0 " fill="none"></path>
+</g>
+<path d="M646.9 197.8 L643.7 193.5 L640.5 189.3 L654.3 185.5 Z"></path>
+<g stroke-dasharray="6 6">
+<path d="M707.3 193.5 L926 359 L926 379 L926.0 379.0 " fill="none"></path>
+</g>
+<path d="M710.5 189.3 L707.3 193.5 L704.1 197.8 L696.7 185.5 Z"></path>
+<g stroke-dasharray="6 6">
+<path d="M719.9 180.7 L1430.5 359 L1430.5 484 L1430.5 484.0 " fill="none"></path>
+</g>
+<path d="M721.2 175.5 L719.9 180.7 L718.6 185.8 L707.0 177.4 Z"></path>
+<g data-name="Dashboard">
+<g fill="#eee8d5" stroke="#33322E" data-name="Dashboard">
+<rect x="501.0" y="145.5" height="48.0" width="103.0" data-name="Dashboard"></rect>
+<path d="M501.0 177.5 L604.0 177.5" fill="none" data-name="Dashboard"></path>
+<path d="M501.0 185.5 L604.0 185.5" fill="none" data-name="Dashboard"></path>
+</g>
+<g transform="translate(501, 145.5)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="Dashboard" data-compartment="0">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Dashboard" data-compartment="0">
+<a id="..\..\..\src\app\pages\dashboard\dashboard.ts.Dashboard" xlink:href="..\..\..\src\app\pages\dashboard\dashboard.ts"><text x="43.5" y="14.1" stroke="none" text-anchor="middle" data-name="Dashboard" data-compartment="0">Dashboard</text></a>
+
+</g>
+</g>
+<g transform="translate(501, 177.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Dashboard" data-compartment="1">
+<g transform="translate(8, 8)" fill="#33322E" data-name="Dashboard" data-compartment="1">
+
+</g>
+</g>
+<g transform="translate(501, 185.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Dashboard" data-compartment="2">
+<g transform="translate(8, 8)" fill="#33322E" data-name="Dashboard" data-compartment="2">
+
+</g>
+</g>
+</g>
+<g data-name="DashboardSidebar">
+<g fill="#eee8d5" stroke="#33322E" data-name="DashboardSidebar">
+<rect x="0.0" y="516.5" height="194.0" width="217.0" data-name="DashboardSidebar"></rect>
+<path d="M0.0 548.5 L217.0 548.5" fill="none" data-name="DashboardSidebar"></path>
+<path d="M0.0 645.5 L217.0 645.5" fill="none" data-name="DashboardSidebar"></path>
+</g>
+<g transform="translate(0, 516.5)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="DashboardSidebar" data-compartment="0">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="DashboardSidebar" data-compartment="0">
+<a id="..\..\..\src\app\pages\dashboard-sidebar\dashboard-sidebar.ts.DashboardSidebar" xlink:href="..\..\..\src\app\pages\dashboard-sidebar\dashboard-sidebar.ts"><text x="100.5" y="14.1" stroke="none" text-anchor="middle" data-name="DashboardSidebar" data-compartment="0">DashboardSidebar</text></a>
+
+</g>
+</g>
+<g transform="translate(0, 548.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="DashboardSidebar" data-compartment="1">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="DashboardSidebar" data-compartment="1">
+<text x="0.0" y="14.1" stroke="none" data-name="DashboardSidebar" data-compartment="1">+year: number</text>
+<text x="0.0" y="30.3" stroke="none" data-name="DashboardSidebar" data-compartment="1">+isSidebarOpen: boolean</text>
+<text x="0.0" y="46.5" stroke="none" data-name="DashboardSidebar" data-compartment="1">+isMobile: boolean</text>
+<text x="0.0" y="62.7" stroke="none" data-name="DashboardSidebar" data-compartment="1">-router: Router</text>
+<text x="0.0" y="78.9" stroke="none" data-name="DashboardSidebar" data-compartment="1">-destroyRef: DestroyRef</text>
+
+</g>
+</g>
+<g transform="translate(0, 645.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="DashboardSidebar" data-compartment="2">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="DashboardSidebar" data-compartment="2">
+<text x="0.0" y="14.1" stroke="none" data-name="DashboardSidebar" data-compartment="2">+ngOnInit(): void</text>
+<text x="0.0" y="30.3" stroke="none" data-name="DashboardSidebar" data-compartment="2">+toggleSidebar(): void</text>
+<text x="0.0" y="46.5" stroke="none" data-name="DashboardSidebar" data-compartment="2">-checkIfMobile(): void</text>
+
+</g>
+</g>
+</g>
+<g data-name="OnInit">
+<g fill="#eee8d5" stroke="#33322E" data-name="OnInit">
+<rect x="644.0" y="153.5" height="32.0" width="63.0" data-name="OnInit"></rect>
+</g>
+<g transform="translate(644, 153.5)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="OnInit" data-compartment="0">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="OnInit" data-compartment="0">
+<text x="23.5" y="14.1" stroke="none" text-anchor="middle" data-name="OnInit" data-compartment="0">OnInit</text>
+
+</g>
+</g>
+</g>
+<g data-name="FileDownload">
+<g fill="#eee8d5" stroke="#33322E" data-name="FileDownload">
+<rect x="747.0" y="0.0" height="339.0" width="315.0" data-name="FileDownload"></rect>
+<path d="M747.0 32.0 L1062.0 32.0" fill="none" data-name="FileDownload"></path>
+<path d="M747.0 242.0 L1062.0 242.0" fill="none" data-name="FileDownload"></path>
+</g>
+<g transform="translate(747, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="FileDownload" data-compartment="0">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="FileDownload" data-compartment="0">
+<a id="..\..\..\src\app\pages\file-download\file-download.ts.FileDownload" xlink:href="..\..\..\src\app\pages\file-download\file-download.ts"><text x="149.5" y="14.1" stroke="none" text-anchor="middle" data-name="FileDownload" data-compartment="0">FileDownload</text></a>
+
+</g>
+</g>
+<g transform="translate(747, 32)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="FileDownload" data-compartment="1">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="FileDownload" data-compartment="1">
+<text x="0.0" y="14.1" stroke="none" data-name="FileDownload" data-compartment="1">-fileService: FileService</text>
+<text x="0.0" y="30.3" stroke="none" data-name="FileDownload" data-compartment="1">-route: ActivatedRoute</text>
+<text x="0.0" y="46.5" stroke="none" data-name="FileDownload" data-compartment="1">-router: Router</text>
+<text x="0.0" y="62.7" stroke="none" data-name="FileDownload" data-compartment="1">-formBuilder: FormBuilder</text>
+<text x="0.0" y="78.9" stroke="none" data-name="FileDownload" data-compartment="1">-cdr: ChangeDetectorRef</text>
+<text x="0.0" y="95.1" stroke="none" data-name="FileDownload" data-compartment="1">+fileDownloadForm: FormGroup&lt;any&gt;</text>
+<text x="0.0" y="111.3" stroke="none" data-name="FileDownload" data-compartment="1">+fileId: number</text>
+<text x="0.0" y="127.5" stroke="none" data-name="FileDownload" data-compartment="1">+fileToken: string</text>
+<text x="0.0" y="143.7" stroke="none" data-name="FileDownload" data-compartment="1">+file: FileInfo</text>
+<text x="0.0" y="159.9" stroke="none" data-name="FileDownload" data-compartment="1">+expMsgType: string</text>
+<text x="0.0" y="176.1" stroke="none" data-name="FileDownload" data-compartment="1">+expMsgIcon: string</text>
+<text x="0.0" y="192.3" stroke="none" data-name="FileDownload" data-compartment="1">+fileLink: string</text>
+
+</g>
+</g>
+<g transform="translate(747, 242)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="FileDownload" data-compartment="2">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="FileDownload" data-compartment="2">
+<text x="0.0" y="14.1" stroke="none" data-name="FileDownload" data-compartment="2">-buildForm(): void</text>
+<text x="0.0" y="30.3" stroke="none" data-name="FileDownload" data-compartment="2">+ngOnInit(): void</text>
+<text x="0.0" y="46.5" stroke="none" data-name="FileDownload" data-compartment="2">+processFile(): void</text>
+<text x="0.0" y="62.7" stroke="none" data-name="FileDownload" data-compartment="2">+onDownload(): void</text>
+<text x="0.0" y="78.9" stroke="none" data-name="FileDownload" data-compartment="2">+downloadFile(): void</text>
+
+</g>
+</g>
+</g>
+<g data-name="FileListing">
+<g fill="#eee8d5" stroke="#33322E" data-name="FileListing">
+<rect x="257.0" y="403.0" height="421.0" width="336.0" data-name="FileListing"></rect>
+<path d="M257.0 435.0 L593.0 435.0" fill="none" data-name="FileListing"></path>
+<path d="M257.0 678.0 L593.0 678.0" fill="none" data-name="FileListing"></path>
+</g>
+<g transform="translate(257, 403)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="FileListing" data-compartment="0">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="FileListing" data-compartment="0">
+<a id="..\..\..\src\app\pages\file-listing\file-listing.ts.FileListing" xlink:href="..\..\..\src\app\pages\file-listing\file-listing.ts"><text x="160.0" y="14.1" stroke="none" text-anchor="middle" data-name="FileListing" data-compartment="0">FileListing</text></a>
+
+</g>
+</g>
+<g transform="translate(257, 435)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="FileListing" data-compartment="1">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="FileListing" data-compartment="1">
+<text x="0.0" y="14.1" stroke="none" data-name="FileListing" data-compartment="1">-fileService: FileService</text>
+<text x="0.0" y="30.3" stroke="none" data-name="FileListing" data-compartment="1">-authService: AuthService</text>
+<text x="0.0" y="46.5" stroke="none" data-name="FileListing" data-compartment="1">-loadingService: LoadingService</text>
+<text x="0.0" y="62.7" stroke="none" data-name="FileListing" data-compartment="1">-router: Router</text>
+<text x="0.0" y="78.9" stroke="none" data-name="FileListing" data-compartment="1">-cdr: ChangeDetectorRef</text>
+<text x="0.0" y="95.1" stroke="none" data-name="FileListing" data-compartment="1">+userFiles: FileInfo[]</text>
+<text x="0.0" y="111.3" stroke="none" data-name="FileListing" data-compartment="1">+filteredFiles: FileInfo[]</text>
+<text x="0.0" y="127.5" stroke="none" data-name="FileListing" data-compartment="1">+activeFilter: string</text>
+<text x="0.0" y="143.7" stroke="none" data-name="FileListing" data-compartment="1">+isMobile: boolean</text>
+<text x="0.0" y="159.9" stroke="none" data-name="FileListing" data-compartment="1">+message: string</text>
+<text x="0.0" y="176.1" stroke="none" data-name="FileListing" data-compartment="1">+messageType: string</text>
+<text x="0.0" y="192.3" stroke="none" data-name="FileListing" data-compartment="1">-messageTimeout: any</text>
+<text x="0.0" y="208.5" stroke="none" data-name="FileListing" data-compartment="1">+menuOpen: number</text>
+<text x="0.0" y="224.7" stroke="none" data-name="FileListing" data-compartment="1">+isLoading$: Observable&lt;boolean&gt;</text>
+
+</g>
+</g>
+<g transform="translate(257, 678)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="FileListing" data-compartment="2">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="FileListing" data-compartment="2">
+<text x="0.0" y="14.1" stroke="none" data-name="FileListing" data-compartment="2">+showMessage(): void</text>
+<text x="0.0" y="30.3" stroke="none" data-name="FileListing" data-compartment="2">+ngOnInit(): void</text>
+<text x="0.0" y="46.5" stroke="none" data-name="FileListing" data-compartment="2">+filterFiles(): void</text>
+<text x="0.0" y="62.7" stroke="none" data-name="FileListing" data-compartment="2">+onDeleteFile(): void</text>
+<text x="0.0" y="78.9" stroke="none" data-name="FileListing" data-compartment="2">+onViewFile(): void</text>
+<text x="0.0" y="95.1" stroke="none" data-name="FileListing" data-compartment="2">+closeMessage(): void</text>
+<text x="0.0" y="111.3" stroke="none" data-name="FileListing" data-compartment="2">+closeMenuWhenClickingOutside(): void</text>
+<text x="0.0" y="127.5" stroke="none" data-name="FileListing" data-compartment="2">+toggleMenu(): void</text>
+
+</g>
+</g>
+</g>
+<g data-name="FileUpload">
+<g fill="#eee8d5" stroke="#33322E" data-name="FileUpload">
+<rect x="633.0" y="379.0" height="469.0" width="586.0" data-name="FileUpload"></rect>
+<path d="M633.0 411.0 L1219.0 411.0" fill="none" data-name="FileUpload"></path>
+<path d="M633.0 686.0 L1219.0 686.0" fill="none" data-name="FileUpload"></path>
+</g>
+<g transform="translate(633, 379)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="FileUpload" data-compartment="0">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="FileUpload" data-compartment="0">
+<a id="..\..\..\src\app\pages\file-upload\file-upload.ts.FileUpload" xlink:href="..\..\..\src\app\pages\file-upload\file-upload.ts"><text x="285.0" y="14.1" stroke="none" text-anchor="middle" data-name="FileUpload" data-compartment="0">FileUpload</text></a>
+
+</g>
+</g>
+<g transform="translate(633, 411)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="FileUpload" data-compartment="1">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="FileUpload" data-compartment="1">
+<text x="0.0" y="14.1" stroke="none" data-name="FileUpload" data-compartment="1">-fileService: FileService</text>
+<text x="0.0" y="30.3" stroke="none" data-name="FileUpload" data-compartment="1">-authService: AuthService</text>
+<text x="0.0" y="46.5" stroke="none" data-name="FileUpload" data-compartment="1">-formBuilder: FormBuilder</text>
+<text x="0.0" y="62.7" stroke="none" data-name="FileUpload" data-compartment="1">-loadingService: LoadingService</text>
+<text x="0.0" y="78.9" stroke="none" data-name="FileUpload" data-compartment="1">+isLoading$: Observable&lt;boolean&gt;</text>
+<text x="0.0" y="95.1" stroke="none" data-name="FileUpload" data-compartment="1">+fileUploadForm: FormGroup&lt;any&gt;</text>
+<text x="0.0" y="111.3" stroke="none" data-name="FileUpload" data-compartment="1">+downloadLink: string</text>
+<text x="0.0" y="127.5" stroke="none" data-name="FileUpload" data-compartment="1">+dwlLinkMessage: string</text>
+<text x="0.0" y="143.7" stroke="none" data-name="FileUpload" data-compartment="1">+selectedFile: File</text>
+<text x="0.0" y="159.9" stroke="none" data-name="FileUpload" data-compartment="1">+fileIcon: string</text>
+<text x="0.0" y="176.1" stroke="none" data-name="FileUpload" data-compartment="1">+fileChecksum: string</text>
+<text x="0.0" y="192.3" stroke="none" data-name="FileUpload" data-compartment="1">+expirationOptions: Map&lt;number, string&gt;</text>
+<text x="0.0" y="208.5" stroke="none" data-name="FileUpload" data-compartment="1">+selectedExpiration: number</text>
+<text x="0.0" y="224.7" stroke="none" data-name="FileUpload" data-compartment="1">+currentUserEmail: string</text>
+<text x="0.0" y="240.9" stroke="none" data-name="FileUpload" data-compartment="1">+passwordMinLength: number</text>
+<text x="0.0" y="257.1" stroke="none" data-name="FileUpload" data-compartment="1">+getHumanReadableSize: (bytes: number, decimals?: number) =&gt; string</text>
+
+</g>
+</g>
+<g transform="translate(633, 686)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="FileUpload" data-compartment="2">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="FileUpload" data-compartment="2">
+<text x="0.0" y="14.1" stroke="none" data-name="FileUpload" data-compartment="2">-buildForm(): void</text>
+<text x="0.0" y="30.3" stroke="none" data-name="FileUpload" data-compartment="2">+ngOnInit(): void</text>
+<text x="0.0" y="46.5" stroke="none" data-name="FileUpload" data-compartment="2">+calculateChecksum(): Promise&lt;void&gt;</text>
+<text x="0.0" y="62.7" stroke="none" data-name="FileUpload" data-compartment="2">+onFileSelected(): void</text>
+<text x="0.0" y="78.9" stroke="none" data-name="FileUpload" data-compartment="2">+resetSelectedFile(): void</text>
+<text x="0.0" y="95.1" stroke="none" data-name="FileUpload" data-compartment="2">+getFileFormData(): FormData</text>
+<text x="0.0" y="111.3" stroke="none" data-name="FileUpload" data-compartment="2">+onUpload(): Promise&lt;void&gt;</text>
+<text x="0.0" y="127.5" stroke="none" data-name="FileUpload" data-compartment="2">+copyLinkToClipboard(): void</text>
+<text x="0.0" y="143.7" stroke="none" data-name="FileUpload" data-compartment="2">+getDownloadURL(): string</text>
+
+</g>
+</g>
+</g>
+<g data-name="Header">
+<g fill="#eee8d5" stroke="#33322E" data-name="Header">
+<rect x="1259.0" y="484.0" height="259.0" width="343.0" data-name="Header"></rect>
+<path d="M1259.0 516.0 L1602.0 516.0" fill="none" data-name="Header"></path>
+<path d="M1259.0 662.0 L1602.0 662.0" fill="none" data-name="Header"></path>
+</g>
+<g transform="translate(1259, 484)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="Header" data-compartment="0">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Header" data-compartment="0">
+<a id="..\..\..\src\app\pages\header\header.ts.Header" xlink:href="..\..\..\src\app\pages\header\header.ts"><text x="163.5" y="14.1" stroke="none" text-anchor="middle" data-name="Header" data-compartment="0">Header</text></a>
+
+</g>
+</g>
+<g transform="translate(1259, 516)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Header" data-compartment="1">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Header" data-compartment="1">
+<text x="0.0" y="14.1" stroke="none" data-name="Header" data-compartment="1">-destroyRef: DestroyRef</text>
+<text x="0.0" y="30.3" stroke="none" data-name="Header" data-compartment="1">-router: Router</text>
+<text x="0.0" y="46.5" stroke="none" data-name="Header" data-compartment="1">+authService: AuthService</text>
+<text x="0.0" y="62.7" stroke="none" data-name="Header" data-compartment="1">+currentRoute: string</text>
+<text x="0.0" y="78.9" stroke="none" data-name="Header" data-compartment="1">+isMobile: boolean</text>
+<text x="0.0" y="95.1" stroke="none" data-name="Header" data-compartment="1">+profileMenuOpen: boolean</text>
+<text x="0.0" y="111.3" stroke="none" data-name="Header" data-compartment="1">+currentEmail$: Observable&lt;string&gt;</text>
+<text x="0.0" y="127.5" stroke="none" data-name="Header" data-compartment="1">+isAuthenticated$: Observable&lt;boolean&gt;</text>
+
+</g>
+</g>
+<g transform="translate(1259, 662)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Header" data-compartment="2">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Header" data-compartment="2">
+<text x="0.0" y="14.1" stroke="none" data-name="Header" data-compartment="2">+ngOnInit(): void</text>
+<text x="0.0" y="30.3" stroke="none" data-name="Header" data-compartment="2">-updateCurrentRoute(): void</text>
+<text x="0.0" y="46.5" stroke="none" data-name="Header" data-compartment="2">+logout(): void</text>
+<text x="0.0" y="62.7" stroke="none" data-name="Header" data-compartment="2">+toggleProfileMenu(): void</text>
+
+</g>
+</g>
+</g>
+<g data-name="Login">
+<g fill="#eee8d5" stroke="#33322E" data-name="Login">
+<rect x="1102.0" y="81.0" height="177.0" width="252.0" data-name="Login"></rect>
+<path d="M1102.0 113.0 L1354.0 113.0" fill="none" data-name="Login"></path>
+<path d="M1102.0 226.0 L1354.0 226.0" fill="none" data-name="Login"></path>
+</g>
+<g transform="translate(1102, 81)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="Login" data-compartment="0">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Login" data-compartment="0">
+<a id="..\..\..\src\app\pages\login\login.ts.Login" xlink:href="..\..\..\src\app\pages\login\login.ts"><text x="118.0" y="14.1" stroke="none" text-anchor="middle" data-name="Login" data-compartment="0">Login</text></a>
+
+</g>
+</g>
+<g transform="translate(1102, 113)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Login" data-compartment="1">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Login" data-compartment="1">
+<text x="0.0" y="14.1" stroke="none" data-name="Login" data-compartment="1">+loginForm: FormGroup&lt;any&gt;</text>
+<text x="0.0" y="30.3" stroke="none" data-name="Login" data-compartment="1">-userService: UserService</text>
+<text x="0.0" y="46.5" stroke="none" data-name="Login" data-compartment="1">-authService: AuthService</text>
+<text x="0.0" y="62.7" stroke="none" data-name="Login" data-compartment="1">-destroyRef: DestroyRef</text>
+<text x="0.0" y="78.9" stroke="none" data-name="Login" data-compartment="1">-router: Router</text>
+<text x="0.0" y="95.1" stroke="none" data-name="Login" data-compartment="1">-formBuilder: FormBuilder</text>
+
+</g>
+</g>
+<g transform="translate(1102, 226)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Login" data-compartment="2">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Login" data-compartment="2">
+<text x="0.0" y="14.1" stroke="none" data-name="Login" data-compartment="2">+onSubmit(): void</text>
+
+</g>
+</g>
+</g>
+<g data-name="Register">
+<g fill="#eee8d5" stroke="#33322E" data-name="Register">
+<rect x="1394.0" y="81.0" height="177.0" width="274.0" data-name="Register"></rect>
+<path d="M1394.0 113.0 L1668.0 113.0" fill="none" data-name="Register"></path>
+<path d="M1394.0 226.0 L1668.0 226.0" fill="none" data-name="Register"></path>
+</g>
+<g transform="translate(1394, 81)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="Register" data-compartment="0">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Register" data-compartment="0">
+<a id="..\..\..\src\app\pages\register\register.ts.Register" xlink:href="..\..\..\src\app\pages\register\register.ts"><text x="129.0" y="14.1" stroke="none" text-anchor="middle" data-name="Register" data-compartment="0">Register</text></a>
+
+</g>
+</g>
+<g transform="translate(1394, 113)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Register" data-compartment="1">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Register" data-compartment="1">
+<text x="0.0" y="14.1" stroke="none" data-name="Register" data-compartment="1">+registerForm: FormGroup&lt;any&gt;</text>
+<text x="0.0" y="30.3" stroke="none" data-name="Register" data-compartment="1">-userService: UserService</text>
+<text x="0.0" y="46.5" stroke="none" data-name="Register" data-compartment="1">-destroyRef: DestroyRef</text>
+<text x="0.0" y="62.7" stroke="none" data-name="Register" data-compartment="1">-router: Router</text>
+<text x="0.0" y="78.9" stroke="none" data-name="Register" data-compartment="1">+passwordMinLength: number</text>
+<text x="0.0" y="95.1" stroke="none" data-name="Register" data-compartment="1">-formBuilder: FormBuilder</text>
+
+</g>
+</g>
+<g transform="translate(1394, 226)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Register" data-compartment="2">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Register" data-compartment="2">
+<text x="0.0" y="14.1" stroke="none" data-name="Register" data-compartment="2">+onSubmit(): void</text>
+
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+</svg>

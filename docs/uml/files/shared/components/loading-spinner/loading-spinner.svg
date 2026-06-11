@@ -1,0 +1,43 @@
+<svg version="1.1" baseProfile="full" width="258.0" height="144.0" viewBox="0 0 258 144" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
+<desc >#.interface: fill=lightblue
+#.enumeration: fill=lightgreen
+#.type: fill=lightgray
+
+[LoadingSpinner|+message: string;+showSpinner: boolean|]</desc>
+<g stroke-width="1.0" text-align="left" font="12pt Helvetica, Arial, sans-serif" font-size="12pt" font-family="Helvetica" font-weight="normal" font-style="normal">
+<g font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round" stroke="#33322E">
+<g stroke="transparent" fill="transparent">
+<rect x="0.0" y="0.0" height="144.0" width="258.0" stroke="none"></rect>
+</g>
+<g transform="translate(8, 8)" fill="#33322E">
+<g transform="translate(20, 20)">
+<g data-name="LoadingSpinner">
+<g fill="#eee8d5" stroke="#33322E" data-name="LoadingSpinner">
+<rect x="0.0" y="0.0" height="88.0" width="202.0" data-name="LoadingSpinner"></rect>
+<path d="M0.0 32.0 L202.0 32.0" fill="none" data-name="LoadingSpinner"></path>
+<path d="M0.0 80.0 L202.0 80.0" fill="none" data-name="LoadingSpinner"></path>
+</g>
+<g transform="translate(0, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="LoadingSpinner" data-compartment="0">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="LoadingSpinner" data-compartment="0">
+<a id="..\..\..\..\..\..\src\app\shared\components\loading-spinner\loading-spinner.ts.LoadingSpinner" xlink:href="..\..\..\..\..\..\src\app\shared\components\loading-spinner\loading-spinner.ts"><text x="93.0" y="14.1" stroke="none" text-anchor="middle" data-name="LoadingSpinner" data-compartment="0">LoadingSpinner</text></a>
+
+</g>
+</g>
+<g transform="translate(0, 32)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="LoadingSpinner" data-compartment="1">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="LoadingSpinner" data-compartment="1">
+<text x="0.0" y="14.1" stroke="none" data-name="LoadingSpinner" data-compartment="1">+message: string</text>
+<text x="0.0" y="30.3" stroke="none" data-name="LoadingSpinner" data-compartment="1">+showSpinner: boolean</text>
+
+</g>
+</g>
+<g transform="translate(0, 80)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="LoadingSpinner" data-compartment="2">
+<g transform="translate(8, 8)" fill="#33322E" data-name="LoadingSpinner" data-compartment="2">
+
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+</svg>

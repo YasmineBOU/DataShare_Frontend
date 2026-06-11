@@ -1,0 +1,162 @@
+<svg version="1.1" baseProfile="full" width="1765.0" height="234.0" viewBox="0 0 1765 234" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
+<desc >#.interface: fill=lightblue
+#.enumeration: fill=lightgreen
+#.type: fill=lightgray
+
+[AuthService|-httpClient: unknown;-apiUrl: &quot;/api&quot;;-currentEmailSubject: BehaviorSubject&lt;string&gt;;+currentEmail$: Observable&lt;string&gt;|+loadCurrentUser(): Observable&lt;AuthMeModel&gt;;+logout(): Observable&lt;any&gt;;+isAuthenticated(): boolean]
+[FileService|-httpClient: HttpClient|+uploadFile(): Observable&lt;Object&gt;;+getFileLink(): Observable&lt;Object&gt;;+downloadFile(): Observable&lt;Blob&gt;;+listFiles(): Observable&lt;FileListResponse&gt;;+getFileInfo(): Observable&lt;Object&gt;;+deleteFile(): Observable&lt;Object&gt;]
+[&lt;interface&gt;FileListResponse|+message: string;+files: FileInfo\[\]|]
+[LoadingService|-isLoading: BehaviorSubject&lt;boolean&gt;;+isLoading$: Observable&lt;boolean&gt;|+show(): void;+hide(): void]
+[UserService|-httpClient: HttpClient|+register(): Observable&lt;Object&gt;;+login(): Observable&lt;{ message: string; }&gt;;+me(): Observable&lt;AuthMeModel&gt;]</desc>
+<g stroke-width="1.0" text-align="left" font="12pt Helvetica, Arial, sans-serif" font-size="12pt" font-family="Helvetica" font-weight="normal" font-style="normal">
+<g font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round" stroke="#33322E">
+<g stroke="transparent" fill="transparent">
+<rect x="0.0" y="0.0" height="234.0" width="1765.0" stroke="none"></rect>
+</g>
+<g transform="translate(8, 8)" fill="#33322E">
+<g transform="translate(20, 20)">
+<g data-name="AuthService">
+<g fill="#eee8d5" stroke="#33322E" data-name="AuthService">
+<rect x="0.0" y="0.0" height="178.0" width="397.0" data-name="AuthService"></rect>
+<path d="M0.0 32.0 L397.0 32.0" fill="none" data-name="AuthService"></path>
+<path d="M0.0 113.0 L397.0 113.0" fill="none" data-name="AuthService"></path>
+</g>
+<g transform="translate(0, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="AuthService" data-compartment="0">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="AuthService" data-compartment="0">
+<a id="..\..\..\src\app\core\service\auth.service.ts.AuthService" xlink:href="..\..\..\src\app\core\service\auth.service.ts"><text x="190.5" y="14.1" stroke="none" text-anchor="middle" data-name="AuthService" data-compartment="0">AuthService</text></a>
+
+</g>
+</g>
+<g transform="translate(0, 32)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AuthService" data-compartment="1">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="AuthService" data-compartment="1">
+<text x="0.0" y="14.1" stroke="none" data-name="AuthService" data-compartment="1">-httpClient: unknown</text>
+<text x="0.0" y="30.3" stroke="none" data-name="AuthService" data-compartment="1">-apiUrl: &quot;/api&quot;</text>
+<text x="0.0" y="46.5" stroke="none" data-name="AuthService" data-compartment="1">-currentEmailSubject: BehaviorSubject&lt;string&gt;</text>
+<text x="0.0" y="62.7" stroke="none" data-name="AuthService" data-compartment="1">+currentEmail$: Observable&lt;string&gt;</text>
+
+</g>
+</g>
+<g transform="translate(0, 113)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AuthService" data-compartment="2">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="AuthService" data-compartment="2">
+<text x="0.0" y="14.1" stroke="none" data-name="AuthService" data-compartment="2">+loadCurrentUser(): Observable&lt;AuthMeModel&gt;</text>
+<text x="0.0" y="30.3" stroke="none" data-name="AuthService" data-compartment="2">+logout(): Observable&lt;any&gt;</text>
+<text x="0.0" y="46.5" stroke="none" data-name="AuthService" data-compartment="2">+isAuthenticated(): boolean</text>
+
+</g>
+</g>
+</g>
+<g data-name="FileService">
+<g fill="#eee8d5" stroke="#33322E" data-name="FileService">
+<rect x="437.0" y="0.5" height="177.0" width="354.0" data-name="FileService"></rect>
+<path d="M437.0 32.5 L791.0 32.5" fill="none" data-name="FileService"></path>
+<path d="M437.0 64.5 L791.0 64.5" fill="none" data-name="FileService"></path>
+</g>
+<g transform="translate(437, 0.5)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="FileService" data-compartment="0">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="FileService" data-compartment="0">
+<a id="..\..\..\src\app\core\service\file.service.ts.FileService" xlink:href="..\..\..\src\app\core\service\file.service.ts"><text x="169.0" y="14.1" stroke="none" text-anchor="middle" data-name="FileService" data-compartment="0">FileService</text></a>
+
+</g>
+</g>
+<g transform="translate(437, 32.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="FileService" data-compartment="1">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="FileService" data-compartment="1">
+<text x="0.0" y="14.1" stroke="none" data-name="FileService" data-compartment="1">-httpClient: HttpClient</text>
+
+</g>
+</g>
+<g transform="translate(437, 64.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="FileService" data-compartment="2">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="FileService" data-compartment="2">
+<text x="0.0" y="14.1" stroke="none" data-name="FileService" data-compartment="2">+uploadFile(): Observable&lt;Object&gt;</text>
+<text x="0.0" y="30.3" stroke="none" data-name="FileService" data-compartment="2">+getFileLink(): Observable&lt;Object&gt;</text>
+<text x="0.0" y="46.5" stroke="none" data-name="FileService" data-compartment="2">+downloadFile(): Observable&lt;Blob&gt;</text>
+<text x="0.0" y="62.7" stroke="none" data-name="FileService" data-compartment="2">+listFiles(): Observable&lt;FileListResponse&gt;</text>
+<text x="0.0" y="78.9" stroke="none" data-name="FileService" data-compartment="2">+getFileInfo(): Observable&lt;Object&gt;</text>
+<text x="0.0" y="95.1" stroke="none" data-name="FileService" data-compartment="2">+deleteFile(): Observable&lt;Object&gt;</text>
+
+</g>
+</g>
+</g>
+<g data-name="FileListResponse">
+<g fill="lightblue" stroke="#33322E" data-name="FileListResponse">
+<rect x="831.0" y="45.0" height="88.0" width="152.0" data-name="FileListResponse"></rect>
+<path d="M831.0 77.0 L983.0 77.0" fill="none" data-name="FileListResponse"></path>
+<path d="M831.0 125.0 L983.0 125.0" fill="none" data-name="FileListResponse"></path>
+</g>
+<g transform="translate(831, 45)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="FileListResponse" data-compartment="0">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="FileListResponse" data-compartment="0">
+<a id="..\..\..\src\app\core\service\file.service.ts.FileListResponse" xlink:href="..\..\..\src\app\core\service\file.service.ts"><text x="68.0" y="14.1" stroke="none" text-anchor="middle" data-name="FileListResponse" data-compartment="0">FileListResponse</text></a>
+
+</g>
+</g>
+<g transform="translate(831, 77)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="FileListResponse" data-compartment="1">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="FileListResponse" data-compartment="1">
+<text x="0.0" y="14.1" stroke="none" data-name="FileListResponse" data-compartment="1">+message: string</text>
+<text x="0.0" y="30.3" stroke="none" data-name="FileListResponse" data-compartment="1">+files: FileInfo[]</text>
+
+</g>
+</g>
+<g transform="translate(831, 125)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="FileListResponse" data-compartment="2">
+<g transform="translate(8, 8)" fill="#33322E" data-name="FileListResponse" data-compartment="2">
+
+</g>
+</g>
+</g>
+<g data-name="LoadingService">
+<g fill="#eee8d5" stroke="#33322E" data-name="LoadingService">
+<rect x="1023.0" y="25.0" height="128.0" width="322.0" data-name="LoadingService"></rect>
+<path d="M1023.0 57.0 L1345.0 57.0" fill="none" data-name="LoadingService"></path>
+<path d="M1023.0 105.0 L1345.0 105.0" fill="none" data-name="LoadingService"></path>
+</g>
+<g transform="translate(1023, 25)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="LoadingService" data-compartment="0">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="LoadingService" data-compartment="0">
+<a id="..\..\..\src\app\core\service\loading.ts.LoadingService" xlink:href="..\..\..\src\app\core\service\loading.ts"><text x="153.0" y="14.1" stroke="none" text-anchor="middle" data-name="LoadingService" data-compartment="0">LoadingService</text></a>
+
+</g>
+</g>
+<g transform="translate(1023, 57)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="LoadingService" data-compartment="1">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="LoadingService" data-compartment="1">
+<text x="0.0" y="14.1" stroke="none" data-name="LoadingService" data-compartment="1">-isLoading: BehaviorSubject&lt;boolean&gt;</text>
+<text x="0.0" y="30.3" stroke="none" data-name="LoadingService" data-compartment="1">+isLoading$: Observable&lt;boolean&gt;</text>
+
+</g>
+</g>
+<g transform="translate(1023, 105)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="LoadingService" data-compartment="2">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="LoadingService" data-compartment="2">
+<text x="0.0" y="14.1" stroke="none" data-name="LoadingService" data-compartment="2">+show(): void</text>
+<text x="0.0" y="30.3" stroke="none" data-name="LoadingService" data-compartment="2">+hide(): void</text>
+
+</g>
+</g>
+</g>
+<g data-name="UserService">
+<g fill="#eee8d5" stroke="#33322E" data-name="UserService">
+<rect x="1385.0" y="16.5" height="145.0" width="324.0" data-name="UserService"></rect>
+<path d="M1385.0 48.5 L1709.0 48.5" fill="none" data-name="UserService"></path>
+<path d="M1385.0 80.5 L1709.0 80.5" fill="none" data-name="UserService"></path>
+</g>
+<g transform="translate(1385, 16.5)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="UserService" data-compartment="0">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="UserService" data-compartment="0">
+<a id="..\..\..\src\app\core\service\user.service.ts.UserService" xlink:href="..\..\..\src\app\core\service\user.service.ts"><text x="154.0" y="14.1" stroke="none" text-anchor="middle" data-name="UserService" data-compartment="0">UserService</text></a>
+
+</g>
+</g>
+<g transform="translate(1385, 48.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="UserService" data-compartment="1">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="UserService" data-compartment="1">
+<text x="0.0" y="14.1" stroke="none" data-name="UserService" data-compartment="1">-httpClient: HttpClient</text>
+
+</g>
+</g>
+<g transform="translate(1385, 80.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="UserService" data-compartment="2">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="UserService" data-compartment="2">
+<text x="0.0" y="14.1" stroke="none" data-name="UserService" data-compartment="2">+register(): Observable&lt;Object&gt;</text>
+<text x="0.0" y="30.3" stroke="none" data-name="UserService" data-compartment="2">+login(): Observable&lt;{ message: string</text>
+<text x="0.0" y="46.5" stroke="none" data-name="UserService" data-compartment="2">}&gt;</text>
+<text x="0.0" y="62.7" stroke="none" data-name="UserService" data-compartment="2">+me(): Observable&lt;AuthMeModel&gt;</text>
+
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+</svg>

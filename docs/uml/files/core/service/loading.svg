@@ -1,0 +1,45 @@
+<svg version="1.1" baseProfile="full" width="378.0" height="184.0" viewBox="0 0 378 184" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
+<desc >#.interface: fill=lightblue
+#.enumeration: fill=lightgreen
+#.type: fill=lightgray
+
+[LoadingService|-isLoading: BehaviorSubject&lt;boolean&gt;;+isLoading$: Observable&lt;boolean&gt;|+show(): void;+hide(): void]</desc>
+<g stroke-width="1.0" text-align="left" font="12pt Helvetica, Arial, sans-serif" font-size="12pt" font-family="Helvetica" font-weight="normal" font-style="normal">
+<g font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round" stroke="#33322E">
+<g stroke="transparent" fill="transparent">
+<rect x="0.0" y="0.0" height="184.0" width="378.0" stroke="none"></rect>
+</g>
+<g transform="translate(8, 8)" fill="#33322E">
+<g transform="translate(20, 20)">
+<g data-name="LoadingService">
+<g fill="#eee8d5" stroke="#33322E" data-name="LoadingService">
+<rect x="0.0" y="0.0" height="128.0" width="322.0" data-name="LoadingService"></rect>
+<path d="M0.0 32.0 L322.0 32.0" fill="none" data-name="LoadingService"></path>
+<path d="M0.0 80.0 L322.0 80.0" fill="none" data-name="LoadingService"></path>
+</g>
+<g transform="translate(0, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="LoadingService" data-compartment="0">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="LoadingService" data-compartment="0">
+<a id="..\..\..\..\..\src\app\core\service\loading.ts.LoadingService" xlink:href="..\..\..\..\..\src\app\core\service\loading.ts"><text x="153.0" y="14.1" stroke="none" text-anchor="middle" data-name="LoadingService" data-compartment="0">LoadingService</text></a>
+
+</g>
+</g>
+<g transform="translate(0, 32)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="LoadingService" data-compartment="1">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="LoadingService" data-compartment="1">
+<text x="0.0" y="14.1" stroke="none" data-name="LoadingService" data-compartment="1">-isLoading: BehaviorSubject&lt;boolean&gt;</text>
+<text x="0.0" y="30.3" stroke="none" data-name="LoadingService" data-compartment="1">+isLoading$: Observable&lt;boolean&gt;</text>
+
+</g>
+</g>
+<g transform="translate(0, 80)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="LoadingService" data-compartment="2">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="LoadingService" data-compartment="2">
+<text x="0.0" y="14.1" stroke="none" data-name="LoadingService" data-compartment="2">+show(): void</text>
+<text x="0.0" y="30.3" stroke="none" data-name="LoadingService" data-compartment="2">+hide(): void</text>
+
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+</svg>

@@ -1,0 +1,5 @@
+#.interface: fill=lightblue
+#.enumeration: fill=lightgreen
+#.type: fill=lightgray
+
+[FileDownload|-fileService: FileService;-route: ActivatedRoute;-router: Router;-formBuilder: FormBuilder;-cdr: ChangeDetectorRef;+fileDownloadForm: FormGroup<any>;+fileId: number;+fileToken: string;+file: FileInfo;+expMsgType: string;+expMsgIcon: string;+fileLink: string|-buildForm(): void;+ngOnInit(): void;+processFile(): void;+onDownload(): void;+downloadFile(): void]

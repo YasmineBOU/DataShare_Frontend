@@ -1,0 +1,65 @@
+<svg version="1.1" baseProfile="full" width="273.0" height="322.0" viewBox="0 0 273 322" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
+<desc >#.interface: fill=lightblue
+#.enumeration: fill=lightgreen
+#.type: fill=lightgray
+
+[DashboardSidebar|+year: number;+isSidebarOpen: boolean;+isMobile: boolean;-router: Router;-destroyRef: DestroyRef|+ngOnInit(): void;+toggleSidebar(): void;-checkIfMobile(): void]
+[OnInit]&lt;:--[DashboardSidebar]</desc>
+<g stroke-width="1.0" text-align="left" font="12pt Helvetica, Arial, sans-serif" font-size="12pt" font-family="Helvetica" font-weight="bold" font-style="normal">
+<g font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round" stroke="#33322E">
+<g stroke="transparent" fill="transparent">
+<rect x="0.0" y="0.0" height="322.0" width="273.0" stroke="none"></rect>
+</g>
+<g transform="translate(8, 8)" fill="#33322E">
+<g transform="translate(20, 20)" fill="#eee8d5" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal">
+<g stroke-dasharray="6 6">
+<path d="M108.5 45.3 L108.5 52 L108.5 72 L108.5 72.0 " fill="none"></path>
+</g>
+<path d="M113.8 45.3 L108.5 45.3 L103.2 45.3 L108.5 32.0 Z"></path>
+<g data-name="DashboardSidebar">
+<g fill="#eee8d5" stroke="#33322E" data-name="DashboardSidebar">
+<rect x="0.0" y="72.0" height="194.0" width="217.0" data-name="DashboardSidebar"></rect>
+<path d="M0.0 104.0 L217.0 104.0" fill="none" data-name="DashboardSidebar"></path>
+<path d="M0.0 201.0 L217.0 201.0" fill="none" data-name="DashboardSidebar"></path>
+</g>
+<g transform="translate(0, 72)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="DashboardSidebar" data-compartment="0">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="DashboardSidebar" data-compartment="0">
+<a id="..\..\..\..\..\src\app\pages\dashboard-sidebar\dashboard-sidebar.ts.DashboardSidebar" xlink:href="..\..\..\..\..\src\app\pages\dashboard-sidebar\dashboard-sidebar.ts"><text x="100.5" y="14.1" stroke="none" text-anchor="middle" data-name="DashboardSidebar" data-compartment="0">DashboardSidebar</text></a>
+
+</g>
+</g>
+<g transform="translate(0, 104)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="DashboardSidebar" data-compartment="1">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="DashboardSidebar" data-compartment="1">
+<text x="0.0" y="14.1" stroke="none" data-name="DashboardSidebar" data-compartment="1">+year: number</text>
+<text x="0.0" y="30.3" stroke="none" data-name="DashboardSidebar" data-compartment="1">+isSidebarOpen: boolean</text>
+<text x="0.0" y="46.5" stroke="none" data-name="DashboardSidebar" data-compartment="1">+isMobile: boolean</text>
+<text x="0.0" y="62.7" stroke="none" data-name="DashboardSidebar" data-compartment="1">-router: Router</text>
+<text x="0.0" y="78.9" stroke="none" data-name="DashboardSidebar" data-compartment="1">-destroyRef: DestroyRef</text>
+
+</g>
+</g>
+<g transform="translate(0, 201)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="DashboardSidebar" data-compartment="2">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="DashboardSidebar" data-compartment="2">
+<text x="0.0" y="14.1" stroke="none" data-name="DashboardSidebar" data-compartment="2">+ngOnInit(): void</text>
+<text x="0.0" y="30.3" stroke="none" data-name="DashboardSidebar" data-compartment="2">+toggleSidebar(): void</text>
+<text x="0.0" y="46.5" stroke="none" data-name="DashboardSidebar" data-compartment="2">-checkIfMobile(): void</text>
+
+</g>
+</g>
+</g>
+<g data-name="OnInit">
+<g fill="#eee8d5" stroke="#33322E" data-name="OnInit">
+<rect x="77.0" y="0.0" height="32.0" width="63.0" data-name="OnInit"></rect>
+</g>
+<g transform="translate(77, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="OnInit" data-compartment="0">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="OnInit" data-compartment="0">
+<text x="23.5" y="14.1" stroke="none" text-anchor="middle" data-name="OnInit" data-compartment="0">OnInit</text>
+
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+</svg>

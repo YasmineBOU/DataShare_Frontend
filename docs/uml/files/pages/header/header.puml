@@ -1,0 +1,6 @@
+#.interface: fill=lightblue
+#.enumeration: fill=lightgreen
+#.type: fill=lightgray
+
+[Header|-destroyRef: DestroyRef;-router: Router;+authService: AuthService;+currentRoute: string;+isMobile: boolean;+profileMenuOpen: boolean;+currentEmail$: Observable<string>;+isAuthenticated$: Observable<boolean>|+ngOnInit(): void;-updateCurrentRoute(): void;+logout(): void;+toggleProfileMenu(): void]
+[OnInit]<:--[Header]

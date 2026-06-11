@@ -1,0 +1,6 @@
+#.interface: fill=lightblue
+#.enumeration: fill=lightgreen
+#.type: fill=lightgray
+
+[DashboardSidebar|+year: number;+isSidebarOpen: boolean;+isMobile: boolean;-router: Router;-destroyRef: DestroyRef|+ngOnInit(): void;+toggleSidebar(): void;-checkIfMobile(): void]
+[OnInit]<:--[DashboardSidebar]

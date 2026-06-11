@@ -1,0 +1,51 @@
+<svg version="1.1" baseProfile="full" width="262.0" height="274.0" viewBox="0 0 262 274" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
+<desc >#.interface: fill=lightblue
+#.enumeration: fill=lightgreen
+#.type: fill=lightgray
+
+[&lt;interface&gt;FileInfo|+id: number;+filename: string;+fileSize: string;+fileToken: string;+createdAt: string;+expirationDate: string;+hasPassword: boolean;+isExpired?: boolean;+expirationMsg?: string;+fileIconUrl?: string|]</desc>
+<g stroke-width="1.0" text-align="left" font="12pt Helvetica, Arial, sans-serif" font-size="12pt" font-family="Helvetica" font-weight="normal" font-style="normal">
+<g font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round" stroke="#33322E">
+<g stroke="transparent" fill="transparent">
+<rect x="0.0" y="0.0" height="274.0" width="262.0" stroke="none"></rect>
+</g>
+<g transform="translate(8, 8)" fill="#33322E">
+<g transform="translate(20, 20)">
+<g data-name="FileInfo">
+<g fill="lightblue" stroke="#33322E" data-name="FileInfo">
+<rect x="0.0" y="0.0" height="218.0" width="206.0" data-name="FileInfo"></rect>
+<path d="M0.0 32.0 L206.0 32.0" fill="none" data-name="FileInfo"></path>
+<path d="M0.0 210.0 L206.0 210.0" fill="none" data-name="FileInfo"></path>
+</g>
+<g transform="translate(0, 0)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="FileInfo" data-compartment="0">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="FileInfo" data-compartment="0">
+<a id="..\..\..\..\..\src\app\core\models\file-info.model.ts.FileInfo" xlink:href="..\..\..\..\..\src\app\core\models\file-info.model.ts"><text x="95.0" y="14.1" stroke="none" text-anchor="middle" data-name="FileInfo" data-compartment="0">FileInfo</text></a>
+
+</g>
+</g>
+<g transform="translate(0, 32)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="FileInfo" data-compartment="1">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="FileInfo" data-compartment="1">
+<text x="0.0" y="14.1" stroke="none" data-name="FileInfo" data-compartment="1">+id: number</text>
+<text x="0.0" y="30.3" stroke="none" data-name="FileInfo" data-compartment="1">+filename: string</text>
+<text x="0.0" y="46.5" stroke="none" data-name="FileInfo" data-compartment="1">+fileSize: string</text>
+<text x="0.0" y="62.7" stroke="none" data-name="FileInfo" data-compartment="1">+fileToken: string</text>
+<text x="0.0" y="78.9" stroke="none" data-name="FileInfo" data-compartment="1">+createdAt: string</text>
+<text x="0.0" y="95.1" stroke="none" data-name="FileInfo" data-compartment="1">+expirationDate: string</text>
+<text x="0.0" y="111.3" stroke="none" data-name="FileInfo" data-compartment="1">+hasPassword: boolean</text>
+<text x="0.0" y="127.5" stroke="none" data-name="FileInfo" data-compartment="1">+isExpired?: boolean</text>
+<text x="0.0" y="143.7" stroke="none" data-name="FileInfo" data-compartment="1">+expirationMsg?: string</text>
+<text x="0.0" y="159.9" stroke="none" data-name="FileInfo" data-compartment="1">+fileIconUrl?: string</text>
+
+</g>
+</g>
+<g transform="translate(0, 210)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="FileInfo" data-compartment="2">
+<g transform="translate(8, 8)" fill="#33322E" data-name="FileInfo" data-compartment="2">
+
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+</svg>

@@ -1,0 +1,5 @@
+#.interface: fill=lightblue
+#.enumeration: fill=lightgreen
+#.type: fill=lightgray
+
+[AuthService|-httpClient: unknown;-apiUrl: "/api";-currentEmailSubject: BehaviorSubject<string>;+currentEmail$: Observable<string>|+loadCurrentUser(): Observable<AuthMeModel>;+logout(): Observable<any>;+isAuthenticated(): boolean]

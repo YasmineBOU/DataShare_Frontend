@@ -1,0 +1,10 @@
+#.interface: fill=lightblue
+#.enumeration: fill=lightgreen
+#.type: fill=lightgray
+
+[<interface>AuthMeModel|+authenticated: boolean;+email: string|]
+[<interface>FileDownloadInfo|+id: number;+filePassword: string|]
+[<interface>FileInfo|+id: number;+filename: string;+fileSize: string;+fileToken: string;+createdAt: string;+expirationDate: string;+hasPassword: boolean;+isExpired?: boolean;+expirationMsg?: string;+fileIconUrl?: string|]
+[<interface>FileUploadModel|+email?: string;+file: File;+filename: string;+fileSize: number;+fileType: string;+hash: string;+filePassword: string;+expirationDays: number|]
+[<interface>LoginModel|+email: string;+password: string|]
+[<interface>RegisterModel|+email: string;+password: string;+confirmPassword: string|]

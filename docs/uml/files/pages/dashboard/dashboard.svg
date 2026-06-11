@@ -1,0 +1,41 @@
+<svg version="1.1" baseProfile="full" width="159.0" height="104.0" viewBox="0 0 159 104" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
+<desc >#.interface: fill=lightblue
+#.enumeration: fill=lightgreen
+#.type: fill=lightgray
+
+[Dashboard||]</desc>
+<g stroke-width="1.0" text-align="left" font="12pt Helvetica, Arial, sans-serif" font-size="12pt" font-family="Helvetica" font-weight="bold" font-style="normal">
+<g font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round" stroke="#33322E">
+<g stroke="transparent" fill="transparent">
+<rect x="0.0" y="0.0" height="104.0" width="159.0" stroke="none"></rect>
+</g>
+<g transform="translate(8, 8)" fill="#33322E">
+<g transform="translate(20, 20)">
+<g data-name="Dashboard">
+<g fill="#eee8d5" stroke="#33322E" data-name="Dashboard">
+<rect x="0.0" y="0.0" height="48.0" width="103.0" data-name="Dashboard"></rect>
+<path d="M0.0 32.0 L103.0 32.0" fill="none" data-name="Dashboard"></path>
+<path d="M0.0 40.0 L103.0 40.0" fill="none" data-name="Dashboard"></path>
+</g>
+<g transform="translate(0, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="Dashboard" data-compartment="0">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Dashboard" data-compartment="0">
+<a id="..\..\..\..\..\src\app\pages\dashboard\dashboard.ts.Dashboard" xlink:href="..\..\..\..\..\src\app\pages\dashboard\dashboard.ts"><text x="43.5" y="14.1" stroke="none" text-anchor="middle" data-name="Dashboard" data-compartment="0">Dashboard</text></a>
+
+</g>
+</g>
+<g transform="translate(0, 32)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Dashboard" data-compartment="1">
+<g transform="translate(8, 8)" fill="#33322E" data-name="Dashboard" data-compartment="1">
+
+</g>
+</g>
+<g transform="translate(0, 40)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Dashboard" data-compartment="2">
+<g transform="translate(8, 8)" fill="#33322E" data-name="Dashboard" data-compartment="2">
+
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+</svg>

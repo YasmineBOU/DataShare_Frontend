@@ -1,0 +1,46 @@
+<svg version="1.1" baseProfile="full" width="380.0" height="201.0" viewBox="0 0 380 201" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
+<desc >#.interface: fill=lightblue
+#.enumeration: fill=lightgreen
+#.type: fill=lightgray
+
+[UserService|-httpClient: HttpClient|+register(): Observable&lt;Object&gt;;+login(): Observable&lt;{ message: string; }&gt;;+me(): Observable&lt;AuthMeModel&gt;]</desc>
+<g stroke-width="1.0" text-align="left" font="12pt Helvetica, Arial, sans-serif" font-size="12pt" font-family="Helvetica" font-weight="normal" font-style="normal">
+<g font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round" stroke="#33322E">
+<g stroke="transparent" fill="transparent">
+<rect x="0.0" y="0.0" height="201.0" width="380.0" stroke="none"></rect>
+</g>
+<g transform="translate(8, 8)" fill="#33322E">
+<g transform="translate(20, 20)">
+<g data-name="UserService">
+<g fill="#eee8d5" stroke="#33322E" data-name="UserService">
+<rect x="0.0" y="0.0" height="145.0" width="324.0" data-name="UserService"></rect>
+<path d="M0.0 32.0 L324.0 32.0" fill="none" data-name="UserService"></path>
+<path d="M0.0 64.0 L324.0 64.0" fill="none" data-name="UserService"></path>
+</g>
+<g transform="translate(0, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="UserService" data-compartment="0">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="UserService" data-compartment="0">
+<a id="..\..\..\..\..\src\app\core\service\user.service.ts.UserService" xlink:href="..\..\..\..\..\src\app\core\service\user.service.ts"><text x="154.0" y="14.1" stroke="none" text-anchor="middle" data-name="UserService" data-compartment="0">UserService</text></a>
+
+</g>
+</g>
+<g transform="translate(0, 32)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="UserService" data-compartment="1">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="UserService" data-compartment="1">
+<text x="0.0" y="14.1" stroke="none" data-name="UserService" data-compartment="1">-httpClient: HttpClient</text>
+
+</g>
+</g>
+<g transform="translate(0, 64)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="UserService" data-compartment="2">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="UserService" data-compartment="2">
+<text x="0.0" y="14.1" stroke="none" data-name="UserService" data-compartment="2">+register(): Observable&lt;Object&gt;</text>
+<text x="0.0" y="30.3" stroke="none" data-name="UserService" data-compartment="2">+login(): Observable&lt;{ message: string</text>
+<text x="0.0" y="46.5" stroke="none" data-name="UserService" data-compartment="2">}&gt;</text>
+<text x="0.0" y="62.7" stroke="none" data-name="UserService" data-compartment="2">+me(): Observable&lt;AuthMeModel&gt;</text>
+
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+</svg>

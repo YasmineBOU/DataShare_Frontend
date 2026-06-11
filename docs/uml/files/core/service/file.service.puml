@@ -1,0 +1,6 @@
+#.interface: fill=lightblue
+#.enumeration: fill=lightgreen
+#.type: fill=lightgray
+
+[FileService|-httpClient: HttpClient|+uploadFile(): Observable<Object>;+getFileLink(): Observable<Object>;+downloadFile(): Observable<Blob>;+listFiles(): Observable<FileListResponse>;+getFileInfo(): Observable<Object>;+deleteFile(): Observable<Object>]
+[<interface>FileListResponse|+message: string;+files: FileInfo\[\]|]

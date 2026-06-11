@@ -1,0 +1,5 @@
+#.interface: fill=lightblue
+#.enumeration: fill=lightgreen
+#.type: fill=lightgray
+
+[PublicLayout|+year: number;+showFooter: boolean;-router: Router|]

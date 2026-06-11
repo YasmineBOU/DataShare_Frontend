@@ -1,0 +1,5 @@
+#.interface: fill=lightblue
+#.enumeration: fill=lightgreen
+#.type: fill=lightgray
+
+[<interface>FileDownloadInfo|+id: number;+filePassword: string|]

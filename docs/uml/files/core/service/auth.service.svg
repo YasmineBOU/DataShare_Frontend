@@ -1,0 +1,48 @@
+<svg version="1.1" baseProfile="full" width="453.0" height="234.0" viewBox="0 0 453 234" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
+<desc >#.interface: fill=lightblue
+#.enumeration: fill=lightgreen
+#.type: fill=lightgray
+
+[AuthService|-httpClient: unknown;-apiUrl: &quot;/api&quot;;-currentEmailSubject: BehaviorSubject&lt;string&gt;;+currentEmail$: Observable&lt;string&gt;|+loadCurrentUser(): Observable&lt;AuthMeModel&gt;;+logout(): Observable&lt;any&gt;;+isAuthenticated(): boolean]</desc>
+<g stroke-width="1.0" text-align="left" font="12pt Helvetica, Arial, sans-serif" font-size="12pt" font-family="Helvetica" font-weight="normal" font-style="normal">
+<g font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round" stroke="#33322E">
+<g stroke="transparent" fill="transparent">
+<rect x="0.0" y="0.0" height="234.0" width="453.0" stroke="none"></rect>
+</g>
+<g transform="translate(8, 8)" fill="#33322E">
+<g transform="translate(20, 20)">
+<g data-name="AuthService">
+<g fill="#eee8d5" stroke="#33322E" data-name="AuthService">
+<rect x="0.0" y="0.0" height="178.0" width="397.0" data-name="AuthService"></rect>
+<path d="M0.0 32.0 L397.0 32.0" fill="none" data-name="AuthService"></path>
+<path d="M0.0 113.0 L397.0 113.0" fill="none" data-name="AuthService"></path>
+</g>
+<g transform="translate(0, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="AuthService" data-compartment="0">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="AuthService" data-compartment="0">
+<a id="..\..\..\..\..\src\app\core\service\auth.service.ts.AuthService" xlink:href="..\..\..\..\..\src\app\core\service\auth.service.ts"><text x="190.5" y="14.1" stroke="none" text-anchor="middle" data-name="AuthService" data-compartment="0">AuthService</text></a>
+
+</g>
+</g>
+<g transform="translate(0, 32)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AuthService" data-compartment="1">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="AuthService" data-compartment="1">
+<text x="0.0" y="14.1" stroke="none" data-name="AuthService" data-compartment="1">-httpClient: unknown</text>
+<text x="0.0" y="30.3" stroke="none" data-name="AuthService" data-compartment="1">-apiUrl: &quot;/api&quot;</text>
+<text x="0.0" y="46.5" stroke="none" data-name="AuthService" data-compartment="1">-currentEmailSubject: BehaviorSubject&lt;string&gt;</text>
+<text x="0.0" y="62.7" stroke="none" data-name="AuthService" data-compartment="1">+currentEmail$: Observable&lt;string&gt;</text>
+
+</g>
+</g>
+<g transform="translate(0, 113)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AuthService" data-compartment="2">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="AuthService" data-compartment="2">
+<text x="0.0" y="14.1" stroke="none" data-name="AuthService" data-compartment="2">+loadCurrentUser(): Observable&lt;AuthMeModel&gt;</text>
+<text x="0.0" y="30.3" stroke="none" data-name="AuthService" data-compartment="2">+logout(): Observable&lt;any&gt;</text>
+<text x="0.0" y="46.5" stroke="none" data-name="AuthService" data-compartment="2">+isAuthenticated(): boolean</text>
+
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+</svg>

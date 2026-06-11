@@ -1,0 +1,60 @@
+<svg version="1.1" baseProfile="full" width="298.0" height="240.0" viewBox="0 0 298 240" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
+<desc >#.interface: fill=lightblue
+#.enumeration: fill=lightgreen
+#.type: fill=lightgray
+
+[App|\#title: WritableSignal&lt;string&gt;;-authService: AuthService|+ngOnInit(): void]
+[OnInit]&lt;:--[App]</desc>
+<g stroke-width="1.0" text-align="left" font="12pt Helvetica, Arial, sans-serif" font-size="12pt" font-family="Helvetica" font-weight="bold" font-style="normal">
+<g font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round" stroke="#33322E">
+<g stroke="transparent" fill="transparent">
+<rect x="0.0" y="0.0" height="240.0" width="298.0" stroke="none"></rect>
+</g>
+<g transform="translate(8, 8)" fill="#33322E">
+<g transform="translate(20, 20)" fill="#eee8d5" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal">
+<g stroke-dasharray="6 6">
+<path d="M121.0 45.3 L121 52 L121 72 L121.0 72.0 " fill="none"></path>
+</g>
+<path d="M126.3 45.3 L121.0 45.3 L115.7 45.3 L121.0 32.0 Z"></path>
+<g data-name="App">
+<g fill="#eee8d5" stroke="#33322E" data-name="App">
+<rect x="0.0" y="72.0" height="112.0" width="242.0" data-name="App"></rect>
+<path d="M0.0 104.0 L242.0 104.0" fill="none" data-name="App"></path>
+<path d="M0.0 152.0 L242.0 152.0" fill="none" data-name="App"></path>
+</g>
+<g transform="translate(0, 72)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="App" data-compartment="0">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="App" data-compartment="0">
+<a id="..\..\..\src\app\app.ts.App" xlink:href="..\..\..\src\app\app.ts"><text x="113.0" y="14.1" stroke="none" text-anchor="middle" data-name="App" data-compartment="0">App</text></a>
+
+</g>
+</g>
+<g transform="translate(0, 104)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="App" data-compartment="1">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="App" data-compartment="1">
+<text x="0.0" y="14.1" stroke="none" data-name="App" data-compartment="1">#title: WritableSignal&lt;string&gt;</text>
+<text x="0.0" y="30.3" stroke="none" data-name="App" data-compartment="1">-authService: AuthService</text>
+
+</g>
+</g>
+<g transform="translate(0, 152)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="App" data-compartment="2">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="App" data-compartment="2">
+<text x="0.0" y="14.1" stroke="none" data-name="App" data-compartment="2">+ngOnInit(): void</text>
+
+</g>
+</g>
+</g>
+<g data-name="OnInit">
+<g fill="#eee8d5" stroke="#33322E" data-name="OnInit">
+<rect x="89.5" y="0.0" height="32.0" width="63.0" data-name="OnInit"></rect>
+</g>
+<g transform="translate(89.5, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="OnInit" data-compartment="0">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="OnInit" data-compartment="0">
+<text x="23.5" y="14.1" stroke="none" text-anchor="middle" data-name="OnInit" data-compartment="0">OnInit</text>
+
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+</svg>

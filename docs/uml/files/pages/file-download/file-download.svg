@@ -1,0 +1,58 @@
+<svg version="1.1" baseProfile="full" width="371.0" height="395.0" viewBox="0 0 371 395" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
+<desc >#.interface: fill=lightblue
+#.enumeration: fill=lightgreen
+#.type: fill=lightgray
+
+[FileDownload|-fileService: FileService;-route: ActivatedRoute;-router: Router;-formBuilder: FormBuilder;-cdr: ChangeDetectorRef;+fileDownloadForm: FormGroup&lt;any&gt;;+fileId: number;+fileToken: string;+file: FileInfo;+expMsgType: string;+expMsgIcon: string;+fileLink: string|-buildForm(): void;+ngOnInit(): void;+processFile(): void;+onDownload(): void;+downloadFile(): void]</desc>
+<g stroke-width="1.0" text-align="left" font="12pt Helvetica, Arial, sans-serif" font-size="12pt" font-family="Helvetica" font-weight="normal" font-style="normal">
+<g font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round" stroke="#33322E">
+<g stroke="transparent" fill="transparent">
+<rect x="0.0" y="0.0" height="395.0" width="371.0" stroke="none"></rect>
+</g>
+<g transform="translate(8, 8)" fill="#33322E">
+<g transform="translate(20, 20)">
+<g data-name="FileDownload">
+<g fill="#eee8d5" stroke="#33322E" data-name="FileDownload">
+<rect x="0.0" y="0.0" height="339.0" width="315.0" data-name="FileDownload"></rect>
+<path d="M0.0 32.0 L315.0 32.0" fill="none" data-name="FileDownload"></path>
+<path d="M0.0 242.0 L315.0 242.0" fill="none" data-name="FileDownload"></path>
+</g>
+<g transform="translate(0, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="FileDownload" data-compartment="0">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="FileDownload" data-compartment="0">
+<a id="..\..\..\..\..\src\app\pages\file-download\file-download.ts.FileDownload" xlink:href="..\..\..\..\..\src\app\pages\file-download\file-download.ts"><text x="149.5" y="14.1" stroke="none" text-anchor="middle" data-name="FileDownload" data-compartment="0">FileDownload</text></a>
+
+</g>
+</g>
+<g transform="translate(0, 32)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="FileDownload" data-compartment="1">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="FileDownload" data-compartment="1">
+<text x="0.0" y="14.1" stroke="none" data-name="FileDownload" data-compartment="1">-fileService: FileService</text>
+<text x="0.0" y="30.3" stroke="none" data-name="FileDownload" data-compartment="1">-route: ActivatedRoute</text>
+<text x="0.0" y="46.5" stroke="none" data-name="FileDownload" data-compartment="1">-router: Router</text>
+<text x="0.0" y="62.7" stroke="none" data-name="FileDownload" data-compartment="1">-formBuilder: FormBuilder</text>
+<text x="0.0" y="78.9" stroke="none" data-name="FileDownload" data-compartment="1">-cdr: ChangeDetectorRef</text>
+<text x="0.0" y="95.1" stroke="none" data-name="FileDownload" data-compartment="1">+fileDownloadForm: FormGroup&lt;any&gt;</text>
+<text x="0.0" y="111.3" stroke="none" data-name="FileDownload" data-compartment="1">+fileId: number</text>
+<text x="0.0" y="127.5" stroke="none" data-name="FileDownload" data-compartment="1">+fileToken: string</text>
+<text x="0.0" y="143.7" stroke="none" data-name="FileDownload" data-compartment="1">+file: FileInfo</text>
+<text x="0.0" y="159.9" stroke="none" data-name="FileDownload" data-compartment="1">+expMsgType: string</text>
+<text x="0.0" y="176.1" stroke="none" data-name="FileDownload" data-compartment="1">+expMsgIcon: string</text>
+<text x="0.0" y="192.3" stroke="none" data-name="FileDownload" data-compartment="1">+fileLink: string</text>
+
+</g>
+</g>
+<g transform="translate(0, 242)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="FileDownload" data-compartment="2">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="FileDownload" data-compartment="2">
+<text x="0.0" y="14.1" stroke="none" data-name="FileDownload" data-compartment="2">-buildForm(): void</text>
+<text x="0.0" y="30.3" stroke="none" data-name="FileDownload" data-compartment="2">+ngOnInit(): void</text>
+<text x="0.0" y="46.5" stroke="none" data-name="FileDownload" data-compartment="2">+processFile(): void</text>
+<text x="0.0" y="62.7" stroke="none" data-name="FileDownload" data-compartment="2">+onDownload(): void</text>
+<text x="0.0" y="78.9" stroke="none" data-name="FileDownload" data-compartment="2">+downloadFile(): void</text>
+
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+</svg>

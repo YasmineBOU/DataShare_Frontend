@@ -1,0 +1,6 @@
+#.interface: fill=lightblue
+#.enumeration: fill=lightgreen
+#.type: fill=lightgray
+
+[FileUpload|-fileService: FileService;-authService: AuthService;-formBuilder: FormBuilder;-loadingService: LoadingService;+isLoading$: Observable<boolean>;+fileUploadForm: FormGroup<any>;+downloadLink: string;+dwlLinkMessage: string;+selectedFile: File;+fileIcon: string;+fileChecksum: string;+expirationOptions: Map<number, string>;+selectedExpiration: number;+currentUserEmail: string;+passwordMinLength: number;+getHumanReadableSize: (bytes: number, decimals?: number) => string|-buildForm(): void;+ngOnInit(): void;+calculateChecksum(): Promise<void>;+onFileSelected(): void;+resetSelectedFile(): void;+getFileFormData(): FormData;+onUpload(): Promise<void>;+copyLinkToClipboard(): void;+getDownloadURL(): string]
+[OnInit]<:--[FileUpload]

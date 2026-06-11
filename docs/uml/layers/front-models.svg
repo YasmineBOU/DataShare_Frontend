@@ -1,0 +1,188 @@
+<svg version="1.1" baseProfile="full" width="1435.0" height="274.0" viewBox="0 0 1435 274" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
+<desc >#.interface: fill=lightblue
+#.enumeration: fill=lightgreen
+#.type: fill=lightgray
+
+[&lt;interface&gt;AuthMeModel|+authenticated: boolean;+email: string|]
+[&lt;interface&gt;FileDownloadInfo|+id: number;+filePassword: string|]
+[&lt;interface&gt;FileInfo|+id: number;+filename: string;+fileSize: string;+fileToken: string;+createdAt: string;+expirationDate: string;+hasPassword: boolean;+isExpired?: boolean;+expirationMsg?: string;+fileIconUrl?: string|]
+[&lt;interface&gt;FileUploadModel|+email?: string;+file: File;+filename: string;+fileSize: number;+fileType: string;+hash: string;+filePassword: string;+expirationDays: number|]
+[&lt;interface&gt;LoginModel|+email: string;+password: string|]
+[&lt;interface&gt;RegisterModel|+email: string;+password: string;+confirmPassword: string|]</desc>
+<g stroke-width="1.0" text-align="left" font="12pt Helvetica, Arial, sans-serif" font-size="12pt" font-family="Helvetica" font-weight="normal" font-style="normal">
+<g font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round" stroke="#33322E">
+<g stroke="transparent" fill="transparent">
+<rect x="0.0" y="0.0" height="274.0" width="1435.0" stroke="none"></rect>
+</g>
+<g transform="translate(8, 8)" fill="#33322E">
+<g transform="translate(20, 20)">
+<g data-name="AuthMeModel">
+<g fill="lightblue" stroke="#33322E" data-name="AuthMeModel">
+<rect x="0.0" y="65.0" height="88.0" width="208.0" data-name="AuthMeModel"></rect>
+<path d="M0.0 97.0 L208.0 97.0" fill="none" data-name="AuthMeModel"></path>
+<path d="M0.0 145.0 L208.0 145.0" fill="none" data-name="AuthMeModel"></path>
+</g>
+<g transform="translate(0, 65)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AuthMeModel" data-compartment="0">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="AuthMeModel" data-compartment="0">
+<a id="..\..\..\src\app\core\models\auth-me.model.ts.AuthMeModel" xlink:href="..\..\..\src\app\core\models\auth-me.model.ts"><text x="96.0" y="14.1" stroke="none" text-anchor="middle" data-name="AuthMeModel" data-compartment="0">AuthMeModel</text></a>
+
+</g>
+</g>
+<g transform="translate(0, 97)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AuthMeModel" data-compartment="1">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="AuthMeModel" data-compartment="1">
+<text x="0.0" y="14.1" stroke="none" data-name="AuthMeModel" data-compartment="1">+authenticated: boolean</text>
+<text x="0.0" y="30.3" stroke="none" data-name="AuthMeModel" data-compartment="1">+email: string</text>
+
+</g>
+</g>
+<g transform="translate(0, 145)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AuthMeModel" data-compartment="2">
+<g transform="translate(8, 8)" fill="#33322E" data-name="AuthMeModel" data-compartment="2">
+
+</g>
+</g>
+</g>
+<g data-name="FileDownloadInfo">
+<g fill="lightblue" stroke="#33322E" data-name="FileDownloadInfo">
+<rect x="248.0" y="65.0" height="88.0" width="180.0" data-name="FileDownloadInfo"></rect>
+<path d="M248.0 97.0 L428.0 97.0" fill="none" data-name="FileDownloadInfo"></path>
+<path d="M248.0 145.0 L428.0 145.0" fill="none" data-name="FileDownloadInfo"></path>
+</g>
+<g transform="translate(248, 65)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="FileDownloadInfo" data-compartment="0">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="FileDownloadInfo" data-compartment="0">
+<a id="..\..\..\src\app\core\models\file-download.model.ts.FileDownloadInfo" xlink:href="..\..\..\src\app\core\models\file-download.model.ts"><text x="82.0" y="14.1" stroke="none" text-anchor="middle" data-name="FileDownloadInfo" data-compartment="0">FileDownloadInfo</text></a>
+
+</g>
+</g>
+<g transform="translate(248, 97)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="FileDownloadInfo" data-compartment="1">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="FileDownloadInfo" data-compartment="1">
+<text x="0.0" y="14.1" stroke="none" data-name="FileDownloadInfo" data-compartment="1">+id: number</text>
+<text x="0.0" y="30.3" stroke="none" data-name="FileDownloadInfo" data-compartment="1">+filePassword: string</text>
+
+</g>
+</g>
+<g transform="translate(248, 145)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="FileDownloadInfo" data-compartment="2">
+<g transform="translate(8, 8)" fill="#33322E" data-name="FileDownloadInfo" data-compartment="2">
+
+</g>
+</g>
+</g>
+<g data-name="FileInfo">
+<g fill="lightblue" stroke="#33322E" data-name="FileInfo">
+<rect x="468.0" y="0.0" height="218.0" width="206.0" data-name="FileInfo"></rect>
+<path d="M468.0 32.0 L674.0 32.0" fill="none" data-name="FileInfo"></path>
+<path d="M468.0 210.0 L674.0 210.0" fill="none" data-name="FileInfo"></path>
+</g>
+<g transform="translate(468, 0)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="FileInfo" data-compartment="0">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="FileInfo" data-compartment="0">
+<a id="..\..\..\src\app\core\models\file-info.model.ts.FileInfo" xlink:href="..\..\..\src\app\core\models\file-info.model.ts"><text x="95.0" y="14.1" stroke="none" text-anchor="middle" data-name="FileInfo" data-compartment="0">FileInfo</text></a>
+
+</g>
+</g>
+<g transform="translate(468, 32)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="FileInfo" data-compartment="1">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="FileInfo" data-compartment="1">
+<text x="0.0" y="14.1" stroke="none" data-name="FileInfo" data-compartment="1">+id: number</text>
+<text x="0.0" y="30.3" stroke="none" data-name="FileInfo" data-compartment="1">+filename: string</text>
+<text x="0.0" y="46.5" stroke="none" data-name="FileInfo" data-compartment="1">+fileSize: string</text>
+<text x="0.0" y="62.7" stroke="none" data-name="FileInfo" data-compartment="1">+fileToken: string</text>
+<text x="0.0" y="78.9" stroke="none" data-name="FileInfo" data-compartment="1">+createdAt: string</text>
+<text x="0.0" y="95.1" stroke="none" data-name="FileInfo" data-compartment="1">+expirationDate: string</text>
+<text x="0.0" y="111.3" stroke="none" data-name="FileInfo" data-compartment="1">+hasPassword: boolean</text>
+<text x="0.0" y="127.5" stroke="none" data-name="FileInfo" data-compartment="1">+isExpired?: boolean</text>
+<text x="0.0" y="143.7" stroke="none" data-name="FileInfo" data-compartment="1">+expirationMsg?: string</text>
+<text x="0.0" y="159.9" stroke="none" data-name="FileInfo" data-compartment="1">+fileIconUrl?: string</text>
+
+</g>
+</g>
+<g transform="translate(468, 210)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="FileInfo" data-compartment="2">
+<g transform="translate(8, 8)" fill="#33322E" data-name="FileInfo" data-compartment="2">
+
+</g>
+</g>
+</g>
+<g data-name="FileUploadModel">
+<g fill="lightblue" stroke="#33322E" data-name="FileUploadModel">
+<rect x="714.0" y="16.0" height="186.0" width="214.0" data-name="FileUploadModel"></rect>
+<path d="M714.0 48.0 L928.0 48.0" fill="none" data-name="FileUploadModel"></path>
+<path d="M714.0 194.0 L928.0 194.0" fill="none" data-name="FileUploadModel"></path>
+</g>
+<g transform="translate(714, 16)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="FileUploadModel" data-compartment="0">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="FileUploadModel" data-compartment="0">
+<a id="..\..\..\src\app\core\models\file-upload.model.ts.FileUploadModel" xlink:href="..\..\..\src\app\core\models\file-upload.model.ts"><text x="99.0" y="14.1" stroke="none" text-anchor="middle" data-name="FileUploadModel" data-compartment="0">FileUploadModel</text></a>
+
+</g>
+</g>
+<g transform="translate(714, 48)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="FileUploadModel" data-compartment="1">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="FileUploadModel" data-compartment="1">
+<text x="0.0" y="14.1" stroke="none" data-name="FileUploadModel" data-compartment="1">+email?: string</text>
+<text x="0.0" y="30.3" stroke="none" data-name="FileUploadModel" data-compartment="1">+file: File</text>
+<text x="0.0" y="46.5" stroke="none" data-name="FileUploadModel" data-compartment="1">+filename: string</text>
+<text x="0.0" y="62.7" stroke="none" data-name="FileUploadModel" data-compartment="1">+fileSize: number</text>
+<text x="0.0" y="78.9" stroke="none" data-name="FileUploadModel" data-compartment="1">+fileType: string</text>
+<text x="0.0" y="95.1" stroke="none" data-name="FileUploadModel" data-compartment="1">+hash: string</text>
+<text x="0.0" y="111.3" stroke="none" data-name="FileUploadModel" data-compartment="1">+filePassword: string</text>
+<text x="0.0" y="127.5" stroke="none" data-name="FileUploadModel" data-compartment="1">+expirationDays: number</text>
+
+</g>
+</g>
+<g transform="translate(714, 194)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="FileUploadModel" data-compartment="2">
+<g transform="translate(8, 8)" fill="#33322E" data-name="FileUploadModel" data-compartment="2">
+
+</g>
+</g>
+</g>
+<g data-name="LoginModel">
+<g fill="lightblue" stroke="#33322E" data-name="LoginModel">
+<rect x="968.0" y="65.0" height="88.0" width="156.0" data-name="LoginModel"></rect>
+<path d="M968.0 97.0 L1124.0 97.0" fill="none" data-name="LoginModel"></path>
+<path d="M968.0 145.0 L1124.0 145.0" fill="none" data-name="LoginModel"></path>
+</g>
+<g transform="translate(968, 65)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="LoginModel" data-compartment="0">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="LoginModel" data-compartment="0">
+<a id="..\..\..\src\app\core\models\login.model.ts.LoginModel" xlink:href="..\..\..\src\app\core\models\login.model.ts"><text x="70.0" y="14.1" stroke="none" text-anchor="middle" data-name="LoginModel" data-compartment="0">LoginModel</text></a>
+
+</g>
+</g>
+<g transform="translate(968, 97)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="LoginModel" data-compartment="1">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="LoginModel" data-compartment="1">
+<text x="0.0" y="14.1" stroke="none" data-name="LoginModel" data-compartment="1">+email: string</text>
+<text x="0.0" y="30.3" stroke="none" data-name="LoginModel" data-compartment="1">+password: string</text>
+
+</g>
+</g>
+<g transform="translate(968, 145)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="LoginModel" data-compartment="2">
+<g transform="translate(8, 8)" fill="#33322E" data-name="LoginModel" data-compartment="2">
+
+</g>
+</g>
+</g>
+<g data-name="RegisterModel">
+<g fill="lightblue" stroke="#33322E" data-name="RegisterModel">
+<rect x="1164.0" y="56.5" height="105.0" width="215.0" data-name="RegisterModel"></rect>
+<path d="M1164.0 88.5 L1379.0 88.5" fill="none" data-name="RegisterModel"></path>
+<path d="M1164.0 153.5 L1379.0 153.5" fill="none" data-name="RegisterModel"></path>
+</g>
+<g transform="translate(1164, 56.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="RegisterModel" data-compartment="0">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="RegisterModel" data-compartment="0">
+<a id="..\..\..\src\app\core\models\register.model.ts.RegisterModel" xlink:href="..\..\..\src\app\core\models\register.model.ts"><text x="99.5" y="14.1" stroke="none" text-anchor="middle" data-name="RegisterModel" data-compartment="0">RegisterModel</text></a>
+
+</g>
+</g>
+<g transform="translate(1164, 88.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="RegisterModel" data-compartment="1">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="RegisterModel" data-compartment="1">
+<text x="0.0" y="14.1" stroke="none" data-name="RegisterModel" data-compartment="1">+email: string</text>
+<text x="0.0" y="30.3" stroke="none" data-name="RegisterModel" data-compartment="1">+password: string</text>
+<text x="0.0" y="46.5" stroke="none" data-name="RegisterModel" data-compartment="1">+confirmPassword: string</text>
+
+</g>
+</g>
+<g transform="translate(1164, 153.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="RegisterModel" data-compartment="2">
+<g transform="translate(8, 8)" fill="#33322E" data-name="RegisterModel" data-compartment="2">
+
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+</svg>

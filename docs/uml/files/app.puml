@@ -1,0 +1,6 @@
+#.interface: fill=lightblue
+#.enumeration: fill=lightgreen
+#.type: fill=lightgray
+
+[App|\#title: WritableSignal<string>;-authService: AuthService|+ngOnInit(): void]
+[OnInit]<:--[App]

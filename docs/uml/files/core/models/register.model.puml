@@ -1,0 +1,5 @@
+#.interface: fill=lightblue
+#.enumeration: fill=lightgreen
+#.type: fill=lightgray
+
+[<interface>RegisterModel|+email: string;+password: string;+confirmPassword: string|]

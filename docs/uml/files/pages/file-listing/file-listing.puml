@@ -1,0 +1,6 @@
+#.interface: fill=lightblue
+#.enumeration: fill=lightgreen
+#.type: fill=lightgray
+
+[FileListing|-fileService: FileService;-authService: AuthService;-loadingService: LoadingService;-router: Router;-cdr: ChangeDetectorRef;+userFiles: FileInfo\[\];+filteredFiles: FileInfo\[\];+activeFilter: string;+isMobile: boolean;+message: string;+messageType: string;-messageTimeout: any;+menuOpen: number;+isLoading$: Observable<boolean>|+showMessage(): void;+ngOnInit(): void;+filterFiles(): void;+onDeleteFile(): void;+onViewFile(): void;+closeMessage(): void;+closeMenuWhenClickingOutside(): void;+toggleMenu(): void]
+[OnInit]<:--[FileListing]

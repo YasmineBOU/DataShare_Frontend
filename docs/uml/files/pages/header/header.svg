@@ -1,0 +1,69 @@
+<svg version="1.1" baseProfile="full" width="399.0" height="387.0" viewBox="0 0 399 387" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
+<desc >#.interface: fill=lightblue
+#.enumeration: fill=lightgreen
+#.type: fill=lightgray
+
+[Header|-destroyRef: DestroyRef;-router: Router;+authService: AuthService;+currentRoute: string;+isMobile: boolean;+profileMenuOpen: boolean;+currentEmail$: Observable&lt;string&gt;;+isAuthenticated$: Observable&lt;boolean&gt;|+ngOnInit(): void;-updateCurrentRoute(): void;+logout(): void;+toggleProfileMenu(): void]
+[OnInit]&lt;:--[Header]</desc>
+<g stroke-width="1.0" text-align="left" font="12pt Helvetica, Arial, sans-serif" font-size="12pt" font-family="Helvetica" font-weight="bold" font-style="normal">
+<g font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round" stroke="#33322E">
+<g stroke="transparent" fill="transparent">
+<rect x="0.0" y="0.0" height="387.0" width="399.0" stroke="none"></rect>
+</g>
+<g transform="translate(8, 8)" fill="#33322E">
+<g transform="translate(20, 20)" fill="#eee8d5" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal">
+<g stroke-dasharray="6 6">
+<path d="M171.5 45.3 L171.5 52 L171.5 72 L171.5 72.0 " fill="none"></path>
+</g>
+<path d="M176.8 45.3 L171.5 45.3 L166.2 45.3 L171.5 32.0 Z"></path>
+<g data-name="Header">
+<g fill="#eee8d5" stroke="#33322E" data-name="Header">
+<rect x="0.0" y="72.0" height="259.0" width="343.0" data-name="Header"></rect>
+<path d="M0.0 104.0 L343.0 104.0" fill="none" data-name="Header"></path>
+<path d="M0.0 250.0 L343.0 250.0" fill="none" data-name="Header"></path>
+</g>
+<g transform="translate(0, 72)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="Header" data-compartment="0">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Header" data-compartment="0">
+<a id="..\..\..\..\..\src\app\pages\header\header.ts.Header" xlink:href="..\..\..\..\..\src\app\pages\header\header.ts"><text x="163.5" y="14.1" stroke="none" text-anchor="middle" data-name="Header" data-compartment="0">Header</text></a>
+
+</g>
+</g>
+<g transform="translate(0, 104)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Header" data-compartment="1">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Header" data-compartment="1">
+<text x="0.0" y="14.1" stroke="none" data-name="Header" data-compartment="1">-destroyRef: DestroyRef</text>
+<text x="0.0" y="30.3" stroke="none" data-name="Header" data-compartment="1">-router: Router</text>
+<text x="0.0" y="46.5" stroke="none" data-name="Header" data-compartment="1">+authService: AuthService</text>
+<text x="0.0" y="62.7" stroke="none" data-name="Header" data-compartment="1">+currentRoute: string</text>
+<text x="0.0" y="78.9" stroke="none" data-name="Header" data-compartment="1">+isMobile: boolean</text>
+<text x="0.0" y="95.1" stroke="none" data-name="Header" data-compartment="1">+profileMenuOpen: boolean</text>
+<text x="0.0" y="111.3" stroke="none" data-name="Header" data-compartment="1">+currentEmail$: Observable&lt;string&gt;</text>
+<text x="0.0" y="127.5" stroke="none" data-name="Header" data-compartment="1">+isAuthenticated$: Observable&lt;boolean&gt;</text>
+
+</g>
+</g>
+<g transform="translate(0, 250)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Header" data-compartment="2">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Header" data-compartment="2">
+<text x="0.0" y="14.1" stroke="none" data-name="Header" data-compartment="2">+ngOnInit(): void</text>
+<text x="0.0" y="30.3" stroke="none" data-name="Header" data-compartment="2">-updateCurrentRoute(): void</text>
+<text x="0.0" y="46.5" stroke="none" data-name="Header" data-compartment="2">+logout(): void</text>
+<text x="0.0" y="62.7" stroke="none" data-name="Header" data-compartment="2">+toggleProfileMenu(): void</text>
+
+</g>
+</g>
+</g>
+<g data-name="OnInit">
+<g fill="#eee8d5" stroke="#33322E" data-name="OnInit">
+<rect x="140.0" y="0.0" height="32.0" width="63.0" data-name="OnInit"></rect>
+</g>
+<g transform="translate(140, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="OnInit" data-compartment="0">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="OnInit" data-compartment="0">
+<text x="23.5" y="14.1" stroke="none" text-anchor="middle" data-name="OnInit" data-compartment="0">OnInit</text>
+
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+</svg>

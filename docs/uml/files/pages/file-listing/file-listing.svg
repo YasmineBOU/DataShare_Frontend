@@ -1,0 +1,79 @@
+<svg version="1.1" baseProfile="full" width="392.0" height="549.0" viewBox="0 0 392 549" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
+<desc >#.interface: fill=lightblue
+#.enumeration: fill=lightgreen
+#.type: fill=lightgray
+
+[FileListing|-fileService: FileService;-authService: AuthService;-loadingService: LoadingService;-router: Router;-cdr: ChangeDetectorRef;+userFiles: FileInfo\[\];+filteredFiles: FileInfo\[\];+activeFilter: string;+isMobile: boolean;+message: string;+messageType: string;-messageTimeout: any;+menuOpen: number;+isLoading$: Observable&lt;boolean&gt;|+showMessage(): void;+ngOnInit(): void;+filterFiles(): void;+onDeleteFile(): void;+onViewFile(): void;+closeMessage(): void;+closeMenuWhenClickingOutside(): void;+toggleMenu(): void]
+[OnInit]&lt;:--[FileListing]</desc>
+<g stroke-width="1.0" text-align="left" font="12pt Helvetica, Arial, sans-serif" font-size="12pt" font-family="Helvetica" font-weight="bold" font-style="normal">
+<g font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round" stroke="#33322E">
+<g stroke="transparent" fill="transparent">
+<rect x="0.0" y="0.0" height="549.0" width="392.0" stroke="none"></rect>
+</g>
+<g transform="translate(8, 8)" fill="#33322E">
+<g transform="translate(20, 20)" fill="#eee8d5" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal">
+<g stroke-dasharray="6 6">
+<path d="M168.0 45.3 L168 52 L168 72 L168.0 72.0 " fill="none"></path>
+</g>
+<path d="M173.3 45.3 L168.0 45.3 L162.7 45.3 L168.0 32.0 Z"></path>
+<g data-name="FileListing">
+<g fill="#eee8d5" stroke="#33322E" data-name="FileListing">
+<rect x="0.0" y="72.0" height="421.0" width="336.0" data-name="FileListing"></rect>
+<path d="M0.0 104.0 L336.0 104.0" fill="none" data-name="FileListing"></path>
+<path d="M0.0 347.0 L336.0 347.0" fill="none" data-name="FileListing"></path>
+</g>
+<g transform="translate(0, 72)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="FileListing" data-compartment="0">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="FileListing" data-compartment="0">
+<a id="..\..\..\..\..\src\app\pages\file-listing\file-listing.ts.FileListing" xlink:href="..\..\..\..\..\src\app\pages\file-listing\file-listing.ts"><text x="160.0" y="14.1" stroke="none" text-anchor="middle" data-name="FileListing" data-compartment="0">FileListing</text></a>
+
+</g>
+</g>
+<g transform="translate(0, 104)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="FileListing" data-compartment="1">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="FileListing" data-compartment="1">
+<text x="0.0" y="14.1" stroke="none" data-name="FileListing" data-compartment="1">-fileService: FileService</text>
+<text x="0.0" y="30.3" stroke="none" data-name="FileListing" data-compartment="1">-authService: AuthService</text>
+<text x="0.0" y="46.5" stroke="none" data-name="FileListing" data-compartment="1">-loadingService: LoadingService</text>
+<text x="0.0" y="62.7" stroke="none" data-name="FileListing" data-compartment="1">-router: Router</text>
+<text x="0.0" y="78.9" stroke="none" data-name="FileListing" data-compartment="1">-cdr: ChangeDetectorRef</text>
+<text x="0.0" y="95.1" stroke="none" data-name="FileListing" data-compartment="1">+userFiles: FileInfo[]</text>
+<text x="0.0" y="111.3" stroke="none" data-name="FileListing" data-compartment="1">+filteredFiles: FileInfo[]</text>
+<text x="0.0" y="127.5" stroke="none" data-name="FileListing" data-compartment="1">+activeFilter: string</text>
+<text x="0.0" y="143.7" stroke="none" data-name="FileListing" data-compartment="1">+isMobile: boolean</text>
+<text x="0.0" y="159.9" stroke="none" data-name="FileListing" data-compartment="1">+message: string</text>
+<text x="0.0" y="176.1" stroke="none" data-name="FileListing" data-compartment="1">+messageType: string</text>
+<text x="0.0" y="192.3" stroke="none" data-name="FileListing" data-compartment="1">-messageTimeout: any</text>
+<text x="0.0" y="208.5" stroke="none" data-name="FileListing" data-compartment="1">+menuOpen: number</text>
+<text x="0.0" y="224.7" stroke="none" data-name="FileListing" data-compartment="1">+isLoading$: Observable&lt;boolean&gt;</text>
+
+</g>
+</g>
+<g transform="translate(0, 347)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="FileListing" data-compartment="2">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="FileListing" data-compartment="2">
+<text x="0.0" y="14.1" stroke="none" data-name="FileListing" data-compartment="2">+showMessage(): void</text>
+<text x="0.0" y="30.3" stroke="none" data-name="FileListing" data-compartment="2">+ngOnInit(): void</text>
+<text x="0.0" y="46.5" stroke="none" data-name="FileListing" data-compartment="2">+filterFiles(): void</text>
+<text x="0.0" y="62.7" stroke="none" data-name="FileListing" data-compartment="2">+onDeleteFile(): void</text>
+<text x="0.0" y="78.9" stroke="none" data-name="FileListing" data-compartment="2">+onViewFile(): void</text>
+<text x="0.0" y="95.1" stroke="none" data-name="FileListing" data-compartment="2">+closeMessage(): void</text>
+<text x="0.0" y="111.3" stroke="none" data-name="FileListing" data-compartment="2">+closeMenuWhenClickingOutside(): void</text>
+<text x="0.0" y="127.5" stroke="none" data-name="FileListing" data-compartment="2">+toggleMenu(): void</text>
+
+</g>
+</g>
+</g>
+<g data-name="OnInit">
+<g fill="#eee8d5" stroke="#33322E" data-name="OnInit">
+<rect x="136.5" y="0.0" height="32.0" width="63.0" data-name="OnInit"></rect>
+</g>
+<g transform="translate(136.5, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="OnInit" data-compartment="0">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="OnInit" data-compartment="0">
+<text x="23.5" y="14.1" stroke="none" text-anchor="middle" data-name="OnInit" data-compartment="0">OnInit</text>
+
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+</svg>

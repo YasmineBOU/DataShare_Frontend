@@ -1,0 +1,74 @@
+<svg version="1.1" baseProfile="full" width="602.0" height="233.0" viewBox="0 0 602 233" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
+<desc >#.interface: fill=lightblue
+#.enumeration: fill=lightgreen
+#.type: fill=lightgray
+
+[FileService|-httpClient: HttpClient|+uploadFile(): Observable&lt;Object&gt;;+getFileLink(): Observable&lt;Object&gt;;+downloadFile(): Observable&lt;Blob&gt;;+listFiles(): Observable&lt;FileListResponse&gt;;+getFileInfo(): Observable&lt;Object&gt;;+deleteFile(): Observable&lt;Object&gt;]
+[&lt;interface&gt;FileListResponse|+message: string;+files: FileInfo\[\]|]</desc>
+<g stroke-width="1.0" text-align="left" font="12pt Helvetica, Arial, sans-serif" font-size="12pt" font-family="Helvetica" font-weight="normal" font-style="normal">
+<g font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round" stroke="#33322E">
+<g stroke="transparent" fill="transparent">
+<rect x="0.0" y="0.0" height="233.0" width="602.0" stroke="none"></rect>
+</g>
+<g transform="translate(8, 8)" fill="#33322E">
+<g transform="translate(20, 20)">
+<g data-name="FileService">
+<g fill="#eee8d5" stroke="#33322E" data-name="FileService">
+<rect x="0.0" y="0.0" height="177.0" width="354.0" data-name="FileService"></rect>
+<path d="M0.0 32.0 L354.0 32.0" fill="none" data-name="FileService"></path>
+<path d="M0.0 64.0 L354.0 64.0" fill="none" data-name="FileService"></path>
+</g>
+<g transform="translate(0, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="FileService" data-compartment="0">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="FileService" data-compartment="0">
+<a id="..\..\..\..\..\src\app\core\service\file.service.ts.FileService" xlink:href="..\..\..\..\..\src\app\core\service\file.service.ts"><text x="169.0" y="14.1" stroke="none" text-anchor="middle" data-name="FileService" data-compartment="0">FileService</text></a>
+
+</g>
+</g>
+<g transform="translate(0, 32)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="FileService" data-compartment="1">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="FileService" data-compartment="1">
+<text x="0.0" y="14.1" stroke="none" data-name="FileService" data-compartment="1">-httpClient: HttpClient</text>
+
+</g>
+</g>
+<g transform="translate(0, 64)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="FileService" data-compartment="2">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="FileService" data-compartment="2">
+<text x="0.0" y="14.1" stroke="none" data-name="FileService" data-compartment="2">+uploadFile(): Observable&lt;Object&gt;</text>
+<text x="0.0" y="30.3" stroke="none" data-name="FileService" data-compartment="2">+getFileLink(): Observable&lt;Object&gt;</text>
+<text x="0.0" y="46.5" stroke="none" data-name="FileService" data-compartment="2">+downloadFile(): Observable&lt;Blob&gt;</text>
+<text x="0.0" y="62.7" stroke="none" data-name="FileService" data-compartment="2">+listFiles(): Observable&lt;FileListResponse&gt;</text>
+<text x="0.0" y="78.9" stroke="none" data-name="FileService" data-compartment="2">+getFileInfo(): Observable&lt;Object&gt;</text>
+<text x="0.0" y="95.1" stroke="none" data-name="FileService" data-compartment="2">+deleteFile(): Observable&lt;Object&gt;</text>
+
+</g>
+</g>
+</g>
+<g data-name="FileListResponse">
+<g fill="lightblue" stroke="#33322E" data-name="FileListResponse">
+<rect x="394.0" y="44.5" height="88.0" width="152.0" data-name="FileListResponse"></rect>
+<path d="M394.0 76.5 L546.0 76.5" fill="none" data-name="FileListResponse"></path>
+<path d="M394.0 124.5 L546.0 124.5" fill="none" data-name="FileListResponse"></path>
+</g>
+<g transform="translate(394, 44.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="FileListResponse" data-compartment="0">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="FileListResponse" data-compartment="0">
+<a id="..\..\..\..\..\src\app\core\service\file.service.ts.FileListResponse" xlink:href="..\..\..\..\..\src\app\core\service\file.service.ts"><text x="68.0" y="14.1" stroke="none" text-anchor="middle" data-name="FileListResponse" data-compartment="0">FileListResponse</text></a>
+
+</g>
+</g>
+<g transform="translate(394, 76.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="FileListResponse" data-compartment="1">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="FileListResponse" data-compartment="1">
+<text x="0.0" y="14.1" stroke="none" data-name="FileListResponse" data-compartment="1">+message: string</text>
+<text x="0.0" y="30.3" stroke="none" data-name="FileListResponse" data-compartment="1">+files: FileInfo[]</text>
+
+</g>
+</g>
+<g transform="translate(394, 124.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="FileListResponse" data-compartment="2">
+<g transform="translate(8, 8)" fill="#33322E" data-name="FileListResponse" data-compartment="2">
+
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+</svg>
