@@ -13,7 +13,7 @@
  */
 
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { firstValueFrom } from 'rxjs/internal/firstValueFrom';
 
@@ -46,6 +46,11 @@ export class FileUpload implements OnInit {
    * The AuthService used to load the current authenticated user's email.
    */
   private authService = inject(AuthService);
+  
+  /**
+   * The ChangeDetectorRef service used to detect changes in the component.
+   */
+  private cdr = inject(ChangeDetectorRef);
   
   /**
    * The FormBuilder service used to create reactive forms.
@@ -111,11 +116,18 @@ export class FileUpload implements OnInit {
    * The minimum password length required for file protection.
    */
   passwordMinLength = FILE_CONFIG.PASSWORD_MIN_LENGTH;
+
+  /**
+   * Flag to show a confirmation message when the download link is copied to the clipboard.
+   */
+  showCopyConfirmation: boolean = false;
   
   /**
    * Utility function to format file size in a human-readable format.
    */
   getHumanReadableSize = formatFileSize;
+
+
 
   /**
    * Builds or updates the reactive form for file upload.
@@ -303,6 +315,12 @@ export class FileUpload implements OnInit {
    */
   copyLinkToClipboard() {
     navigator.clipboard.writeText(this.downloadLink).then(() => {
+      this.showCopyConfirmation = true;
+      this.cdr.markForCheck(); 
+      setTimeout(() => {
+        this.showCopyConfirmation = false;
+        this.cdr.markForCheck(); 
+      }, 2000);
     }).catch(err => {
       console.error('Error copying link :', err);
     });
