@@ -63,9 +63,21 @@
               ],
               "outputHashing": "all"
             },
+            "e2e": {
+              "outputMode": "static",
+              "optimization": false,
+              "sourceMap": true,
+              "extractLicenses": false
+            },
             "development": {
               "optimization": false,
               "extractLicenses": false,
+              "sourceMap": true
+            },
+
+            "development-csr": {
+              "outputMode": "static",
+              "optimization": false,
               "sourceMap": true
             }
           },
@@ -76,6 +88,14 @@
           "configurations": {
             "production": {
               "buildTarget": "DataShare_Frontend:build:production"
+            },
+            "e2e": {
+              "buildTarget": "DataShare_Frontend:build:e2e",
+              "proxyConfig": "proxy.conf.json",
+              "ssl": true,
+              "sslCert": ".certs/localhost.pem",
+              "sslKey": ".certs/localhost-key.pem",
+              "port": 4200
             },
             "development": {
               "buildTarget": "DataShare_Frontend:build:development",
@@ -89,7 +109,10 @@
           "defaultConfiguration": "development"
         },
         "test": {
-          "builder": "@angular/build:unit-test"
+          "builder": "@angular-builders/jest:run",
+          "options": {
+            "config": "jest.config.js"
+          }
         }
       }
     }

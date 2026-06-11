@@ -1,5 +1,6 @@
 import { TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting, HttpTestingController } from '@angular/common/http/testing';
 import { AuthService } from './auth.service';
 
 describe('AuthService', () => {
@@ -8,15 +9,18 @@ describe('AuthService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [AuthService]
+      providers: [
+        AuthService,
+        provideHttpClient(),
+        provideHttpClientTesting(),
+      ]
     });
     authService = TestBed.inject(AuthService);
     httpMock = TestBed.inject(HttpTestingController);
   });
 
   afterEach(() => {
-    httpMock.verify(); // check that no unmatched requests are outstanding
+    httpMock.verify();
   });
 
   it('should be created', () => {
@@ -85,7 +89,6 @@ describe('AuthService', () => {
 
   describe('logout', () => {
     it('should call logout endpoint and clear currentEmail', () => {
-      // Simulate user being logged in first
       authService.loadCurrentUser().subscribe();
       httpMock.expectOne('/api/auth/me').flush({ authenticated: true, email: 'test@example.com' });
       expect(authService.currentEmail).toBe('test@example.com');

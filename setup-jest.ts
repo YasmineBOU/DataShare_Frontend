@@ -1,4 +1,10 @@
 console.log('>>> setup-jest.ts is running');
-import { setupZonelessTestEnv } from 'jest-preset-angular/setup-env/zoneless';
+const { setupZonelessTestEnv } = require('jest-preset-angular/setup-env/zoneless');
 
-setupZonelessTestEnv();
+// Call setupZonelessTestEnv() only if not already initialized by the preset
+const { getTestBed } = require('@angular/core/testing');
+try {
+  getTestBed().compiler; // Throws error if not initialized
+} catch {
+  setupZonelessTestEnv();
+}

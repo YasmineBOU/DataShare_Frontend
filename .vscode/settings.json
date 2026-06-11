@@ -4,5 +4,7 @@
   "less.lint.unknownAtRules": "ignore",
   "editor.tabSize": 2,
   "editor.insertSpaces": true,
-  "editor.detectIndentation": false
+  "editor.detectIndentation": false,
+  "jestrunner.jestCommand": "node node_modules/jest/bin/jest.js --config=jest.config.js",
+  "jestrunner.projectPath": "${workspaceFolder}"
 }
