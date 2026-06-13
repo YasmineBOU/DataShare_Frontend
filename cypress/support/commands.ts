@@ -1,37 +1,52 @@
 /// <reference types="cypress" />
-// ***********************************************
-// This example commands.ts shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
-// ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
-//
-// declare global {
-//   namespace Cypress {
-//     interface Chainable {
-//       login(email: string, password: string): Chainable<void>
-//       drag(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
-//       dismiss(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
-//       visit(originalFn: CommandOriginalFn, url: string, options: Partial<VisitOptions>): Chainable<Element>
-//     }
-//   }
-// }
+
+import users from '../fixtures/users.json';
+import cookies from '../fixtures/cookies.json';
+
+/**
+ * Custom login command that:
+ * - Sends a POST request to /api/login with user credentials
+ * - Automatically stores the JWT cookie returned by the backend
+ * - Simulates a real login flow
+ *
+ * Usage:
+ *   cy.login() // Logs in with the registered user from fixtures/users.json
+ */
+
+Cypress.Commands.add('login', () => {
+  const testUser = users.registeredUser;
+  const randomSessionName = `user-session-${Math.random().toString(36).substring(2, 10)}`;
+  cy.session(
+    randomSessionName, // Session name
+    () => {
+      // 1. Visit the login page to initialize the session
+      cy.visit('/login');
+
+      // 2. Fill in the login form with the test user's credentials
+      cy.get('input[id="email"]').type(testUser.email);
+      cy.get('input[id="password"]').type(testUser.password);
+
+      // 3. Intercept the login request to capture the response
+      cy.intercept('POST', '/api/login').as('loginRequest');
+
+      // 4. Submit the login form
+      cy.contains('button', 'Connexion').click();
+
+      // 5. Wait for the login request to complete and assert the response status
+      cy.wait('@loginRequest').its('response.statusCode').should('eq', 200);
+
+      // 6. Verify that the JWT cookie is set in the browser after login
+      cy.getCookie(cookies.tokenKey).then((cookie) => {
+        if (!cookie) {
+          throw new Error(`JWT cookie "${cookies.tokenKey}" not found after login. Ensure the backend sets the cookie correctly.`);
+        }
+        cy.wrap(cookie.value).as(cookies.tokenKey);
+      });
+    },
+    {
+      // Cache les données de session pour éviter de se reconnecter à chaque test
+      cacheAcrossSpecs: true,
+    }
+  );
+});
+
