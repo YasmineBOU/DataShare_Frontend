@@ -1,6 +1,6 @@
-describe('Login page', () => {
+import users from '../fixtures/users.json';
 
-  const users = require('../fixtures/users.json');
+describe('Login page', () => {
 
   beforeEach(() => {
     // Avoid uncaught exceptions from the app to fail the test

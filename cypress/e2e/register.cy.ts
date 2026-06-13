@@ -1,7 +1,9 @@
+import users from '../fixtures/users.json';
+import config from '../fixtures/config.mock.json';
+
 describe('Register page', () => {
 
-  const users = require('../fixtures/users.json');
-  const registerConfig = require('../fixtures/config.mock.json').REGISTER_CONFIG;
+  const registerConfig = config.REGISTER_CONFIG;
 
   beforeEach(() => {
     cy.on('uncaught:exception', () => false);
