@@ -4,9 +4,13 @@ declare global {
   namespace Cypress {
     interface Chainable {
       /**
-       * Se connecte avec un utilisateur enregistré pour les tests E2E
+       * Custom login command that:
+       * - Sends a POST request to /api/login with user credentials
+       * - Automatically stores the JWT cookie returned by the backend
+       * - Simulates a real login flow
+       *
        * @example
-       *    cy.login() // Se connecte avec l'utilisateur enregistré dans fixtures/users.json
+       *    cy.login() // Logs in with the registered user from fixtures/users.json
        */
       login(): Chainable<void>;
     }

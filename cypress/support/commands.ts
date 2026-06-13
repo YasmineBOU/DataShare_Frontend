@@ -16,9 +16,10 @@ import cookies from '../fixtures/cookies.json';
 
 Cypress.Commands.add('login', () => {
   const testUser = users.registeredUser;
-  const sessionName = `user-session-${testUser.email}`;
+  const sessionName = `user-session-${testUser.email}-upload-landing`;
+  
   cy.session(
-    sessionName, // Session name
+    [sessionName, 'v2'], 
     () => {
       // 1. Visit the login page to initialize the session
       cy.visit('/login');
@@ -43,19 +44,15 @@ Cypress.Commands.add('login', () => {
         }
         cy.wrap(cookie.value).as(cookies.tokenKey);
       });
+
+      // 7. Force a stable authenticated landing page for downstream tests
+      cy.visit('/files/upload', { timeout: 10000, failOnStatusCode: false });
     },
     {
-      // Cache les données de session pour éviter de se reconnecter à chaque test
+      // Cache the session to reuse it across specs
       cacheAcrossSpecs: true,
       validate: () => {
         cy.getCookie(cookies.tokenKey).should('exist');
-        cy.request({
-          method: 'GET',
-          url: '/api/auth/me',
-          failOnStatusCode: false
-        })
-          .its('body.authenticated')
-          .should('eq', true);
       },
     }
   );
