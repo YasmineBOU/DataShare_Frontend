@@ -23,6 +23,7 @@ import { FileListing } from './pages/file-listing/file-listing';
 import { FileUpload } from './pages/file-upload/file-upload';
 import { Login } from './pages/login/login';
 import { Register } from './pages/register/register';
+import { authGuard } from './core/guards/auth.guard';
 
 /**
  * Main application routes configuration.
@@ -83,6 +84,7 @@ export const routes: Routes = [
          */
         path: 'dashboard',
         component: Dashboard,
+        canActivate: [authGuard],
         children: [
           /**
            * Redirect to the 'files' child route by default.

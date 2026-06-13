@@ -47,10 +47,8 @@ export class App implements OnInit{
       return;
     }
 
-    // Clear any stale session on app startup and load current user state
-    this.authService.logout().subscribe(() => {
-      // After logout, load current user to check if still authenticated via HttpOnly cookie
-      this.authService.loadCurrentUser().subscribe();
-    });
+    // After logout, load current user to check if still authenticated via HttpOnly cookie
+    this.authService.loadCurrentUser().subscribe();
+    
   }
 }

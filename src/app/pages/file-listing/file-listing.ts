@@ -145,44 +145,50 @@ export class FileListing implements OnInit {
 
     // Use the current user state from AuthService (loaded once at app startup)
     // instead of calling loadCurrentUser again
-    const response = { authenticated: this.authService.isAuthenticated(), email: this.authService.currentEmail };
-    
-    if (!response.authenticated || !response.email) {
-      this.showMessage('User email not found. Please log in again.', 'error');
-      this.router.navigate(['/login']);
-      return;
-    }
-
-    const email = response.email;
-    this.fileService.listFiles(email).subscribe({
-      next: (fileResponse) => {
-        const files = fileResponse.files ?? [];
-        queueMicrotask(() => {
-          // Add UI-only computed fields without changing the backend model.
-          this.userFiles = files.map(file => {
-            // Format file size for display
-            file.fileSize = formatFileSize(Number(file.fileSize));
-            const isExpired = new Date(file.expirationDate) < new Date();
-            // Determine file icon based on extension
-            let fileIconUrl = getIconByExtension(file.filename);
-            // 
-            let expirationMsg = '';
-            if (isExpired) {
-              expirationMsg = 'Ce fichier a expiré, il n\'est plus stocké chez nous';
-            } else {
-              expirationMsg = `Expire ${getExpirationDaysMessage(file.expirationDate)[0]}`;
-            }
-            return { ...file, isExpired, expirationMsg, fileIconUrl };
-          });
-
-          this.filterFiles(this.activeFilter); // Apply initial filter to populate filteredFiles
-          this.cdr.detectChanges();
-        });
-      },
-      error: err => {
-        console.error('Error fetching files:', err);
-        this.showMessage('An error occurred while fetching files.', 'error');
+    this.authService.loadCurrentUser().subscribe({
+    next: (response) => {
+      if (!response.authenticated || !response.email) {
+        this.showMessage('User email not found. Please log in again.', 'error');
+        this.router.navigate(['/login']);
+        return;
       }
+
+      const email = response.email;
+      this.fileService.listFiles(email).subscribe({
+        next: (fileResponse) => {
+          const files = fileResponse.files ?? [];
+          queueMicrotask(() => {
+            // Add UI-only computed fields without changing the backend model.
+            this.userFiles = files.map(file => {
+              // Format file size for display
+              file.fileSize = formatFileSize(Number(file.fileSize));
+              const isExpired = new Date(file.expirationDate) < new Date();
+              // Determine file icon based on extension
+              let fileIconUrl = getIconByExtension(file.filename);
+              // 
+              let expirationMsg = '';
+              if (isExpired) {
+                expirationMsg = 'Ce fichier a expiré, il n\'est plus stocké chez nous';
+              } else {
+                expirationMsg = `Expire ${getExpirationDaysMessage(file.expirationDate)[0]}`;
+              }
+              return { ...file, isExpired, expirationMsg, fileIconUrl };
+            });
+
+            this.filterFiles(this.activeFilter); // Apply initial filter to populate filteredFiles
+            this.cdr.detectChanges();
+          });
+        },
+        error: err => {
+          console.error('Error fetching files:', err);
+          this.showMessage('An error occurred while fetching files.', 'error');
+        }
+      });
+    },
+    error: err => {
+      console.error('Error loading current user:', err);
+      this.showMessage('An error occurred while loading user information.', 'error');
+    }
     });
   }
 
