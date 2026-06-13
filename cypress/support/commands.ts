@@ -1,4 +1,5 @@
 /// <reference types="cypress" />
+/// <reference path="./commands.d.ts" />
 
 import users from '../fixtures/users.json';
 import cookies from '../fixtures/cookies.json';
@@ -15,9 +16,9 @@ import cookies from '../fixtures/cookies.json';
 
 Cypress.Commands.add('login', () => {
   const testUser = users.registeredUser;
-  const randomSessionName = `user-session-${Math.random().toString(36).substring(2, 10)}`;
+  const sessionName = `user-session-${testUser.email}`;
   cy.session(
-    randomSessionName, // Session name
+    sessionName, // Session name
     () => {
       // 1. Visit the login page to initialize the session
       cy.visit('/login');
@@ -46,6 +47,16 @@ Cypress.Commands.add('login', () => {
     {
       // Cache les données de session pour éviter de se reconnecter à chaque test
       cacheAcrossSpecs: true,
+      validate: () => {
+        cy.getCookie(cookies.tokenKey).should('exist');
+        cy.request({
+          method: 'GET',
+          url: '/api/auth/me',
+          failOnStatusCode: false
+        })
+          .its('body.authenticated')
+          .should('eq', true);
+      },
     }
   );
 });

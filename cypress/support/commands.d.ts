@@ -2,7 +2,7 @@
 
 declare global {
   namespace Cypress {
-    interface Chainable<Subject = any> {
+    interface Chainable {
       /**
        * Se connecte avec un utilisateur enregistré pour les tests E2E
        * @example
