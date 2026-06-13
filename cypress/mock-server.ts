@@ -1,3 +1,6 @@
+import users from './fixtures/users.json';
+import files from './fixtures/files.json';
+
 type MockUser = {
   email: string;
   password: string;
@@ -18,7 +21,17 @@ type UploadResponse = {
   fileToken: string;
 };
 
-const users = require('./fixtures/users.json') satisfies Record<string, MockUser>;
+type MockFile = {
+  id: number;
+  filename: string;
+  fileSize: string;
+  fileToken: string;
+  hasPassword: boolean;
+  expirationDate: string;
+};
+
+const typedUsers = users as Record<string, MockUser>;
+const typedFiles = files as Record<string, MockFile>;
 
 function isSameUser(email: string | undefined, user: MockUser): boolean {
   return email === user.email;
@@ -36,6 +49,23 @@ function createJwtToken(): string {
 }
 
 export function setupMockBackend(): void {
+  let currentAuthenticatedEmail: string | null = typedUsers['registeredUser'].email;
+
+  // ─────────────────────────────────────────
+  // LOGOUT
+  // ─────────────────────────────────────────
+  cy.intercept('POST', '/api/logout', {
+    statusCode: 200,
+    body: {}
+  });
+
+  // ─────────────────────────────────────────
+  // AUTH ME
+  // ─────────────────────────────────────────
+  cy.intercept('GET', '/api/auth/me', {
+    statusCode: 200,
+    body: { authenticated: true, email: currentAuthenticatedEmail }
+  })
 
   // ─────────────────────────────────────────
   // AUTH
@@ -43,7 +73,7 @@ export function setupMockBackend(): void {
   cy.intercept("POST", "/api/login", (req) => {
     const body = req.body as LoginBody;
 
-    if (body.email === users.serverErrorUser.email) {
+    if (body.email === typedUsers['serverErrorUser'].email) {
       req.reply({
         statusCode: 500,
         body: { message: "Unexpected server error" },
@@ -51,17 +81,26 @@ export function setupMockBackend(): void {
       return;
     }
 
-    if (isSameUser(body.email, users.registeredUser) && body.password === users.registeredUser.password){
+    if (isSameUser(body.email, typedUsers['registeredUser']) && body.password === typedUsers['registeredUser'].password){
+      currentAuthenticatedEmail = typedUsers['registeredUser'].email;
       req.reply({
         statusCode: 200,
-        // headers: {
-        //   'Set-Cookie': `token=${createJwtToken()}; Path=/; HttpOnly`
-        // },
-        
         headers: {
-          'Set-Cookie': `AUTH_TOKEN=${createJwtToken()}; Path=/; HttpOnly; Secure; SameSite=None`,
+          'Set-Cookie': `authToken=${createJwtToken()}; Path=/; HttpOnly`,
         },
-        body: { message: 'Login successful' }
+        body: { message: 'Login successful', authenticated: true, email: typedUsers['registeredUser'].email }
+      });
+      return;
+    }
+
+    if (isSameUser(body.email, typedUsers['newUserWithValidCredentials']) && body.password === typedUsers['newUserWithValidCredentials'].password) {
+      currentAuthenticatedEmail = typedUsers['newUserWithValidCredentials'].email;
+      req.reply({
+        statusCode: 200,
+        headers: {
+          'Set-Cookie': `authToken=${createJwtToken()}; Path=/; HttpOnly`,
+        },
+        body: { message: 'Login successful', authenticated: true, email: typedUsers['newUserWithValidCredentials'].email }
       });
       return;
     }
@@ -83,7 +122,7 @@ export function setupMockBackend(): void {
   cy.intercept("POST", "/api/register", (req) => {
     const body = req.body as RegisterBody;
 
-    if (isSameUser(body.email, users.registeredUser)) {
+    if (isSameUser(body.email, typedUsers['registeredUser'])) {
       req.reply({
         statusCode: 409,
         body: {
@@ -101,7 +140,7 @@ export function setupMockBackend(): void {
         message: "User registered successfully",
         user: {
           id: 1,
-          email: body.email ?? users.newUserWithValidCredentials.email,
+          email: body.email ?? typedUsers['newUserWithValidCredentials'].email,
         },
       },
     });
@@ -156,5 +195,142 @@ export function setupMockBackend(): void {
     });
   });
 
+
+  
+  // ─────────────────────────────────────────
+  // FILE DOWNLOAD
+  // ─────────────────────────────────────────
+  cy.intercept("GET", "/api/files/download/*", (req) => {
+    const fileToken = req.url.split('/').pop();
+    if (fileToken === 'mock-token-protected') {
+      req.reply({
+        statusCode: 401,
+        body: { message: "Unauthorized" }
+      });
+      return;
+    }
+
+    if (fileToken === 'mock-token-notfound') {
+      req.reply({
+        statusCode: 404,
+        body: { message: "File not found" }
+      });
+      return;
+    }
+
+    req.reply({
+      statusCode: 200,
+      body: { message: "File downloaded successfully" }
+    });
+  });   
+
+  // ─────────────────────────────────────────
+  // FILE INFO
+  // ─────────────────────────────────────────
+  cy.intercept('GET', '/api/files/info*', (req) => {
+    const fileToken = req.query['fileToken'] as string;
+
+    if (fileToken === 'mock-token-notfound') {
+      req.reply({ statusCode: 404, body: { message: 'File not found' } });
+      return;
+    }
+
+    if (fileToken === 'mock-token-expired') {
+      req.reply({
+        statusCode: 200,
+        body: {
+          id: 3,
+          filename: 'expired-file.pdf',
+          fileSize: '1024',
+          hasPassword: false,
+          expirationDate: new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString()
+        }
+      });
+      return;
+    }
+
+    if (fileToken === 'mock-token-protected') {
+      req.reply({
+        statusCode: 200,
+        body: {
+          id: 2,
+          filename: 'protected-file.pdf',
+          fileSize: '2048',
+          hasPassword: true,
+          expirationDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString()
+        }
+      });
+      return;
+    }
+
+    // Default: valid file
+    req.reply({
+      statusCode: 200,
+      body: {
+        id: 1,
+        filename: 'test-file.pdf',
+        fileSize: '1024',
+        hasPassword: false,
+        expirationDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString()
+      }
+    });
+  });
+
+  // // ─────────────────────────────────────────
+  // // FILE LINK (download)
+  // // ─────────────────────────────────────────
+  // cy.intercept('POST', '/api/files/download', (req) => {
+  //   const { filePassword } = req.body;
+
+  //   if (filePassword === 'wrong-password') {
+  //     req.reply({ statusCode: 401, body: { message: 'Unauthorized' } });
+  //     return;
+  //   }
+
+  //   req.reply({
+  //     statusCode: 200,
+  //     body: { fileLink: 'https://mock-storage.com/files/test-file.pdf' }
+  //   });
+  // });
+
+  // ─────────────────────────────────────────
+  // FILE LIST
+  // ─────────────────────────────────────────
+  cy.intercept('GET', '/api/files/list*', (req) => {
+    const filesByEmail: Record<string, MockFile[]> = {
+      [typedUsers['registeredUser'].email]: [
+        typedFiles['validFile'],
+        typedFiles['passwordProtectedFile'],
+        typedFiles['expiredFile'],
+        typedFiles['expiredPasswordProtectedFile']
+      ],
+      [typedUsers['newUserWithValidCredentials'].email]: [
+        typedFiles['validFile'],
+        typedFiles['expiredPasswordProtectedFile']
+      ],
+      ['userWithEmptyFileList@mail.com']: []
+    };
+
+    const queryEmail = req.query?.['email'];
+    const requestedEmail = Array.isArray(queryEmail) ? queryEmail[0] : queryEmail;
+    const resolvedEmail = (requestedEmail as string) || currentAuthenticatedEmail || typedUsers['registeredUser'].email;
+    const userFiles = filesByEmail[resolvedEmail] ?? [];
+
+    req.reply({
+      statusCode: 200,
+      body: {
+        message: 'Files retrieved successfully',
+        files: userFiles
+      }
+    });
+  }).as('listFiles');
+
+  // ─────────────────────────────────────────
+  // FILE DELETE
+  // ─────────────────────────────────────────
+  cy.intercept('DELETE', '/api/files/delete/*', {
+    statusCode: 200,
+    body: { message: 'File deleted successfully' }
+  }).as('deleteFile');
 
 }
