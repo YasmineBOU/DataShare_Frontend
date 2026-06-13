@@ -31,11 +31,21 @@ const expiredFile = {
   expirationDate: oneDayAgo.toISOString()
 };
 
+const expiredPasswordProtectedFile = {
+  ...validFile,
+  filename: 'expired-protected-file.png',
+  fileToken: 'expired-protected-token-789',
+  fileSize: '4096',
+  hasPassword: true,
+  expirationDate: oneDayAgo.toISOString()
+};
+
 // Combine the files into a single fixture object
 const filesFixture = {
   validFile,
   passwordProtectedFile,
-  expiredFile
+  expiredFile,
+  expiredPasswordProtectedFile
 };
 
 // Write the fixture to a JSON file
