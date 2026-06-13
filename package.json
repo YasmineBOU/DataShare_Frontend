@@ -35,7 +35,7 @@
     "tslib": "^2.3.0"
   },
   "devDependencies": {
-    "@angular-builders/jest": "^21.0.3",
+    "@angular-builders/jest": "^21.0.4",
     "@angular/build": "^21.2.6",
     "@angular/cli": "^21.2.6",
     "@angular/compiler-cli": "^21.2.0",
@@ -43,7 +43,7 @@
     "@types/crypto-js": "^4.2.2",
     "@types/express": "^5.0.1",
     "@types/jest": "^30.0.0",
-    "@types/node": "^20.17.19",
+    "@types/node": "^20.19.43",
     "autoprefixer": "^10.5.0",
     "cypress": "^15.16.0",
     "jest": "^30.4.2",
@@ -60,6 +60,9 @@
   },
   "overrides": {
     "blake3-wasm": "^3.0.0",
-    "@c4312/blake3-internal": "^3.0.0"
+    "@c4312/blake3-internal": "^3.0.0",
+    "uuid": "^11.1.1",
+    "esbuild": "^0.28.1",
+    "webpack-dev-server": "^5.2.4"
   }
 }
