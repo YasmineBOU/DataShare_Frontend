@@ -63,7 +63,7 @@ export function setupMockBackend(): void {
   cy.intercept('POST', '/api/logout', {
     statusCode: 200,
     body: {}
-  });
+  }).as('logoutUser');
 
   // ─────────────────────────────────────────
   // AUTH ME
@@ -71,7 +71,7 @@ export function setupMockBackend(): void {
   cy.intercept('GET', '/api/auth/me', {
     statusCode: 200,
     body: { authenticated: true, email: currentAuthenticatedEmail }
-  })
+  }).as('authMe');
 
   // ─────────────────────────────────────────
   // AUTH
@@ -118,7 +118,7 @@ export function setupMockBackend(): void {
       },
     });
 
-  });
+  }).as('loginUser');
 
   
 
@@ -150,7 +150,7 @@ export function setupMockBackend(): void {
         },
       },
     });
-  });
+  }).as('registerUser');
 
   
   // ─────────────────────────────────────────
@@ -199,7 +199,7 @@ export function setupMockBackend(): void {
       statusCode: 200,
       body: { fileToken: "mock-token-abc123" }
     });
-  });
+  }).as('uploadFile');
 
 
   
@@ -230,7 +230,7 @@ export function setupMockBackend(): void {
       statusCode: 200,
       body: { message: "File downloaded successfully" }
     });
-  });   
+  }).as('getFileDownload');   
 
   // ─────────────────────────────────────────
   // FILE INFO
@@ -255,24 +255,24 @@ export function setupMockBackend(): void {
         expirationDate: targetFile.expirationDate
       }
     });
-  });
+  }).as('getFileInfo');
 
-  // // ─────────────────────────────────────────
-  // // FILE LINK (download)
-  // // ─────────────────────────────────────────
-  // cy.intercept('POST', '/api/files/download', (req) => {
-  //   const { filePassword } = req.body;
+  // ─────────────────────────────────────────
+  // FILE LINK (download)
+  // ─────────────────────────────────────────
+  cy.intercept('POST', '/api/files/download', (req) => {
+    const { filePassword } = req.body;
 
-  //   if (filePassword === 'wrong-password') {
-  //     req.reply({ statusCode: 401, body: { message: 'Unauthorized' } });
-  //     return;
-  //   }
+    if (filePassword === 'wrong-password') {
+      req.reply({ statusCode: 401, body: { message: 'Unauthorized' } });
+      return;
+    }
 
-  //   req.reply({
-  //     statusCode: 200,
-  //     body: { fileLink: 'https://mock-storage.com/files/test-file.pdf' }
-  //   });
-  // });
+    req.reply({
+      statusCode: 200,
+      body: { fileLink: 'https://mock-storage.com/files/test-file.pdf' }
+    });
+  }).as('getFileLink');
 
   // ─────────────────────────────────────────
   // FILE LIST
