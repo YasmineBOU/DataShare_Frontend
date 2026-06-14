@@ -47,6 +47,8 @@ describe('FileListing', () => {
     // Mock AuthService
     jest.spyOn(component['authService'], 'isAuthenticated').mockReturnValue(true);
     Object.defineProperty(component['authService'], 'currentEmail', { value: 'test@example.com', configurable: true });
+
+    jest.spyOn(component['authService'], 'loadCurrentUser').mockReturnValue(of({ email: 'test@example.com', authenticated: true }));
     
 
     // Mock FileService
@@ -106,11 +108,10 @@ describe('FileListing', () => {
     it('should check authentication and navigate to login if not authenticated', () => {
       Object.defineProperty(component['authService'], 'currentEmail', { value: null, configurable: true });
       jest.spyOn(component['authService'], 'isAuthenticated').mockReturnValue(false);
-      const showMessageSpy = jest.spyOn(component, 'showMessage');
+      jest.spyOn(component['authService'], 'loadCurrentUser').mockReturnValue(of({ email: null, authenticated: false }));
 
       component.ngOnInit();
 
-      expect(showMessageSpy).toHaveBeenCalledWith('User email not found. Please log in again.', 'error');
       expect(component['router'].navigate).toHaveBeenCalledWith(['/login']);
     });
 

@@ -34,10 +34,9 @@ describe('App', () => {
     expect(app).toBeTruthy();
   });
 
-  it('should call logout then loadCurrentUser on init', async () => {
+  it('should call loadCurrentUser on init', async () => {
     const fixture = TestBed.createComponent(App);
     await fixture.whenStable();
-    expect(authServiceMock.logout).toHaveBeenCalled();
     expect(authServiceMock.loadCurrentUser).toHaveBeenCalled();
   });
 });

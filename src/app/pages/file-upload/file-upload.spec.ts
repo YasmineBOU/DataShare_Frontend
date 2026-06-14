@@ -123,11 +123,14 @@ describe('FileUpload', () => {
    });
 
    describe('getFileFormData', () => {
-      it.each(['', 'johndoe@example.com'])('should return FormData with file and form values with email: "%s"', (email) => { 
+      it.each([null, 'johndoe@example.com'])('should return FormData with file and form values with email: "%s"', (email) => { 
         const mockPassword = 'testpassword';
         const mockExpiration = 7;
         const mockHash = 'mockhash123';
-        component.currentUserEmail = email;
+        if (email) {
+          component.currentUserEmail = email;
+        }
+        
         component.fileChecksum = mockHash;
 
         const mockFile = new File(['file content'], 'test.txt', { type: 'text/plain' });
