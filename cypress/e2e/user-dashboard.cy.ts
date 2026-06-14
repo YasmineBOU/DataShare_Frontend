@@ -32,7 +32,15 @@ describe('User Dashboard', () => {
   describe('Dashboard accessibility', () => {
     it('should redirect to login page if not logged in', () => {
       cy.clearCookies();
+      
+      // Simulate an unauthenticated state by intercepting the auth check
+      cy.intercept('GET', '/api/auth/me', {
+        statusCode: 200,
+        body: { authenticated: false, email: null }
+      }).as('authMeUnauthenticated');
+
       cy.visit('/dashboard/files');
+      cy.wait('@authMeUnauthenticated');
       cy.url().should('include', '/login');
     });
   });
