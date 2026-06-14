@@ -51,6 +51,12 @@ function createJwtToken(): string {
 export function setupMockBackend(): void {
   let currentAuthenticatedEmail: string | null = typedUsers['registeredUser'].email;
 
+  const allMockFiles: MockFile[] = Object.values(typedFiles);
+  const fileByToken = allMockFiles.reduce<Record<string, MockFile>>((acc, file) => {
+    acc[file.fileToken] = file;
+    return acc;
+  }, {});
+
   // ─────────────────────────────────────────
   // LOGOUT
   // ─────────────────────────────────────────
@@ -201,19 +207,21 @@ export function setupMockBackend(): void {
   // FILE DOWNLOAD
   // ─────────────────────────────────────────
   cy.intercept("GET", "/api/files/download/*", (req) => {
-    const fileToken = req.url.split('/').pop();
-    if (fileToken === 'mock-token-protected') {
+    const fileToken = req.url.split('/').pop() ?? '';
+    const targetFile = fileByToken[fileToken];
+
+    if (!targetFile) {
       req.reply({
-        statusCode: 401,
-        body: { message: "Unauthorized" }
+        statusCode: 404,
+        body: { message: "File not found" }
       });
       return;
     }
 
-    if (fileToken === 'mock-token-notfound') {
+    if (targetFile.hasPassword) {
       req.reply({
-        statusCode: 404,
-        body: { message: "File not found" }
+        statusCode: 401,
+        body: { message: "Unauthorized" }
       });
       return;
     }
@@ -228,50 +236,23 @@ export function setupMockBackend(): void {
   // FILE INFO
   // ─────────────────────────────────────────
   cy.intercept('GET', '/api/files/info*', (req) => {
-    const fileToken = req.query['fileToken'] as string;
+    const queryToken = req.query['fileToken'];
+    const fileToken = Array.isArray(queryToken) ? queryToken[0] : queryToken;
+    const targetFile = fileToken ? fileByToken[fileToken] : undefined;
 
-    if (fileToken === 'mock-token-notfound') {
+    if (!targetFile) {
       req.reply({ statusCode: 404, body: { message: 'File not found' } });
       return;
     }
 
-    if (fileToken === 'mock-token-expired') {
-      req.reply({
-        statusCode: 200,
-        body: {
-          id: 3,
-          filename: 'expired-file.pdf',
-          fileSize: '1024',
-          hasPassword: false,
-          expirationDate: new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString()
-        }
-      });
-      return;
-    }
-
-    if (fileToken === 'mock-token-protected') {
-      req.reply({
-        statusCode: 200,
-        body: {
-          id: 2,
-          filename: 'protected-file.pdf',
-          fileSize: '2048',
-          hasPassword: true,
-          expirationDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString()
-        }
-      });
-      return;
-    }
-
-    // Default: valid file
     req.reply({
       statusCode: 200,
       body: {
-        id: 1,
-        filename: 'test-file.pdf',
-        fileSize: '1024',
-        hasPassword: false,
-        expirationDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString()
+        id: targetFile.id,
+        filename: targetFile.filename,
+        fileSize: targetFile.fileSize,
+        hasPassword: targetFile.hasPassword,
+        expirationDate: targetFile.expirationDate
       }
     });
   });
