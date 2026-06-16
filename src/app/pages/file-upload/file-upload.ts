@@ -246,7 +246,6 @@ export class FileUpload implements OnInit {
     formData.append('fileSize', this.selectedFile!.size.toString());
     formData.append('fileType', this.selectedFile!.type);
     formData.append('hash', this.fileChecksum);
-    formData.append('expirationDays', this.fileUploadForm.get('expiration')?.value || null);
     
     if(this.currentUserEmail) {
       formData.append('email', this.currentUserEmail);
