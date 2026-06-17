@@ -13,184 +13,131 @@ describe('File Download page', () => {
     cy.on('uncaught:exception', () => false);
   });
 
-  // describe('Valid file (no password)', () => {
+  describe('Valid file (no password)', () => {
 
-  //   const validFile = files.validFile;
+    const validFile = files.validFile;
 
-  //   beforeEach(() => {
-  //     cy.intercept('GET', '/api/files/info*', {
-  //       statusCode: 200,
-  //       body: validFile
-  //     }).as('getFileInfo');
+    beforeEach(() => {
+      cy.intercept('GET', '/api/files/info*', {
+        statusCode: 200,
+        body: validFile
+      }).as('getFileInfo');
 
-  //     cy.visit(getDownloadUrl(validFile.fileToken), {timeout: 10000});
-  //     cy.url({ timeout: 10000 }).should('include', '/');
-  //   });
+      cy.visit(getDownloadUrl(validFile.fileToken), {timeout: 10000});
+      cy.url({ timeout: 10000 }).should('include', '/');
+    });
     
-  //   it('should display file info', () => {
-  //     cy.contains('h1', 'Télécharger un fichier').should('be.visible');
-  //     cy.contains('h3', validFile.filename).should('be.visible');
-  //     cy.contains('button', 'Télécharger').should('be.visible');
-  //   });
+    it('should display file info', () => {
+      cy.contains('h1', 'Télécharger un fichier').should('be.visible');
+      cy.contains('h3', validFile.filename).should('be.visible');
+      cy.contains('button', 'Télécharger').should('be.visible');
+    });
 
-  //   it('should not show password field', () => {
-  //     cy.get('input[id="password"]').should('not.exist');
-  //   });
+    it('should not show password field', () => {
+      cy.get('input[id="password"]').should('not.exist');
+    });
 
-  //   it('should show expiration message', () => {
-  //     cy.contains('Ce fichier expirera').should('be.visible');
-  //   });
-  // });
+    it('should show expiration message', () => {
+      cy.contains('Ce fichier expirera').should('be.visible');
+    });
+  });
   
-  // describe('Password protected file', () => {
-  //   const passwordProtectedFile = files.passwordProtectedFile;
+  describe('Password protected file', () => {
+    const passwordProtectedFile = files.passwordProtectedFile;
 
-  //   beforeEach(() => {
-  //     cy.intercept('GET', '/api/files/info*', {
-  //       statusCode: 200,
-  //       body: passwordProtectedFile
-  //     }).as('getFileInfo');
+    beforeEach(() => {
+      cy.intercept('GET', '/api/files/info*', {
+        statusCode: 200,
+        body: passwordProtectedFile
+      }).as('getFileInfo');
 
-  //     cy.visit(getDownloadUrl(passwordProtectedFile.fileToken));
-  //     cy.wait('@getFileInfo');
-  //   });
+      cy.visit(getDownloadUrl(passwordProtectedFile.fileToken));
+      cy.wait('@getFileInfo');
+    });
 
-  //   it('should show password field', () => {
-  //     cy.get('input[id="password"]').should('be.visible');
-  //   });
+    it('should show password field', () => {
+      cy.get('input[id="password"]').should('be.visible');
+    });
 
-  //   it('should disable download button when password is empty', () => {
-  //     cy.contains('button', 'Télécharger').should('be.disabled');
-  //   });
+    it('should disable download button when password is empty', () => {
+      cy.contains('button', 'Télécharger').should('be.disabled');
+    });
 
-  //   it('should enable download button when password is filled', () => {
-  //     cy.get('input[id="password"]').type('Password1!');
-  //     cy.contains('button', 'Télécharger').should('not.be.disabled');
-  //   });
+    it('should enable download button when password is filled', () => {
+      cy.get('input[id="password"]').type('Password1!');
+      cy.contains('button', 'Télécharger').should('not.be.disabled');
+    });
 
-  //   it('should show error alert for wrong password', () => {
-  //     cy.intercept('POST', '/api/files/download*', {
-  //       statusCode: 401,
-  //       body: { message: 'Unauthorized' }
-  //     }).as('getFileLink');
+    it('should show error alert for wrong password', () => {
+      cy.intercept('POST', '/api/files/download*', {
+        statusCode: 401,
+        body: { message: 'Unauthorized' }
+      }).as('getFileLink');
 
-  //     cy.get('input[id="password"]').type('wrong-password');
+      cy.get('input[id="password"]').type('wrong-password');
 
-  //     cy.on('window:alert', (text) => {
-  //       expect(text).to.contains('Mot de passe incorrect');
-  //     });
+      cy.on('window:alert', (text) => {
+        expect(text).to.contains('Mot de passe incorrect');
+      });
 
-  //     cy.contains('button', 'Télécharger').click();
-  //   });
-  // });
+      cy.contains('button', 'Télécharger').click();
+    });
+  });
   
-  // describe('Expired file', () => {
+  describe('Expired file', () => {
 
-  //   beforeEach(() => {
-  //     cy.intercept('GET', '/api/files/info*', {
-  //       statusCode: 200,
-  //       body: files.expiredFile
-  //     }).as('getFileInfo');
+    beforeEach(() => {
+      cy.intercept('GET', '/api/files/info*', {
+        statusCode: 200,
+        body: files.expiredFile
+      }).as('getFileInfo');
 
-  //     cy.visit(getDownloadUrl(files.expiredFile.fileToken));
-  //     cy.wait('@getFileInfo');
-  //   });
+      cy.visit(getDownloadUrl(files.expiredFile.fileToken));
+      cy.wait('@getFileInfo');
+    });
 
-  //   it('should show expired message and hide download form', () => {
-  //     cy.contains('Ce fichier n\'est plus disponible').should('be.visible');
-  //     cy.contains('button', 'Télécharger').should('not.exist');
-  //   });
-  // });
+    it('should show expired message and hide download form', () => {
+      cy.contains('Ce fichier n\'est plus disponible').should('be.visible');
+      cy.contains('button', 'Télécharger').should('not.exist');
+    });
+  });
 
-  // describe('Missing or invalid token', () => {
+  describe('Missing or invalid token', () => {
 
-  //   it('should redirect to home if no token in URL', () => {
-  //     cy.visit('/files/download');
-  //     cy.url().should('eq', BASE_URL + '/');
-  //   });
+    it('should redirect to home if no token in URL', () => {
+      cy.visit('/files/download');
+      cy.url().should('eq', BASE_URL + '/');
+    });
 
-  //   it('should redirect to home if file not found', () => {
-  //     cy.intercept('GET', '/api/files/info*', {
-  //       statusCode: 404,
-  //       body: { message: 'File not found' }
-  //     }).as('getFileInfo');
+    it('should redirect to home if file not found', () => {
+      cy.intercept('GET', '/api/files/info*', {
+        statusCode: 404,
+        body: { message: 'File not found' }
+      }).as('getFileInfo');
 
-  //     cy.visit('/files/download?fileToken=mock-token-notfound');
-  //     cy.url().should('eq', BASE_URL + '/');
-  //   });
-  // });
+      cy.visit('/files/download?fileToken=mock-token-notfound');
+      cy.url().should('eq', BASE_URL + '/');
+    });
+  });
 
-  // describe('Network error handling', () => {
+  describe('Network error handling', () => {
 
-  //   beforeEach(() => {
-  //     cy.intercept('GET', '/api/files/info*', {
-  //       statusCode: 500,
-  //       body: { message: 'Network error' }
-  //     }).as('getFileInfo');
+    beforeEach(() => {
+      cy.intercept('GET', '/api/files/info*', {
+        statusCode: 500,
+        body: { message: 'Network error' }
+      }).as('getFileInfo');
 
-  //     cy.visit(getDownloadUrl(files.validFile.fileToken));
-  //     cy.wait('@getFileInfo');
-  //   });
+      cy.visit(getDownloadUrl(files.validFile.fileToken));
+      cy.wait('@getFileInfo');
+    });
 
-  //   it('should show error alert', () => {
-  //     cy.on('window:alert', (text) => {
-  //       expect(text).to.contains('Network error');
-  //     });
-  //   });
-  // });
-
-  // describe('Download file on machine', () => {
-
-  //   const validFile = files.validFile;
-
-  //   beforeEach(() => {
-  //     cy.intercept('GET', '/api/files/info*', {
-  //       statusCode: 200,
-  //       body: validFile
-  //     }).as('getFileInfo');
-
-  //     cy.visit(getDownloadUrl(validFile.fileToken));
-  //     cy.wait('@getFileInfo');
-  //   });
-
-  //   it('should download file successfully', () => {
-  //     cy.contains('button', 'Télécharger').click();
-  //     cy.wait('@getFileLink').its('response.statusCode').should('eq', 200);
-  //   });
-  // });
-
-  // describe('Download file on machine', () => {
-  // const validFile = files.validFile;
-  // const downloadFolder = Cypress.config('downloadsFolder');
-
-  // beforeEach(() => {
-  //   cy.intercept('GET', '/api/files/info*', {
-  //     statusCode: 200,
-  //     body: validFile,
-  //   }).as('getFileInfo');
-
-  //   cy.intercept('GET', '/api/files/download*', {
-  //     statusCode: 200,
-  //     body: 'fake file content',
-  //     headers: {
-  //       'Content-Disposition': `attachment; filename="${validFile.filename}"`,
-  //       'Content-Type': 'application/octet-stream',
-  //     },
-  //   }).as('downloadFile');
-
-  //   cy.visit('/');
-  //   cy.wait('@getFileInfo');
-  // });
-
-  // it('should download file successfully', () => {
-  //   cy.contains('button', 'Télécharger').click();
-  //   cy.wait('@downloadFile').its('response.statusCode').should('eq', 200);
-
-  //   // Vérifie que le fichier existe via une tâche Cypress
-  //   const expectedFilePath = path.join(downloadFolder, validFile.filename);
-  //   cy.task('fileExists', { filePath: expectedFilePath }).should('be.true');
-  // });
-  // });
+    it('should show error alert', () => {
+      cy.on('window:alert', (text) => {
+        expect(text).to.contains('Network error');
+      });
+    });
+  });
 
   describe('Should download file successfully', () => {
 
@@ -220,7 +167,7 @@ describe('File Download page', () => {
       cy.wait('@getFileInfo');
     });
 
-    it('should trigger file download when clicking Télécharger', () => {
+    it('should trigger file download when clicking "Télécharger"', () => {
       cy.window().then((win) => {
         // Stub URL.createObjectURL
         const createStub = cy.stub(win.URL, 'createObjectURL').returns('blob:mock-url');
