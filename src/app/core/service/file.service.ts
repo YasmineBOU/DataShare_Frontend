@@ -51,7 +51,6 @@ export class FileService {
    * @returns An {@link Observable} of type `Object` representing the upload response.
    */
   uploadFile(fileUploadFormData: FormData): Observable<Object> {
-    console.log("File upload data:", fileUploadFormData);
     return this.httpClient.post('/api/files/upload', fileUploadFormData);
   }
 
@@ -63,7 +62,6 @@ export class FileService {
    * @returns An {@link Observable} of type `Object` representing the download link response.
    */
   getFileLink(fileDownloadInfo: FileDownloadInfo): Observable<Object> {
-    console.log("File download info:", fileDownloadInfo);
     return this.httpClient.post('/api/files/download', fileDownloadInfo);
   }
 
