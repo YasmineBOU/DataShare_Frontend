@@ -82,7 +82,7 @@ export class FileDownload {
   /**
    * The type of expiration message to display ('safe', 'warning', or 'overdue').
    */
-  expMsgType = 'safe'; // 'safe' | 'warning' | 'overdue'
+  expMsgType: string = ''; // 'safe' | 'warning' | 'overdue'
   
   /**
    * The icon associated with the expiration message.
@@ -171,6 +171,9 @@ export class FileDownload {
       if (daysLeft <= DOWNLOAD_CONFIG.EXPIRATION_WARNING) {
         this.expMsgType = 'warning';
       } 
+      else {
+        this.expMsgType = 'safe';
+      }
     }
     // Get expiration status icon
     this.expMsgIcon = getIconByStatus(this.expMsgType);

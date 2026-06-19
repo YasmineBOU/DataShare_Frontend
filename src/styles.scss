@@ -16,6 +16,11 @@ body {
 
 }
 
+img[alt] {
+  color: transparent;
+  font-size: 0;
+}
+
 @theme {
   /* Color palette mainly for the Login/Register forms and the buttons. */
   --color-primary-orange: #E27F29;
