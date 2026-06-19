@@ -129,7 +129,12 @@ export class Register {
           this.router.navigateByUrl('/login');
         },
         error: (err) => {
-          alert('Something went wrong : ' + err.message);
+          if (err.status === 409) {
+            alert('Un compte avec cette adresse e-mail existe déjà. Veuillez utiliser une autre adresse e-mail.');
+          } else {
+            console.error('Error during registration:', err);
+            alert('Une erreur est survenue lors de l\'inscription. Veuillez réessayer plus tard.');
+          }
         }
       });
   }
