@@ -59,10 +59,16 @@
     "vitest": "^4.0.8"
   },
   "overrides": {
+    "esbuild": "^0.28.1",
+    "webpack-dev-server": "^5.2.4",
+    "uuid": "^11.1.1",
     "blake3-wasm": "^3.0.0",
     "@c4312/blake3-internal": "^3.0.0",
-    "uuid": "^11.1.1",
-    "esbuild": "^0.28.1",
-    "webpack-dev-server": "^5.2.4"
+    "@babel/core": "^7.29.1",
+    "http-proxy-middleware": "^3.0.7",
+    "js-yaml": "^4.1.2",
+    "piscina": "^5.1.5",
+    "undici": "^7.27.3",
+    "vite": "^7.3.4"
   }
 }
