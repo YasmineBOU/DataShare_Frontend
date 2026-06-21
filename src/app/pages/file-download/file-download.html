@@ -10,10 +10,10 @@
     <ng-container 
       *ngIf="!file.isExpired; else expireBlock"
     >
-    <div class="flex items-center gap-4 mb-6">
+    <div class="flex1 items-center gap-4 mb-6">
       <img [src]="file.fileIconUrl" alt="File Icon" class="w-8 h-8">
       <div>
-        <h3 class="text-lg">{{ file.filename }}</h3>
+        <h3 class="text-lg truncate" [title]="file.filename">{{ file.filename }}</h3>
         <p class="text-sm text-gray-500">{{ file.fileSize }}</p>
       </div>
     </div>

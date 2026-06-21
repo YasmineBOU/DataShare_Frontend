@@ -28,7 +28,7 @@
     </div>
 
     <!-- Display the form if file is selected -->
-    <div *ngIf="selectedFile" class="bg-white mt-6 p-8 rounded-lg shadow-md w-full max-w-md md:max-w-lg lg:max-w-xl min-w-0">
+    <div *ngIf="selectedFile" class="bg-white mt-6 p-8 rounded-lg shadow-md w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg mx-auto">
       <h1 class="text-2xl font-bold text-center text-gray-800 mb-6">
         Ajouter un fichier
       </h1>
@@ -37,9 +37,9 @@
         <div class="flex items-center justify-center">
           <img [src]="fileIcon" alt="Fichier" class="w-5 h-5 mr-3 mb-1" />
         </div>
-        <div class="flex-1 min-w-0">
+        <div class="flex-1 min-w-0 max-w-[150px] sm:max-w-[200px] md:max-w-[250px] lg:max-w-[300px]">
 
-          <p class="text-base truncate" [title]="selectedFile.name">
+          <p class="text-base truncate md:w-32 lg:w-64" [title]="selectedFile.name">
             {{ selectedFile.name }}
           </p>
           <p class="text-sm">
