@@ -1,10 +1,12 @@
-<div class="min-h-screen flex flex-col justify-center items-center p-4">
+<div class="min-h-screen flex flex-col justify-center items-center px-6 sm:px-8 lg:px-12">
   <!-- <div class="p-8 rounded-lg shadow-md w-full max-w-md"> -->
   <!-- Loading Spinner -->
   <app-loading-spinner *ngIf="isLoading$ | async"></app-loading-spinner>
   
-  <div [class.opacity-50]="(isLoading$ | async)" [class.pointer-events-none]="(isLoading$ | async)">
-    <div *ngIf="!selectedFile" class="flex flex-col items-center space-y-4 w-full max-w-md md:max-w-lg lg:max-w-xl">
+  <div [class.opacity-50]="(isLoading$ | async)" [class.pointer-events-none]="(isLoading$ | async)" class="min-w-0">
+    <div 
+      *ngIf="!selectedFile" 
+      class="flex flex-col items-center space-y-4 w-full max-w-md md:max-w-lg lg:max-w-xl">
       <h1 class="text-2xl font-normal text-center text-gray-800 mb-6">
         Tu veux partager un fichier ?
       </h1>
@@ -26,7 +28,7 @@
     </div>
 
     <!-- Display the form if file is selected -->
-    <div *ngIf="selectedFile" class="bg-white mt-6 p-8 rounded-lg shadow-md w-full max-w-md md:max-w-lg lg:max-w-xl">
+    <div *ngIf="selectedFile" class="bg-white mt-6 p-8 rounded-lg shadow-md w-full max-w-md md:max-w-lg lg:max-w-xl min-w-0">
       <h1 class="text-2xl font-bold text-center text-gray-800 mb-6">
         Ajouter un fichier
       </h1>
@@ -104,12 +106,14 @@
 
 
       <!-- Display only if the link has been generated -->
-      <div *ngIf="downloadLink" class="space-y-4 mt-6">
+      <div *ngIf="downloadLink" class="space-y-4 mt-6 w-full overflow-hidden min-w-0">
         <p class="text-base font-normal text-left">
           {{ dwlLinkMessage }}
         </p>
-        <p class="mt-4 text-center text-generated-link-text bg-gray-100 p-2 rounded cursor-pointer
-          max-w-full overflow-x-auto whitespace-nowrap underline" (click)="copyLinkToClipboard()">
+        <p 
+          class="mt-4 text-center text-generated-link-text bg-gray-100 p-2 rounded cursor-pointer
+            block w-full max-w-[calc(100vw-6rem)] overflow-x-auto whitespace-nowrap underline" 
+          (click)="copyLinkToClipboard()">
           {{ downloadLink }}
         </p>
 
