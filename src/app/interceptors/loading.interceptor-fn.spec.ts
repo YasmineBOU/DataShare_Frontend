@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { HttpInterceptorFn, HttpRequest, HttpHandlerFn, HttpEvent } from '@angular/common/http';
 import { of, throwError } from 'rxjs';
 import { loadingInterceptorFn } from './loading.interceptor-fn';
-import { LoadingService } from '../core/service/loading';
+import { LoadingService } from '../core/service/loading.service';
 
 describe('loadingInterceptorFn', () => {
   const interceptor: HttpInterceptorFn = (req, next) =>

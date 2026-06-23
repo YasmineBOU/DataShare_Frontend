@@ -24,7 +24,10 @@ describe('Login page', () => {
     });
 
     it('should have a functional "Créer un compte" link', () => {
-      cy.contains('a', 'Créer un compte').should('be.visible').click();
+      cy.contains('a', 'Créer un compte')
+        .should('be.visible')
+        .and('not.be.disabled');
+      cy.contains('a', 'Créer un compte').click();
       cy.url().should('include', '/register');
     });
   });
