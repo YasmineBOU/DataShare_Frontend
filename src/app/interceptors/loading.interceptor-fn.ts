@@ -13,7 +13,7 @@ import { inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 
-import { LoadingService } from '../core/service/loading';
+import { LoadingService } from '../core/service/loading.service';
 
 /**
  * HTTP interceptor function that manages the loading state.
