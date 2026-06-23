@@ -21,7 +21,7 @@ import { Router } from '@angular/router';
 import { FileInfo } from '../../core/models/file-info.model';
 import { AuthService } from '../../core/service/auth.service';
 import { FileService } from '../../core/service/file.service';
-import { LoadingService } from '../../core/service/loading';
+import { LoadingService } from '../../core/service/loading.service';
 import { isBrowser, isMobileDevice } from '../../core/utils/common-utils';
 import { formatFileSize, getExpirationDaysMessage, getIconByExtension } from '../../core/utils/file-utils';
 import { LoadingSpinner } from '../../shared/components/loading-spinner/loading-spinner';

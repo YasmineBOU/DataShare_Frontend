@@ -172,7 +172,7 @@ describe('Register', () => {
       component.onSubmit();
 
       expect(userServiceRegisterSpy).toHaveBeenCalledWith(newUser);
-      expect(global.alert).toHaveBeenCalledWith('Something went wrong : ' + errorMessage);
+      expect(global.alert).toHaveBeenCalledWith('Une erreur est survenue lors de l\'inscription. Veuillez réessayer plus tard.');
       expect(routerNavigateSpy).not.toHaveBeenCalledWith('/login');
      });
   });
