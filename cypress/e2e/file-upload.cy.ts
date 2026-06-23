@@ -1,5 +1,6 @@
 describe('File Upload page', () => {
 
+
   beforeEach(() => {
     cy.on('uncaught:exception', () => false);
     cy.visit('/');
@@ -43,34 +44,35 @@ describe('File Upload page', () => {
     });
 
     describe('Password validation handling', () => {
+      let passwordPatternSubMessage = 'caractères, avec';
       
       it('should show validation error for short password', () => {
         cy.get('input[id="password"]').type('abc').blur(); // too short
         cy.get('select[id="expiration"]').select('Une semaine'); // valid expiration to isolate password validation 
-        cy.contains('Le mot de passe doit comporter').should('be.visible');
+        cy.contains(passwordPatternSubMessage).should('be.visible');
       });
 
       it('should show validation error for missing a letter', () => {
         cy.get('input[id="password"]').type('123456').blur(); // missing a letter
         cy.get('select[id="expiration"]').select('Une semaine'); // valid expiration to isolate password validation 
-        cy.contains('Le mot de passe doit comporter').should('be.visible');
+        cy.contains(passwordPatternSubMessage).should('be.visible');
       });
 
       it('should show validation error for missing a digit', () => {
         cy.get('input[id="password"]').type('abcdef').blur(); // missing a digit
         cy.get('select[id="expiration"]').select('Une semaine'); // valid expiration to isolate password validation 
-        cy.contains('Le mot de passe doit comporter').should('be.visible');
+        cy.contains(passwordPatternSubMessage).should('be.visible');
       });
 
       it('should not show error for valid password', () => {
         cy.get('input[id="password"]').type('abc123').blur(); // valid password
         cy.get('select[id="expiration"]').select('Une semaine'); // valid expiration to isolate password validation
-        cy.contains('Le mot de passe doit comporter').should('not.exist');
+        cy.get('#passwordError').should('be.hidden');
       });
 
       it('should accept an empty password (optional)', () => {
         cy.get('input[id="password"]').should('have.value', '');
-        cy.contains('Le mot de passe doit comporter').should('not.exist');
+        cy.get('#passwordError').should('be.hidden');
       });
 
     });

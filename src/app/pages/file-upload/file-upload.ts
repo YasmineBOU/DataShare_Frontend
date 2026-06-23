@@ -20,7 +20,7 @@ import { firstValueFrom } from 'rxjs/internal/firstValueFrom';
 import { FILE_CONFIG } from '../../core/config/config';
 import { AuthService } from '../../core/service/auth.service';
 import { FileService } from '../../core/service/file.service';
-import { LoadingService } from '../../core/service/loading';
+import { LoadingService } from '../../core/service/loading.service';
 import { formatFileSize, computeFileChecksum, getIconByExtension } from '../../core/utils/file-utils';
 import { LoadingSpinner } from '../../shared/components/loading-spinner/loading-spinner';
 
@@ -281,7 +281,7 @@ export class FileUpload implements OnInit {
 
     try {
       await this.calculateChecksum();
-      
+
       const response = await firstValueFrom(
         this.fileService.uploadFile(this.getFileFormData())
       ) as { fileToken: string };;
