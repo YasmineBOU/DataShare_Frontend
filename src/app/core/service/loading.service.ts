@@ -40,6 +40,12 @@ export class LoadingService {
   private showTimeout: any = null;
   
   /**
+   * Delay in milliseconds before showing the loading indicator.
+   * This delay helps prevent the loading indicator from appearing for very short requests.
+   */
+  readonly LOADING_DELAY_MS = 300;
+
+  /**
    * Shows the loading indicator.
    * Sets the loading state to `true`.
    */
@@ -52,7 +58,7 @@ export class LoadingService {
           this.isLoading.next(true);
         }
         this.showTimeout = null;
-      }, 300);
+      }, this.LOADING_DELAY_MS);
     }
   }
 
