@@ -18,7 +18,7 @@ import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/
 import { ApplicationConfig, importProvidersFrom, provideBrowserGlobalErrorListeners, provideZonelessChangeDetection } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
-import { provideRouter, withHashLocation } from '@angular/router';
+import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
 import { fileTimeoutInterceptor } from './interceptors/file-timeout.interceptor';
@@ -30,7 +30,6 @@ import { tokenInterceptor } from './interceptors/token.interceptor';
  * This configuration includes:
  * - Browser global error listeners.
  * - Router configuration with application routes.
- * - Client hydration for SSR (Server-Side Rendering).
  * - HTTP client configuration with fetch and custom interceptors.
  * - ReactiveFormsModule integration for form handling.
  * - Zoneless change detection for improved performance.
@@ -38,7 +37,7 @@ import { tokenInterceptor } from './interceptors/token.interceptor';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
-    provideRouter(routes, withHashLocation()), 
+    provideRouter(routes), 
     provideClientHydration(withEventReplay()),
     provideHttpClient(
       withFetch(), 

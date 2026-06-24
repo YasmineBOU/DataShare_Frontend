@@ -14,7 +14,9 @@ const opensslConfigPath = join(certDir, 'localhost-openssl.cnf');
 const localhostNames = ['localhost', '127.0.0.1', '::1'];
 
 function commandExists(command) {
-  const result = spawnSync(command, ['--version'], { stdio: 'ignore', shell: true });
+  // Windows: 'where', Mac/Linux: 'which'
+  const cmdCheck = process.platform === 'win32' ? 'where' : 'which';
+  const result = spawnSync(cmdCheck, [command], { stdio: 'ignore', shell: true });
   return result.status === 0;
 }
 
